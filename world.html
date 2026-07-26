@@ -6,7 +6,6 @@
   <title>1999world.net</title>
   <meta name="description" content="1999world — a quieter corner of the internet for curiosity, creativity and real-world connection.">
   <meta name="theme-color" content="#176f6c">
-  <meta name="description" content="Bringing back the curiosity, creativity and connection of the 90s.">
 
   <style>
     :root {
@@ -929,11 +928,277 @@
         transform: none;
       }
     }
+  
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* ---------- Version 0.3: The World Opens ---------- */
+
+    body {
+      cursor: default;
+    }
+
+    .desktop {
+      opacity: 0;
+      transition: opacity 700ms ease;
+      background:
+        linear-gradient(to bottom, transparent 0 58%, rgba(33, 112, 86, .95) 58% 72%, rgba(24, 88, 66, .98) 72% 100%),
+        radial-gradient(ellipse at 18% 58%, #76a95c 0 16%, transparent 17%),
+        radial-gradient(ellipse at 42% 59%, #6f9f56 0 22%, transparent 23%),
+        radial-gradient(ellipse at 76% 57%, #7baa5e 0 20%, transparent 21%),
+        linear-gradient(#6fb7bf 0 58%, #2b776f 58% 100%);
+    }
+
+    .desktop.ready {
+      opacity: 1;
+    }
+
+    .desktop::selection {
+      background: rgba(17, 23, 111, .65);
+      color: white;
+    }
+
+    .pixel-cloud {
+      position: absolute;
+      width: 72px;
+      height: 22px;
+      background: rgba(247, 241, 220, .72);
+      box-shadow:
+        16px -9px 0 rgba(247, 241, 220, .72),
+        34px -5px 0 rgba(247, 241, 220, .72),
+        50px 2px 0 rgba(247, 241, 220, .72);
+      image-rendering: pixelated;
+      z-index: 1;
+      animation: cloud-drift 54s linear infinite;
+    }
+
+    .cloud-one { top: 90px; left: -110px; }
+    .cloud-two { top: 185px; left: -250px; transform: scale(.7); animation-duration: 72s; animation-delay: -28s; }
+
+    @keyframes cloud-drift {
+      from { translate: 0 0; }
+      to { translate: calc(100vw + 340px) 0; }
+    }
+
+    .boot-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      padding: clamp(24px, 6vw, 80px);
+      color: #69ff9e;
+      background: #020402;
+      font-family: "Courier New", monospace;
+      font-size: clamp(14px, 2vw, 21px);
+      line-height: 1.7;
+      cursor: wait;
+    }
+
+    .boot-screen.hidden {
+      animation: boot-away 650ms ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes boot-away {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    .boot-cursor {
+      display: inline-block;
+      width: .7em;
+      height: 1.1em;
+      margin-left: 5px;
+      vertical-align: -2px;
+      background: #69ff9e;
+      animation: blink 650ms steps(1) infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .window:not(.hidden) {
+      animation: window-open 150ms steps(3, end);
+      transform-origin: center;
+    }
+
+    @keyframes window-open {
+      from { opacity: 0; scale: .96; }
+      to { opacity: 1; scale: 1; }
+    }
+
+    .club-accent {
+      color: #7d1f25;
+    }
+
+    .club-letter {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 27px 28px;
+      background:
+        linear-gradient(rgba(124, 83, 45, .05), rgba(124, 83, 45, .05)),
+        #fbf0d3;
+      border: 1px solid #ab9973;
+      box-shadow: 5px 6px 0 rgba(63, 45, 25, .18);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .club-letter h2 {
+      margin: 0 0 18px;
+      color: #5f2024;
+      font-family: "Courier New", monospace;
+      letter-spacing: 1px;
+    }
+
+    .signup-form {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .signup-form input {
+      min-width: 0;
+      padding: 10px 11px;
+      background: #fffaf0;
+      border-top: 2px solid #615b4d;
+      border-left: 2px solid #615b4d;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+    }
+
+    .signup-note {
+      grid-column: 1 / -1;
+      margin: 2px 0 0;
+      color: #645c4d;
+      font-size: 11px;
+      font-family: "Courier New", monospace;
+    }
+
+    .signup-message {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      background: #edf3d3;
+      border: 2px solid #6b7650;
+      font-family: "Courier New", monospace;
+      text-align: center;
+    }
+
+    .signup-message.show {
+      display: block;
+    }
+
+    .journal-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 15px;
+    }
+
+    .journal-tab.active {
+      border-top-color: #555348;
+      border-left-color: #555348;
+      border-right-color: white;
+      border-bottom-color: white;
+      background: #c8c1aa;
+    }
+
+    .journal-page {
+      display: none;
+      min-height: 250px;
+      padding: 18px;
+      background: #fff9e9;
+      border: 1px solid #bcb197;
+    }
+
+    .journal-page.active {
+      display: block;
+    }
+
+    .empty-board-message {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: min(300px, 72%);
+      padding: 24px 20px;
+      text-align: center;
+      background: #efe1a9;
+      border: 1px solid #695d30;
+      box-shadow: 4px 5px rgba(0,0,0,.25);
+      transform: translate(-50%, -50%) rotate(-1deg);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .secret-icon {
+      display: none;
+    }
+
+    .secret-icon.revealed {
+      display: block;
+    }
+
+    .easter-egg-copy {
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .easter-egg-copy pre {
+      display: inline-block;
+      margin: 16px auto;
+      padding: 14px;
+      color: #67ff9b;
+      background: #101310;
+      text-align: left;
+    }
+
+    .screen-time-actions {
+      margin-top: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .signup-form {
+        grid-template-columns: 1fr;
+      }
+
+      .signup-note {
+        grid-column: auto;
+      }
+
+      .pixel-cloud {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+<div class="boot-screen" id="boot-screen" aria-live="polite">
+  <div id="boot-text">1999world BIOS v0.3</div>
+  <span class="boot-cursor" aria-hidden="true"></span>
+</div>
+
 <main class="desktop" id="desktop">
+  <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
+  <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
   <!-- Desktop icons -->
   <section class="desktop-icons" aria-label="1999world desktop icons">
@@ -1037,6 +1302,21 @@
       <span class="desktop-icon-label">Things We<br>Don’t Need</span>
     </button>
 
+
+    <button class="desktop-icon" data-open="club-window">
+      <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="2" y="4" width="12" height="9" fill="#efe4c5"/>
+        <rect x="2" y="4" width="12" height="1" fill="#3a332a"/>
+        <rect x="2" y="12" width="12" height="1" fill="#3a332a"/>
+        <rect x="2" y="5" width="1" height="7" fill="#3a332a"/>
+        <rect x="13" y="5" width="1" height="7" fill="#3a332a"/>
+        <rect x="3" y="5" width="10" height="1" fill="#c9b98e"/>
+        <rect x="5" y="7" width="6" height="4" fill="#9f2b2b"/>
+        <rect x="6" y="8" width="4" height="2" fill="#d7c27a"/>
+      </svg>
+      <span class="desktop-icon-label">The 1999<br>Club</span>
+    </button>
+
     <button class="desktop-icon" id="see-you-sunday-icon">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="4" y="2" width="8" height="12" fill="#71513d"/>
@@ -1045,6 +1325,17 @@
         <rect x="2" y="13" width="12" height="1" fill="#333029"/>
       </svg>
       <span class="desktop-icon-label">See You<br>Sunday</span>
+    </button>
+
+
+    <button class="desktop-icon secret-icon" id="secret-icon" data-open="secret-window">
+      <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="2" y="4" width="12" height="9" fill="#c7b46b"/>
+        <rect x="3" y="3" width="5" height="2" fill="#d9c77e"/>
+        <rect x="4" y="7" width="8" height="1" fill="#5d5230"/>
+        <rect x="7" y="9" width="2" height="2" fill="#9f2b2b"/>
+      </svg>
+      <span class="desktop-icon-label">FOUND.TXT</span>
     </button>
 
   </section>
@@ -1066,7 +1357,8 @@
     <div class="widget screen-time-note" id="screen-time-note">
       <div class="widget-title">A quiet reminder</div>
       You’ve been here a while.<br>
-      Perhaps save something for Sunday.
+      Maybe today is a good day to log off.
+      <div class="screen-time-actions"><button class="retro-button" id="screen-time-exit">See You Sunday</button></div>
     </div>
   </aside>
 <!-- Welcome: only open window on load -->
@@ -1156,10 +1448,10 @@
           <div id="letter-content">
             <p>Hey friend,</p>
             <p>Welcome to 1999.</p>
-            <p>Once a week, you’ll get a letter.</p>
+            <p>Once a week, members of the 1999 Club receive a letter.</p>
             <p>No ads. No noise.<br>Just thoughts, invitations and things worth keeping.</p>
             <p>See you Sunday.</p>
-            <p>— The Club</p>
+            <p>— The 1999 Club</p>
           </div>
         </article>
       </div>
@@ -1204,12 +1496,37 @@
     </nav>
 
     <div class="window-body standard-body journal-copy">
-      <p>The world became connected.<br>We became disconnected.</p>
-      <p>The world became faster.<br>We forgot how to wait.</p>
-      <p>The world became louder.<br>We stopped listening.</p>
-      <p>1999 isn’t about going backwards.</p>
-      <p>It’s about bringing forward the parts of life worth keeping.</p>
-      <p>Close your laptop.<br>We’ll see you Sunday.</p>
+      <div class="journal-tabs" role="tablist" aria-label="Journal pages">
+        <button class="retro-button journal-tab active" data-page="why">Why 1999?</button>
+        <button class="retro-button journal-tab" data-page="here">Why we’re here</button>
+        <button class="retro-button journal-tab" data-page="miss">The internet we miss</button>
+        <button class="retro-button journal-tab" data-page="future">The future</button>
+      </div>
+
+      <article class="journal-page active" id="journal-page-why">
+        <h2>Why 1999?</h2>
+        <p>1999 isn’t about going backwards.</p>
+        <p>It’s about remembering when the internet felt like somewhere you explored, rather than somewhere that followed you everywhere.</p>
+      </article>
+
+      <article class="journal-page" id="journal-page-here">
+        <h2>Why we’re here</h2>
+        <p>The world became connected.<br>We became disconnected.</p>
+        <p>The world became faster.<br>We forgot how to wait.</p>
+        <p>The world became louder.<br>We stopped listening.</p>
+      </article>
+
+      <article class="journal-page" id="journal-page-miss">
+        <h2>The internet we miss</h2>
+        <p>Small websites. Strange corners. Personal pages. Long emails.</p>
+        <p>Places made by people, not shaped by algorithms.</p>
+      </article>
+
+      <article class="journal-page" id="journal-page-future">
+        <h2>The future we’re building</h2>
+        <p>Digital is the doorway. Real life is the destination.</p>
+        <p>We’re bringing forward the parts of life worth keeping: curiosity, creativity, conversation and Sundays with nowhere else to be.</p>
+      </article>
     </div>
   </section>
 
@@ -1226,9 +1543,8 @@
 
     <div class="window-body standard-body">
       <h2>Coming up</h2>
-      <p><strong>Sunday morning walk</strong><br>8:00am — meet at the park.</p>
-      <p><strong>Community reading club</strong><br>4:00pm — bring one page to share.</p>
-      <p><strong>Vinyl evening</strong><br>7:00pm — one record, one story.</p>
+      <p>Nothing planned yet.</p>
+      <p>When the first 1999world gathering is ready, it will appear here.</p>
     </div>
   </section>
 
@@ -1251,27 +1567,15 @@
     </nav>
 
     <div class="window-body bulletin-board">
-      <article class="pin-note note-one">
-        <strong>Reading Club</strong><br>
-        Sunday, 4:00pm<br>
-        The Corner Store
-      </article>
-
-      <article class="pin-note note-two">
-        <strong>Vinyl Night</strong><br>
-        Friday, 7:00pm<br>
-        Bring a record.
-      </article>
-
-      <article class="pin-note note-three">
-        <strong>Sunday Walk</strong><br>
-        Sunday, 8:00am<br>
-        Meet at the park.
+      <article class="empty-board-message">
+        <strong>Community Noticeboard</strong><br><br>
+        Nothing pinned yet.<br>
+        Maybe you’ll organise the first Sunday.
       </article>
     </div>
 
     <footer class="window-status">
-      <span>3 notices pinned</span>
+      <span>0 notices pinned</span>
       <span>Real people. Real places.</span>
     </footer>
   </section>
@@ -1338,6 +1642,77 @@
     </div>
   </section>
 
+
+  <!-- The 1999 Club -->
+  <section class="window content-window hidden" id="club-window" data-title="The 1999 Club">
+    <header class="window-titlebar">
+      <span class="window-title-icon">99</span>
+      <span class="window-title">The 1999 Club — Membership Letter</span>
+      <div class="window-controls">
+        <button class="window-control minimise-window" aria-label="Minimise">−</button>
+        <button class="window-control close-window" aria-label="Close">×</button>
+      </div>
+    </header>
+
+    <nav class="window-menu">
+      <span>Membership</span>
+      <span>Letters</span>
+      <span>About</span>
+      <span>Help</span>
+    </nav>
+
+    <div class="window-body standard-body">
+      <article class="club-letter">
+        <h2>Dear Friend,</h2>
+        <p>If you’re reading this, you probably miss something too.</p>
+        <p>The slower internet. Long conversations. Real communities. Sunday afternoons.</p>
+        <p>We’re building that again.</p>
+        <p><strong class="club-accent">Join the Sunday Letter.</strong><br>
+        One thoughtful email. No advertising. No algorithms. Just something worth reading.</p>
+
+        <form class="signup-form" id="signup-form" novalidate>
+          <label class="visually-hidden" for="signup-email">Email address</label>
+          <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required>
+          <button class="retro-button" type="submit">Become a Member</button>
+          <p class="signup-note">Your address is only used for 1999world updates. Leave at any time.</p>
+        </form>
+
+        <div class="signup-message" id="signup-message" role="status">
+          <strong>Letter Received.</strong><br><br>
+          We’ll write soon.<br>
+          See you Sunday.
+        </div>
+      </article>
+    </div>
+
+    <footer class="window-status">
+      <span>Membership is free.</span>
+      <span>No spam. No noise.</span>
+    </footer>
+  </section>
+
+  <!-- Hidden discovery -->
+  <section class="window content-window hidden" id="secret-window" data-title="FOUND.TXT">
+    <header class="window-titlebar">
+      <span class="window-title-icon">?</span>
+      <span class="window-title">FOUND.TXT</span>
+      <div class="window-controls">
+        <button class="window-control minimise-window" aria-label="Minimise">−</button>
+        <button class="window-control close-window" aria-label="Close">×</button>
+      </div>
+    </header>
+    <div class="window-body standard-body easter-egg-copy">
+      <h2>You found something.</h2>
+      <pre>   .----.
+  / .--. \
+ | |    | |
+  \ '--' /
+   '----'</pre>
+      <p>The best parts of the old internet were never on the front page.</p>
+      <p>Keep looking.</p>
+    </div>
+  </section>
+
   <!-- Begin menu -->
   <nav class="begin-menu" id="begin-menu">
     <div class="begin-brand">1999world</div>
@@ -1346,6 +1721,7 @@
     <button class="begin-item" data-open="journal-window"><span class="menu-glyph">▤</span>Journal.exe</button>
     <button class="begin-item" data-open="community-window"><span class="menu-glyph">▥</span>Community</button>
     <button class="begin-item" data-open="things-window"><span class="menu-glyph">×</span>Things We Don’t Need</button>
+    <button class="begin-item" data-open="club-window"><span class="menu-glyph">99</span>The 1999 Club</button>
     <button class="begin-item" id="begin-see-you-sunday"><span class="menu-glyph">→</span>See You Sunday</button>
   </nav>
 
@@ -1364,9 +1740,129 @@
 
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
+
+  // Version 0.3 boot sequence
+  const bootScreen = document.getElementById("boot-screen");
+  const bootText = document.getElementById("boot-text");
+  const desktop = document.getElementById("desktop");
+  const bootLines = [
+    "1999world BIOS v0.3",
+    "",
+    "Checking memory........ OK",
+    "Finding curiosity...... OK",
+    "Connecting............. 56K MODEM",
+    "Dialling...............",
+    "Connected.",
+    "",
+    "Loading World..."
+  ];
+
+  let bootIndex = 1;
+
+  function advanceBoot() {
+    if (bootIndex >= bootLines.length) {
+      window.setTimeout(() => {
+        bootScreen.classList.add("hidden");
+        desktop.classList.add("ready");
+      }, 420);
+      return;
+    }
+
+    bootText.textContent += `\n${bootLines[bootIndex]}`;
+    bootText.style.whiteSpace = "pre-line";
+    bootIndex += 1;
+    window.setTimeout(advanceBoot, bootIndex < 6 ? 260 : 390);
+  }
+
+  window.setTimeout(advanceBoot, 240);
+
+  // Journal pages
+  document.querySelectorAll(".journal-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".journal-tab").forEach((item) => item.classList.remove("active"));
+      document.querySelectorAll(".journal-page").forEach((page) => page.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById(`journal-page-${tab.dataset.page}`).classList.add("active");
+    });
+  });
+
+  // Club sign-up. Connect SIGNUP_ENDPOINT to Formspree for live collection.
+  const signupForm = document.getElementById("signup-form");
+  const signupMessage = document.getElementById("signup-message");
+
+  signupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const emailInput = document.getElementById("signup-email");
+    const email = emailInput.value.trim();
+
+    if (!emailInput.checkValidity()) {
+      emailInput.reportValidity();
+      return;
+    }
+
+    const submitButton = signupForm.querySelector("button[type='submit']");
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+
+    try {
+      if (SIGNUP_ENDPOINT) {
+        const response = await fetch(SIGNUP_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            source: "1999world.net — The 1999 Club"
+          })
+        });
+
+        if (!response.ok) throw new Error("Sign-up service did not accept the request.");
+      } else {
+        const localMembers = JSON.parse(localStorage.getItem("1999world-members") || "[]");
+
+        if (!localMembers.includes(email)) {
+          localMembers.push(email);
+          localStorage.setItem("1999world-members", JSON.stringify(localMembers));
+        }
+      }
+
+      signupForm.style.display = "none";
+      signupMessage.classList.add("show");
+    } catch (error) {
+      alert("The letter could not be sent just now. Please try again shortly.");
+      submitButton.disabled = false;
+      submitButton.textContent = "Become a Member";
+    }
+  });
+
+  // Hidden discovery: click the clock five times.
+  let clockClicks = 0;
+  document.getElementById("clock").addEventListener("click", () => {
+    clockClicks += 1;
+
+    if (clockClicks === 5) {
+      const secretIcon = document.getElementById("secret-icon");
+      secretIcon.classList.add("revealed");
+      openWindow("secret-window");
+    }
+  });
+
   const taskButtons = document.getElementById("task-buttons");
   const beginButton = document.getElementById("begin-button");
   const beginMenu = document.getElementById("begin-menu");
+
+  /*
+    SIGN-UP CONNECTION
+    Paste a Formspree endpoint below after creating a form at formspree.io.
+    Example: "https://formspree.io/f/abcdwxyz"
+    Until then, sign-ups are safely stored in this browser and the visitor
+    receives a clear success message. No data is falsely claimed to be sent.
+  */
+  const SIGNUP_ENDPOINT = "";
+
 
   let highestZ = 100;
   let dragState = null;
@@ -1538,10 +2034,10 @@
     welcome: `
       <p>Hey friend,</p>
       <p>Welcome to 1999.</p>
-      <p>Once a week, you’ll get a letter.</p>
+      <p>Once a week, members of the 1999 Club receive a letter.</p>
       <p>No ads. No noise.<br>Just thoughts, invitations and things worth keeping.</p>
       <p>See you Sunday.</p>
-      <p>— The Club</p>
+      <p>— The 1999 Club</p>
     `,
     plans: `
       <p>Hey,</p>
@@ -1640,6 +2136,9 @@ function seeYouSunday() {
   document.getElementById("see-you-sunday-icon")
     .addEventListener("click", seeYouSunday);
 
+  document.getElementById("screen-time-exit")
+    .addEventListener("click", seeYouSunday);
+
   document.getElementById("begin-see-you-sunday")
     .addEventListener("click", seeYouSunday);
 
@@ -1657,7 +2156,7 @@ function seeYouSunday() {
     document.getElementById("session-clock").textContent =
       `${minutes} minute${minutes === 1 ? "" : "s"} online`;
 
-    if (minutes >= 15) {
+    if (minutes >= 20) {
       document.getElementById("screen-time-note").classList.add("show");
     }
   }
@@ -1669,6 +2168,12 @@ function seeYouSunday() {
 
   window.setInterval(updateClock, 30000);
   window.setInterval(updateSessionTime, 30000);
+  window.setTimeout(() => {
+    if (!desktop.classList.contains("ready")) {
+      bootScreen.classList.add("hidden");
+      desktop.classList.add("ready");
+    }
+  }, 6500);
 </script>
 </body>
 </html>
