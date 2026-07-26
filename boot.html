@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>1999WORLD.EXE</title>
 
 <style>
+
 body {
-    background:black;
+    background:#000;
     color:#00ff00;
     font-family:"Courier New", monospace;
-    font-size:20px;
+    font-size:18px;
     padding:40px;
 }
 
@@ -17,12 +19,15 @@ body {
 }
 
 .cursor {
-    animation: blink 1s infinite;
+    animation: blink 0.8s infinite;
 }
 
 @keyframes blink {
-    50% {opacity:0;}
+    50% {
+        opacity:0;
+    }
 }
+
 </style>
 
 </head>
@@ -31,41 +36,73 @@ body {
 
 <div id="screen"></div><span class="cursor">_</span>
 
+
 <script>
 
 let text = `
+1999WORLD COMPUTER SYSTEM
+Copyright 1999 1999world.net
+
+
+Award BIOS v4.51PG
+--------------------------------
+
+Checking system memory........ OK
+
+Detecting hardware............ OK
+
+Modem detected:
+US Robotics 56K Connection..... OK
+
+
+Loading 1999WORLD modules...
+
+
+[OK] Music Archive
+[OK] Game Library
+[OK] Creative Studio
+[OK] Community Network
+[OK] Memory Database
+
+
+Restoring connections......... OK
+
+Analogue Experience Engine..... OK
+
+
 C:\\1999WORLD>
 
-Initializing system...
-
-Checking memory........ OK
-
-Loading graphics....... OK
-
-Connecting modem....... OK
-
-Restoring community.... OK
-
-
-C:\\1999WORLD> RUN 1999WORLD.EXE
+RUN 1999WORLD.EXE
 
 
 Launching 1999WORLD.EXE...
+
+
+Welcome back.
 `;
 
 let i = 0;
 
 function typeText(){
+
     if(i < text.length){
+
         document.getElementById("screen").innerHTML += text.charAt(i);
+
         i++;
-        setTimeout(typeText,35);
-    }
-    else {
+
+        setTimeout(typeText,30);
+
+    } else {
+
         setTimeout(function(){
+
             window.location.href="index.html";
-        },2000);
+
+        },2500);
+
     }
+
 }
 
 typeText();
