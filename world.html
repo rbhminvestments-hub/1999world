@@ -1328,12 +1328,10 @@
 
 <body>
 
-<div class="boot-screen" id="boot-screen" aria-live="polite">
-  <div id="boot-text">1999world BIOS v0.4</div>
   <span class="boot-cursor" aria-hidden="true"></span>
 </div>
 
-<main class="desktop" id="desktop">
+<main class="desktop ready" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -2182,41 +2180,6 @@
 
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
-
-  // Version 0.3 boot sequence
-  const bootScreen = document.getElementById("boot-screen");
-  const bootText = document.getElementById("boot-text");
-  const desktop = document.getElementById("desktop");
-  const bootLines = [
-    "1999world BIOS v0.4",
-    "",
-    "Checking memory........ OK",
-    "Finding curiosity...... OK",
-    "Connecting............. 56K MODEM",
-    "Dialling...............",
-    "Connected.",
-    "",
-    "Loading World..."
-  ];
-
-  let bootIndex = 1;
-
-  function advanceBoot() {
-    if (bootIndex >= bootLines.length) {
-      window.setTimeout(() => {
-        bootScreen.classList.add("hidden");
-        desktop.classList.add("ready");
-      }, 420);
-      return;
-    }
-
-    bootText.textContent += `\n${bootLines[bootIndex]}`;
-    bootText.style.whiteSpace = "pre-line";
-    bootIndex += 1;
-    window.setTimeout(advanceBoot, bootIndex < 6 ? 260 : 390);
-  }
-
-  window.setTimeout(advanceBoot, 240);
 
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
