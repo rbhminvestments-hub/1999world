@@ -5,18 +5,30 @@
 
 <title>1999WORLD.EXE</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
     background: black;
+}
+
+body {
     color: #00ff00;
     font-family: "Courier New", monospace;
-    font-size: 18px;
-    padding: 40px;
+    font-size: clamp(14px, 3.5vw, 18px);
+    padding: 25px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 #screen {
     white-space: pre-line;
+    line-height: 1.4;
 }
 
 .cursor {
@@ -24,9 +36,11 @@ body {
 }
 
 @keyframes blink {
+
     50% {
         opacity: 0;
     }
+
 }
 
 </style>
@@ -35,6 +49,7 @@ body {
 
 
 <body>
+
 
 <div id="screen"></div><span class="cursor">_</span>
 
@@ -76,23 +91,23 @@ WELCOME TO 1999WORLD.NET
 let i = 0;
 
 
-function typeText(){
+function typeText() {
 
-    if(i < text.length){
+    if (i < text.length) {
 
         document.getElementById("screen").innerHTML += text.charAt(i);
 
         i++;
 
-        setTimeout(typeText, 35);
+        setTimeout(typeText, 45);
 
     } else {
 
-        setTimeout(function(){
+        setTimeout(function() {
 
-            window.location.href="world.html";
+            window.location.href = "world.html";
 
-        }, 1800);
+        }, 1200);
 
     }
 
