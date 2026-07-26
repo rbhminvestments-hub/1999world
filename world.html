@@ -1058,16 +1058,59 @@
       letter-spacing: 1px;
     }
 
-    .signup-form {
+    .membership-card {
       margin-top: 22px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
+      padding: 18px;
+      background: #f4ead0;
+      border-top: 2px solid #766d5a;
+      border-left: 2px solid #766d5a;
+      border-right: 2px solid #fffdf4;
+      border-bottom: 2px solid #fffdf4;
     }
 
-    .signup-form input {
+    .membership-card-title {
+      margin: 0 0 14px;
+      color: #5f2024;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .signup-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px 14px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 5px;
+    }
+
+    .form-field.full-width,
+    .interest-fieldset,
+    .consent-row,
+    .signup-actions,
+    .signup-note,
+    .signup-error {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label,
+    .interest-fieldset legend {
+      color: #353126;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .signup-form input,
+    .signup-form select {
+      width: 100%;
       min-width: 0;
-      padding: 10px 11px;
+      padding: 9px 10px;
+      color: #1b1a15;
       background: #fffaf0;
       border-top: 2px solid #615b4d;
       border-left: 2px solid #615b4d;
@@ -1075,26 +1118,111 @@
       border-bottom: 2px solid white;
     }
 
-    .signup-note {
-      grid-column: 1 / -1;
+    .signup-form input:focus,
+    .signup-form select:focus {
+      outline: 2px dotted var(--navy);
+      outline-offset: 2px;
+    }
+
+    .interest-fieldset {
       margin: 2px 0 0;
-      color: #645c4d;
-      font-size: 11px;
+      padding: 11px;
+      border: 1px solid #9a8e72;
+    }
+
+    .interest-grid {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px 10px;
       font-family: "Courier New", monospace;
+      font-size: 10px;
+    }
+
+    .interest-grid label,
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+
+    .interest-grid input,
+    .consent-row input {
+      width: auto;
+      margin: 2px 0 0;
+    }
+
+    .consent-row {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .signup-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .signup-actions .retro-button[disabled] {
+      cursor: wait;
+      opacity: .72;
+    }
+
+    .signup-note {
+      margin: -3px 0 0;
+      color: #645c4d;
+      font-size: 10px;
+      font-family: "Courier New", monospace;
+      line-height: 1.45;
+    }
+
+    .honeypot-field {
+      position: absolute !important;
+      left: -10000px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+    }
+
+    .signup-error {
+      display: none;
+      margin: 0;
+      padding: 9px 10px;
+      color: #6f1717;
+      background: #f5d9d3;
+      border: 1px solid #9c4c43;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .signup-error.show {
+      display: block;
     }
 
     .signup-message {
       display: none;
       margin-top: 20px;
-      padding: 16px;
+      padding: 20px;
       background: #edf3d3;
       border: 2px solid #6b7650;
       font-family: "Courier New", monospace;
       text-align: center;
+      line-height: 1.65;
     }
 
     .signup-message.show {
       display: block;
+    }
+
+    .member-location {
+      display: inline-block;
+      margin: 9px 0;
+      padding: 4px 8px;
+      color: #3f4f2e;
+      background: rgba(255,255,255,.55);
+      border: 1px solid #8a956b;
     }
 
     .journal-tabs {
@@ -1169,8 +1297,17 @@
         grid-template-columns: 1fr;
       }
 
-      .signup-note {
+      .form-field.full-width,
+      .interest-fieldset,
+      .consent-row,
+      .signup-actions,
+      .signup-note,
+      .signup-error {
         grid-column: auto;
+      }
+
+      .interest-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
       .pixel-cloud {
@@ -1192,7 +1329,7 @@
 <body>
 
 <div class="boot-screen" id="boot-screen" aria-live="polite">
-  <div id="boot-text">1999world BIOS v0.3</div>
+  <div id="boot-text">1999world BIOS v0.4</div>
   <span class="boot-cursor" aria-hidden="true"></span>
 </div>
 
@@ -1647,7 +1784,7 @@
   <section class="window content-window hidden" id="club-window" data-title="The 1999 Club">
     <header class="window-titlebar">
       <span class="window-title-icon">99</span>
-      <span class="window-title">The 1999 Club — Membership Letter</span>
+      <span class="window-title">The 1999 Club — Founding Membership</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
@@ -1656,7 +1793,7 @@
 
     <nav class="window-menu">
       <span>Membership</span>
-      <span>Letters</span>
+      <span>Sunday Letter</span>
       <span>About</span>
       <span>Help</span>
     </nav>
@@ -1664,21 +1801,326 @@
     <div class="window-body standard-body">
       <article class="club-letter">
         <h2>Dear Friend,</h2>
-        <p>If you’re reading this, you probably miss something too.</p>
-        <p>The slower internet. Long conversations. Real communities. Sunday afternoons.</p>
-        <p>We’re building that again.</p>
-        <p><strong class="club-accent">Join the Sunday Letter.</strong><br>
-        One thoughtful email. No advertising. No algorithms. Just something worth reading.</p>
+        <p>We’re building a quieter corner of the internet — one shaped by curiosity, creativity and real-world connection.</p>
+        <p>If you’d like to help build it from the beginning, we’d love to know a little about you.</p>
 
-        <form class="signup-form" id="signup-form" novalidate>
-          <label class="visually-hidden" for="signup-email">Email address</label>
-          <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required>
-          <button class="retro-button" type="submit">Become a Member</button>
-          <p class="signup-note">Your address is only used for 1999world updates. Leave at any time.</p>
-        </form>
+        <section class="membership-card" aria-labelledby="membership-card-title">
+          <h3 class="membership-card-title" id="membership-card-title">Founding Membership Card</h3>
 
-        <div class="signup-message" id="signup-message" role="status">
+          <form class="signup-form" id="signup-form" novalidate>
+            <div class="form-field">
+              <label for="signup-first-name">First name *</label>
+              <input id="signup-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="80" required>
+            </div>
+
+            <div class="form-field">
+              <label for="signup-email">Email *</label>
+              <input id="signup-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+            </div>
+
+            <div class="form-field">
+              <label for="signup-city">City *</label>
+              <input id="signup-city" name="city" type="text" autocomplete="address-level2" maxlength="100" required>
+            </div>
+
+            <div class="form-field">
+              <label for="signup-country">Country *</label>
+              <select id="signup-country" name="country" autocomplete="country-name" required>
+                <option value="">Choose your country</option>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Albania">Albania</option>
+                <option value="Algeria">Algeria</option>
+                <option value="American Samoa">American Samoa</option>
+                <option value="Andorra">Andorra</option>
+                <option value="Angola">Angola</option>
+                <option value="Anguilla">Anguilla</option>
+                <option value="Antarctica">Antarctica</option>
+                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Armenia">Armenia</option>
+                <option value="Aruba">Aruba</option>
+                <option value="Australia" selected>Australia</option>
+                <option value="Austria">Austria</option>
+                <option value="Azerbaijan">Azerbaijan</option>
+                <option value="Bahamas">Bahamas</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Barbados">Barbados</option>
+                <option value="Belarus">Belarus</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Belize">Belize</option>
+                <option value="Benin">Benin</option>
+                <option value="Bermuda">Bermuda</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                <option value="Botswana">Botswana</option>
+                <option value="Bouvet Island">Bouvet Island</option>
+                <option value="Brazil">Brazil</option>
+                <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                <option value="Brunei Darussalam">Brunei Darussalam</option>
+                <option value="Bulgaria">Bulgaria</option>
+                <option value="Burkina Faso">Burkina Faso</option>
+                <option value="Burundi">Burundi</option>
+                <option value="Cabo Verde">Cabo Verde</option>
+                <option value="Cambodia">Cambodia</option>
+                <option value="Cameroon">Cameroon</option>
+                <option value="Canada">Canada</option>
+                <option value="Cayman Islands">Cayman Islands</option>
+                <option value="Central African Republic">Central African Republic</option>
+                <option value="Chad">Chad</option>
+                <option value="Chile">Chile</option>
+                <option value="China">China</option>
+                <option value="Christmas Island">Christmas Island</option>
+                <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Comoros">Comoros</option>
+                <option value="Congo">Congo</option>
+                <option value="Congo, The Democratic Republic of the">Congo, The Democratic Republic of the</option>
+                <option value="Cook Islands">Cook Islands</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Croatia">Croatia</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Curaçao">Curaçao</option>
+                <option value="Cyprus">Cyprus</option>
+                <option value="Czechia">Czechia</option>
+                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Djibouti">Djibouti</option>
+                <option value="Dominica">Dominica</option>
+                <option value="Dominican Republic">Dominican Republic</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Egypt">Egypt</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Equatorial Guinea">Equatorial Guinea</option>
+                <option value="Eritrea">Eritrea</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Eswatini">Eswatini</option>
+                <option value="Ethiopia">Ethiopia</option>
+                <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                <option value="Faroe Islands">Faroe Islands</option>
+                <option value="Fiji">Fiji</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="French Guiana">French Guiana</option>
+                <option value="French Polynesia">French Polynesia</option>
+                <option value="French Southern Territories">French Southern Territories</option>
+                <option value="Gabon">Gabon</option>
+                <option value="Gambia">Gambia</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Germany">Germany</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Gibraltar">Gibraltar</option>
+                <option value="Greece">Greece</option>
+                <option value="Greenland">Greenland</option>
+                <option value="Grenada">Grenada</option>
+                <option value="Guadeloupe">Guadeloupe</option>
+                <option value="Guam">Guam</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Guernsey">Guernsey</option>
+                <option value="Guinea">Guinea</option>
+                <option value="Guinea-Bissau">Guinea-Bissau</option>
+                <option value="Guyana">Guyana</option>
+                <option value="Haiti">Haiti</option>
+                <option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+                <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                <option value="Honduras">Honduras</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Iceland">Iceland</option>
+                <option value="India">India</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                <option value="Iraq">Iraq</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Isle of Man">Isle of Man</option>
+                <option value="Israel">Israel</option>
+                <option value="Italy">Italy</option>
+                <option value="Jamaica">Jamaica</option>
+                <option value="Japan">Japan</option>
+                <option value="Jersey">Jersey</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Kazakhstan">Kazakhstan</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Kiribati">Kiribati</option>
+                <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                <option value="Korea, Republic of">Korea, Republic of</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Kyrgyzstan">Kyrgyzstan</option>
+                <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Lebanon">Lebanon</option>
+                <option value="Lesotho">Lesotho</option>
+                <option value="Liberia">Liberia</option>
+                <option value="Libya">Libya</option>
+                <option value="Liechtenstein">Liechtenstein</option>
+                <option value="Lithuania">Lithuania</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Macao">Macao</option>
+                <option value="Madagascar">Madagascar</option>
+                <option value="Malawi">Malawi</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Mali">Mali</option>
+                <option value="Malta">Malta</option>
+                <option value="Marshall Islands">Marshall Islands</option>
+                <option value="Martinique">Martinique</option>
+                <option value="Mauritania">Mauritania</option>
+                <option value="Mauritius">Mauritius</option>
+                <option value="Mayotte">Mayotte</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                <option value="Moldova, Republic of">Moldova, Republic of</option>
+                <option value="Monaco">Monaco</option>
+                <option value="Mongolia">Mongolia</option>
+                <option value="Montenegro">Montenegro</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Morocco">Morocco</option>
+                <option value="Mozambique">Mozambique</option>
+                <option value="Myanmar">Myanmar</option>
+                <option value="Namibia">Namibia</option>
+                <option value="Nauru">Nauru</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="New Caledonia">New Caledonia</option>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Niger">Niger</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Niue">Niue</option>
+                <option value="Norfolk Island">Norfolk Island</option>
+                <option value="North Macedonia">North Macedonia</option>
+                <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                <option value="Norway">Norway</option>
+                <option value="Oman">Oman</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Palau">Palau</option>
+                <option value="Palestine, State of">Palestine, State of</option>
+                <option value="Panama">Panama</option>
+                <option value="Papua New Guinea">Papua New Guinea</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Peru">Peru</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Pitcairn">Pitcairn</option>
+                <option value="Poland">Poland</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Puerto Rico">Puerto Rico</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Romania">Romania</option>
+                <option value="Russian Federation">Russian Federation</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Réunion">Réunion</option>
+                <option value="Saint Barthélemy">Saint Barthélemy</option>
+                <option value="Saint Helena, Ascension and Tristan da Cunha">Saint Helena, Ascension and Tristan da Cunha</option>
+                <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                <option value="Saint Lucia">Saint Lucia</option>
+                <option value="Saint Martin (French part)">Saint Martin (French part)</option>
+                <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                <option value="Samoa">Samoa</option>
+                <option value="San Marino">San Marino</option>
+                <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Senegal">Senegal</option>
+                <option value="Serbia">Serbia</option>
+                <option value="Seychelles">Seychelles</option>
+                <option value="Sierra Leone">Sierra Leone</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                <option value="Slovakia">Slovakia</option>
+                <option value="Slovenia">Slovenia</option>
+                <option value="Solomon Islands">Solomon Islands</option>
+                <option value="Somalia">Somalia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+                <option value="South Sudan">South Sudan</option>
+                <option value="Spain">Spain</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Sudan">Sudan</option>
+                <option value="Suriname">Suriname</option>
+                <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+                <option value="Tajikistan">Tajikistan</option>
+                <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Timor-Leste">Timor-Leste</option>
+                <option value="Togo">Togo</option>
+                <option value="Tokelau">Tokelau</option>
+                <option value="Tonga">Tonga</option>
+                <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Turkmenistan">Turkmenistan</option>
+                <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                <option value="Tuvalu">Tuvalu</option>
+                <option value="Türkiye">Türkiye</option>
+                <option value="Uganda">Uganda</option>
+                <option value="Ukraine">Ukraine</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+                <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Uzbekistan">Uzbekistan</option>
+                <option value="Vanuatu">Vanuatu</option>
+                <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                <option value="Viet Nam">Viet Nam</option>
+                <option value="Virgin Islands, British">Virgin Islands, British</option>
+                <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                <option value="Wallis and Futuna">Wallis and Futuna</option>
+                <option value="Western Sahara">Western Sahara</option>
+                <option value="Yemen">Yemen</option>
+                <option value="Zambia">Zambia</option>
+                <option value="Zimbabwe">Zimbabwe</option>
+                <option value="Åland Islands">Åland Islands</option>
+              </select>
+            </div>
+
+            <fieldset class="interest-fieldset">
+              <legend>Things that make Sundays better (optional)</legend>
+              <div class="interest-grid">
+                <label><input type="checkbox" name="interests" value="Reading">Reading</label>
+                <label><input type="checkbox" name="interests" value="Walking">Walking</label>
+                <label><input type="checkbox" name="interests" value="Photography">Photography</label>
+                <label><input type="checkbox" name="interests" value="Cooking">Cooking</label>
+                <label><input type="checkbox" name="interests" value="Music">Music</label>
+                <label><input type="checkbox" name="interests" value="Gardening">Gardening</label>
+                <label><input type="checkbox" name="interests" value="Creativity">Creativity</label>
+                <label><input type="checkbox" name="interests" value="Community">Community</label>
+                <label><input type="checkbox" name="interests" value="Volunteering">Volunteering</label>
+                <label><input type="checkbox" name="interests" value="Nature">Nature</label>
+                <label><input type="checkbox" name="interests" value="Slowing down">Slowing down</label>
+                <label><input type="checkbox" name="interests" value="Local gatherings">Local gatherings</label>
+              </div>
+            </fieldset>
+
+            <label class="consent-row">
+              <input id="signup-consent" name="consent" type="checkbox" required>
+              <span>I’d like to receive the Sunday Letter and understand I can unsubscribe at any time. *</span>
+            </label>
+
+            <div class="honeypot-field" aria-hidden="true">
+              <label for="signup-website">Website</label>
+              <input id="signup-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <p class="signup-error" id="signup-error" role="alert"></p>
+
+            <div class="signup-actions">
+              <button class="retro-button" type="submit">Become a Founding Member</button>
+            </div>
+
+            <p class="signup-note">We collect your city and country so future invitations can be relevant to where you live. We do not ask for your street address, phone number or age.</p>
+          </form>
+        </section>
+
+        <div class="signup-message" id="signup-message" role="status" aria-live="polite">
           <strong>Letter Received.</strong><br><br>
+          Welcome, <span id="member-first-name">Friend</span>.<br>
+          <span class="member-location" id="member-location"></span><br>
           We’ll write soon.<br>
           See you Sunday.
         </div>
@@ -1687,7 +2129,7 @@
 
     <footer class="window-status">
       <span>Membership is free.</span>
-      <span>No spam. No noise.</span>
+      <span>No advertising. No algorithms.</span>
     </footer>
   </section>
 
@@ -1746,7 +2188,7 @@
   const bootText = document.getElementById("boot-text");
   const desktop = document.getElementById("desktop");
   const bootLines = [
-    "1999world BIOS v0.3",
+    "1999world BIOS v0.4",
     "",
     "Checking memory........ OK",
     "Finding curiosity...... OK",
@@ -1786,55 +2228,81 @@
     });
   });
 
-  // Club sign-up. Connect SIGNUP_ENDPOINT to Formspree for live collection.
+  // The 1999 Club membership form.
+  const SIGNUP_ENDPOINT = "https://1999world-api.rbhminvestments.workers.dev/signup";
   const signupForm = document.getElementById("signup-form");
   const signupMessage = document.getElementById("signup-message");
+  const signupError = document.getElementById("signup-error");
+
+  function showSignupError(message) {
+    signupError.textContent = message;
+    signupError.classList.add("show");
+  }
 
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    signupError.classList.remove("show");
+    signupError.textContent = "";
 
-    const emailInput = document.getElementById("signup-email");
-    const email = emailInput.value.trim();
-
-    if (!emailInput.checkValidity()) {
-      emailInput.reportValidity();
+    if (!signupForm.checkValidity()) {
+      signupForm.reportValidity();
       return;
     }
 
     const submitButton = signupForm.querySelector("button[type='submit']");
+    const firstName = document.getElementById("signup-first-name").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
+    const city = document.getElementById("signup-city").value.trim();
+    const country = document.getElementById("signup-country").value;
+    const consent = document.getElementById("signup-consent").checked;
+    const website = document.getElementById("signup-website").value;
+    const interests = Array.from(
+      signupForm.querySelectorAll('input[name="interests"]:checked')
+    ).map((input) => input.value);
+
     submitButton.disabled = true;
-    submitButton.textContent = "Sending...";
+    submitButton.textContent = "Sending letter...";
 
     try {
-      if (SIGNUP_ENDPOINT) {
-        const response = await fetch(SIGNUP_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            email,
-            source: "1999world.net — The 1999 Club"
-          })
-        });
+      const response = await fetch(SIGNUP_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          firstName,
+          email,
+          city,
+          country,
+          interests,
+          consent,
+          website,
+          source: "1999world.net — Founding Membership"
+        })
+      });
 
-        if (!response.ok) throw new Error("Sign-up service did not accept the request.");
-      } else {
-        const localMembers = JSON.parse(localStorage.getItem("1999world-members") || "[]");
+      const result = await response.json().catch(() => null);
 
-        if (!localMembers.includes(email)) {
-          localMembers.push(email);
-          localStorage.setItem("1999world-members", JSON.stringify(localMembers));
-        }
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.message ||
+          "The membership service could not receive your letter."
+        );
       }
 
+      document.getElementById("member-first-name").textContent = firstName;
+      document.getElementById("member-location").textContent = `${city}, ${country}`;
       signupForm.style.display = "none";
       signupMessage.classList.add("show");
     } catch (error) {
-      alert("The letter could not be sent just now. Please try again shortly.");
+      showSignupError(
+        error instanceof Error
+          ? error.message
+          : "The letter could not be sent just now. Please try again."
+      );
       submitButton.disabled = false;
-      submitButton.textContent = "Become a Member";
+      submitButton.textContent = "Become a Founding Member";
     }
   });
 
@@ -1853,15 +2321,6 @@
   const taskButtons = document.getElementById("task-buttons");
   const beginButton = document.getElementById("begin-button");
   const beginMenu = document.getElementById("begin-menu");
-
-  /*
-    SIGN-UP CONNECTION
-    Paste a Formspree endpoint below after creating a form at formspree.io.
-    Example: "https://formspree.io/f/abcdwxyz"
-    Until then, sign-ups are safely stored in this browser and the visitor
-    receives a clear success message. No data is falsely claimed to be sent.
-  */
-  const SIGNUP_ENDPOINT = "";
 
 
   let highestZ = 100;
