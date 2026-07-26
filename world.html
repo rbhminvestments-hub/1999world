@@ -550,40 +550,6 @@
             background: #f8f2df;
         }
 
-        /* PLAYER */
-
-        .track-display {
-            padding: 14px;
-
-            background: #cad39d;
-
-            border-top: 2px solid #555348;
-            border-left: 2px solid #555348;
-            border-right: 2px solid white;
-            border-bottom: 2px solid white;
-        }
-
-        .player-controls {
-            margin-top: 12px;
-
-            display: flex;
-            gap: 5px;
-        }
-
-        .player-button {
-            width: 37px;
-            height: 31px;
-
-            background: var(--panel);
-
-            border-top: 2px solid white;
-            border-left: 2px solid white;
-            border-right: 2px solid #555348;
-            border-bottom: 2px solid #555348;
-
-            cursor: pointer;
-        }
-
         /* TASKBAR */
 
         .taskbar {
@@ -895,16 +861,7 @@
             <span class="desktop-icon-graphic">📷</span>
             <span class="desktop-icon-label">Photo Album</span>
         </button>
-
-        <button
-            class="desktop-icon"
-            data-open="player-window"
-        >
-            <span class="desktop-icon-graphic">💿</span>
-            <span class="desktop-icon-label">Record Player</span>
-        </button>
-
-        <button
+<button
             class="desktop-icon"
             data-open="downloads-window"
         >
@@ -987,7 +944,7 @@
 
         <footer class="window-status">
             <span>💾 Est. 2026</span>
-            <span>Online Now: 27 👥</span>
+            <span>Digital is the doorway. Real life is the destination.</span>
         </footer>
     </section>
 
@@ -1081,9 +1038,9 @@
             </article>
 
             <article class="pin-note note-two">
-                <strong>Vinyl Night</strong><br>
-                Friday, 7:00pm<br>
-                Bring a record.
+                <strong>Community Dinner</strong><br>
+                Coming soon<br>
+                Details to follow.
             </article>
 
             <article class="pin-note note-three">
@@ -1095,7 +1052,7 @@
 
         <footer class="window-status">
             <span>3 notices pinned</span>
-            <span>Community online</span>
+            <span>Community noticeboard</span>
         </footer>
     </section>
 
@@ -1179,47 +1136,7 @@
             <button class="retro-button">Write Letter</button>
         </footer>
     </section>
-
-    <section
-        class="window content-window hidden"
-        id="player-window"
-        data-title="Record Player"
-    >
-        <header class="window-titlebar">
-            <span class="window-title-icon">♫</span>
-            <span class="window-title">
-                Now Playing - Sunday Morning
-            </span>
-
-            <div class="window-controls">
-                <button class="window-control minimise-window">−</button>
-                <button class="window-control close-window">×</button>
-            </div>
-        </header>
-
-        <nav class="window-menu">
-            <span>File</span>
-            <span>Options</span>
-            <span>Help</span>
-        </nav>
-
-        <div class="window-body standard-body">
-            <div class="track-display">
-                <strong>Sunday Morning</strong><br>
-                1999world Record Player
-            </div>
-
-            <div class="player-controls">
-                <button class="player-button">|◀</button>
-                <button class="player-button">▶</button>
-                <button class="player-button">Ⅱ</button>
-                <button class="player-button">■</button>
-                <button class="player-button">▶|</button>
-            </div>
-        </div>
-    </section>
-
-    <section
+<section
         class="window content-window hidden"
         id="calendar-window"
         data-title="Calendar"
@@ -1237,10 +1154,7 @@
         <div class="window-body standard-body">
             <h2>Coming Up</h2>
 
-            <p>Sunday morning walk</p>
-            <p>Community reading club</p>
-            <p>Vinyl evening</p>
-            <p>Photo swap</p>
+            <p>Events will appear here as the community grows.</p>
         </div>
     </section>
 
