@@ -1,403 +1,2194 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>1999world.net</title>
+
+    <style>
+        :root {
+            --desktop: #176f6c;
+            --desktop-dark: #0d5553;
+
+            --navy: #10166f;
+            --navy-dark: #070b43;
+
+            --panel: #d8d2bd;
+            --panel-light: #f4efdc;
+            --panel-dark: #777261;
+
+            --cream: #f6f0dd;
+            --ink: #171710;
+
+            --taskbar: #c9c3ad;
+            --highlight: #ffffff;
+            --shadow: #38372f;
+
+            --yellow-note: #f3dc72;
+            --cork: #9b7448;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(255, 255, 255, 0.08),
+                    transparent 32%
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.018) 0,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--desktop),
+                    var(--desktop-dark)
+                );
+
+            color: var(--ink);
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+        }
+
+        button,
+        a {
+            font: inherit;
+        }
+
+        button {
+            color: inherit;
+        }
+
+        .desktop {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            min-height: 640px;
+            overflow: hidden;
+        }
+
+        .desktop::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.045) 4px
+                );
 
-<title>1999world OS</title>
+            mix-blend-mode: multiply;
+            opacity: 0.45;
+        }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        /* Desktop icons */
 
-<style>
+        .desktop-icons {
+            position: absolute;
+            top: 16px;
+            left: 10px;
+            bottom: 58px;
 
-html, body {
-    margin:0;
-    padding:0;
-    height:100%;
-    overflow:hidden;
-    font-family:"Courier New", monospace;
-    background:#003366;
-}
+            width: 112px;
 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
 
-/* Desktop */
+            z-index: 2;
+        }
 
-.desktop {
+        .desktop-icon {
+            width: 100px;
+            padding: 2px;
 
-    height:100vh;
-    background:
-    linear-gradient(
-        135deg,
-        #003366,
-        #006666
-    );
+            color: #fff;
+            text-align: center;
+            text-shadow:
+                1px 1px #000,
+                -1px -1px rgba(0, 0, 0, 0.45);
+
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+        }
 
-    color:white;
-    position:relative;
+        .desktop-icon:hover,
+        .desktop-icon:focus-visible {
+            border: 1px dotted rgba(255, 255, 255, 0.85);
+            background: rgba(0, 0, 70, 0.2);
+            outline: none;
+        }
+
+        .desktop-icon-graphic {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 4px;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 31px;
+            line-height: 1;
+
+            background: #e7e0c8;
+
+            border-top: 3px solid #fff;
+            border-left: 3px solid #fff;
+            border-right: 3px solid #4a493f;
+            border-bottom: 3px solid #4a493f;
 
-}
+            box-shadow: 2px 2px 0 #13130f;
+        }
+
+        .desktop-icon-label {
+            font-size: 12px;
+            line-height: 1.15;
+        }
+
+        .notification-badge {
+            position: absolute;
+            transform: translate(30px, -4px);
+
+            min-width: 20px;
+            height: 20px;
+            padding: 0 4px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+
+            background: #27271f;
+            border: 2px solid #eee7cf;
+            border-radius: 50%;
+        }
+
+        /* Windows */
+
+        .window {
+            position: absolute;
+            z-index: 5;
+
+            min-width: 220px;
+
+            background: var(--panel);
+
+            border-top: 3px solid var(--highlight);
+            border-left: 3px solid var(--highlight);
+            border-right: 3px solid var(--shadow);
+            border-bottom: 3px solid var(--shadow);
+
+            box-shadow:
+                2px 2px 0 #111,
+                7px 7px 14px rgba(0, 0, 0, 0.18);
+        }
+
+        .window.active {
+            z-index: 40;
+        }
+
+        .window.hidden {
+            display: none;
+        }
+
+        .window.minimised .window-menu,
+        .window.minimised .window-body,
+        .window.minimised .window-status {
+            display: none;
+        }
+
+        .window-titlebar {
+            min-height: 30px;
+            padding: 3px 4px 3px 7px;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--navy),
+                    #1d2a8f
+                );
+
+            cursor: move;
+            user-select: none;
+        }
+
+        .window-title-icon {
+            flex: 0 0 auto;
+            width: 17px;
+            height: 17px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+            font-size: 11px;
 
+            background: #1d326f;
+
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #080927;
+            border-bottom: 1px solid #080927;
+        }
 
-/* CRT effect */
+        .window-title {
+            min-width: 0;
+            flex: 1;
 
-.desktop:after {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 3px;
+        }
 
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-    repeating-linear-gradient(
-        0deg,
-        rgba(255,255,255,0.03),
-        rgba(255,255,255,0.03) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-
-    pointer-events:none;
-
-}
-
-
-
-/* Header */
-
-.logo {
-
-    padding:20px;
-    font-size:28px;
-    color:#00ff99;
-
-}
-
-.subtitle {
-
-    font-size:14px;
-    color:white;
-
-}
-
-
-
-/* Icons */
-
-.icons {
-
-    display:flex;
-    flex-wrap:wrap;
-    padding:20px;
-    gap:25px;
-
-}
-
-
-.icon {
-
-    width:90px;
-    text-align:center;
-    cursor:pointer;
-    color:white;
-
-}
-
-
-.icon-box {
-
-    width:55px;
-    height:55px;
-    margin:auto;
-
-    background:#009999;
-
-    border:3px outset #66ffff;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:28px;
-
-}
-
-
-.icon:hover .icon-box {
-
-    background:#00cccc;
-
-}
-
-
-.icon-name {
-
-    margin-top:8px;
-    font-size:13px;
-
-}
-
-
-
-/* Bottom bar */
-
-.taskbar {
-
-    position:absolute;
-
-    bottom:0;
-    left:0;
-    right:0;
-
-    height:42px;
-
-    background:#002244;
-
-    border-top:3px solid #00aa88;
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 10px;
-
-    gap:10px;
-
-}
-
-
-.begin {
-
-    background:#009999;
-
-    border:3px outset #66ffff;
-
-    padding:5px 18px;
-
-    color:white;
-
-    cursor:pointer;
-
-}
-
-
-.status {
-
-    margin-left:auto;
-
-    font-size:12px;
-
-    color:#00ff99;
-
-}
-
-
-
-/* Welcome window */
-
-.window {
-
-    position:absolute;
-
-    right:40px;
-
-    top:90px;
-
-    width:260px;
-
-    background:#c0d8d8;
-
-    color:#003333;
-
-    border:3px solid #003333;
-
-}
-
-
-.window-title {
-
-    background:#003366;
-
-    color:white;
-
-    padding:6px;
-
-}
-
-
-.window-content {
-
-    padding:15px;
-
-    font-size:13px;
-
-}
-
-
-</style>
-
-
+        .window-control {
+            width: 23px;
+            height: 22px;
+            padding: 0;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 14px;
+            line-height: 1;
+            font-weight: bold;
+
+            background: var(--panel);
+
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #45443b;
+            border-bottom: 2px solid #45443b;
+
+            cursor: pointer;
+        }
+
+        .window-control:active,
+        .retro-button:active,
+        .begin-button:active {
+            border-top-color: #45443b;
+            border-left-color: #45443b;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        .window-menu {
+            min-height: 29px;
+            padding: 5px 9px;
+
+            display: flex;
+            gap: 17px;
+            align-items: center;
+
+            font-family: Georgia, serif;
+            font-size: 14px;
+
+            background: #e8e2cd;
+            border-bottom: 1px solid #777261;
+        }
+
+        .window-body {
+            background: var(--cream);
+        }
+
+        .window-status {
+            min-height: 27px;
+            padding: 4px 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-size: 11px;
+
+            background: #d8d2bd;
+
+            border-top: 2px solid #777261;
+            box-shadow: inset 0 1px #fff;
+        }
+
+        .retro-button {
+            display: inline-block;
+            padding: 7px 14px;
+
+            color: var(--navy);
+            font-weight: bold;
+            text-decoration: none;
+
+            background: #e5dfc9;
+
+            border-top: 3px solid #fff;
+            border-left: 3px solid #fff;
+            border-right: 3px solid #59574b;
+            border-bottom: 3px solid #59574b;
+
+            cursor: pointer;
+        }
+
+        /* Welcome */
+
+        #welcome-window {
+            top: 48px;
+            left: 13%;
+            width: 38%;
+            max-width: 550px;
+        }
+
+        .welcome-body {
+            min-height: 365px;
+            padding: 38px 36px 26px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255, 255, 255, 0.45),
+                    transparent 65%
+                ),
+                var(--cream);
+        }
+
+        .welcome-year {
+            margin: 0;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(62px, 8vw, 102px);
+            line-height: 0.9;
+            font-weight: 900;
+            letter-spacing: 8px;
+        }
+
+        .welcome-word {
+            margin-top: 18px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            letter-spacing: 10px;
+        }
+
+        .welcome-rule {
+            width: 70%;
+            height: 1px;
+            margin: 19px auto 22px;
+
+            position: relative;
+
+            background: #26261f;
+        }
+
+        .welcome-rule::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+
+            width: 9px;
+            height: 9px;
+
+            background: #111;
+            transform: translate(-50%, -50%);
+        }
+
+        .welcome-copy {
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .welcome-action {
+            margin-top: 24px;
+        }
+
+        /* Journal */
+
+        #journal-window {
+            top: 48px;
+            left: 53%;
+            width: 28%;
+            max-width: 430px;
+        }
+
+        .journal-body {
+            height: 390px;
+            padding: 20px 38px 20px 24px;
+
+            position: relative;
+            overflow: hidden;
+
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .journal-body p {
+            margin: 0 0 23px;
+        }
+
+        .fake-scrollbar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+
+            width: 23px;
+
+            background: #d1cab4;
+            border-left: 1px solid #69675a;
+        }
+
+        .scroll-arrow {
+            height: 23px;
+
+            display: grid;
+            place-items: center;
+
+            background: #d8d2bd;
+
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #555348;
+            border-bottom: 2px solid #555348;
+        }
+
+        .scroll-thumb {
+            height: 118px;
+            margin-top: 115px;
+
+            background: #aaa590;
+            border-top: 2px solid #eee9d5;
+            border-left: 2px solid #eee9d5;
+            border-right: 2px solid #5f5c50;
+            border-bottom: 2px solid #5f5c50;
+        }
+
+        /* Quote */
+
+        .quote-note {
+            position: absolute;
+            top: 98px;
+            right: 2.5%;
+            z-index: 6;
+
+            width: 180px;
+            min-height: 205px;
+            padding: 17px;
+
+            background: var(--yellow-note);
+            border: 1px solid #725f18;
+            box-shadow:
+                4px 5px 0 rgba(0, 0, 0, 0.32);
+
+            transform: rotate(0.5deg);
+        }
+
+        .quote-note h3 {
+            margin: 0 0 17px;
+            padding-bottom: 7px;
+
+            font-size: 13px;
+            text-align: center;
+
+            border-bottom: 1px solid #463b14;
+        }
+
+        .quote-note p {
+            margin: 0;
+
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .quote-smile {
+            margin-top: 23px;
+            text-align: right;
+            font-size: 20px;
+        }
+
+        /* Bulletin board */
+
+        #bulletin-window {
+            left: 10%;
+            bottom: 72px;
+            width: 27%;
+            max-width: 430px;
+        }
+
+        .bulletin-body {
+            height: 292px;
+            padding: 23px 17px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(70, 43, 20, 0.12) 0,
+                    rgba(70, 43, 20, 0.12) 2px,
+                    transparent 2px,
+                    transparent 6px
+                ),
+                var(--cork);
+        }
+
+        .pin-note {
+            position: absolute;
+
+            width: 138px;
+            min-height: 110px;
+            padding: 19px 12px 10px;
+
+            background: #efe1a9;
+            border: 1px solid #695d30;
+            box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.3);
+
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        .pin-note::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 4px;
+
+            width: 13px;
+            height: 13px;
+
+            border-radius: 50%;
+            background: #c02222;
+            box-shadow:
+                inset -2px -2px 0 rgba(0, 0, 0, 0.35),
+                1px 2px 0 rgba(0, 0, 0, 0.35);
+
+            transform: translateX(-50%);
+        }
+
+        .pin-note.blue::before {
+            background: #1e61ad;
+        }
+
+        .pin-note.green::before {
+            background: #2b8750;
+        }
+
+        .note-one {
+            left: 18px;
+            top: 27px;
+            transform: rotate(-3deg);
+        }
+
+        .note-two {
+            right: 16px;
+            top: 43px;
+            transform: rotate(3deg);
+        }
+
+        .note-three {
+            left: 44px;
+            bottom: 20px;
+            transform: rotate(-1deg);
+        }
+
+        /* Player */
+
+        #player-window {
+            left: 38%;
+            bottom: 250px;
+            width: 22%;
+            max-width: 330px;
+        }
+
+        .player-body {
+            padding: 13px;
+        }
+
+        .track-display {
+            min-height: 78px;
+            padding: 12px;
+
+            background: #cbd49e;
+            border-top: 2px solid #54533f;
+            border-left: 2px solid #54533f;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .track-time {
+            float: right;
+        }
+
+        .player-controls {
+            margin-top: 10px;
+
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .player-button {
+            width: 34px;
+            height: 30px;
+            padding: 0;
+
+            display: grid;
+            place-items: center;
+
+            background: #d8d2bd;
+
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #555348;
+            border-bottom: 2px solid #555348;
+
+            cursor: pointer;
+        }
+
+        .volume {
+            margin-left: auto;
+            font-size: 20px;
+        }
+
+        /* Dial-up */
+
+        #dial-window {
+            left: 40%;
+            bottom: 67px;
+            width: 19%;
+            max-width: 275px;
+        }
+
+        .dial-body {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .dial-graphic {
+            margin-bottom: 9px;
+            font-size: 32px;
+            letter-spacing: 5px;
+        }
+
+        .dial-dots {
+            color: #408548;
+            font-size: 14px;
+        }
+
+        /* Letters */
+
+        #letters-window {
+            right: 2.8%;
+            bottom: 63px;
+            width: 37%;
+            max-width: 565px;
+        }
+
+        .letters-body {
+            height: 340px;
+
+            display: grid;
+            grid-template-columns: 42% 58%;
+
+            overflow: hidden;
+        }
+
+        .mail-list {
+            background: #e7e1cd;
+            border-right: 2px solid #787568;
+        }
+
+        .mail-item {
+            min-height: 73px;
+            padding: 11px 9px;
+
+            display: grid;
+            grid-template-columns: 28px 1fr 10px;
+            gap: 7px;
+
+            border-bottom: 1px solid #aaa590;
+
+            cursor: pointer;
+        }
+
+        .mail-item:hover,
+        .mail-item.active {
+            background: #f5f0df;
+        }
+
+        .mail-envelope {
+            font-size: 20px;
+        }
+
+        .mail-subject {
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        .mail-dot {
+            width: 7px;
+            height: 7px;
+            margin-top: 7px;
+
+            border-radius: 50%;
+            background: #d71919;
+        }
+
+        .letter-reader {
+            padding: 23px;
+
+            position: relative;
+
+            background: #f8f2df;
+
+            font-family:
+                "Comic Sans MS",
+                "Bradley Hand",
+                cursive;
+            font-size: 15px;
+            font-style: italic;
+            line-height: 1.55;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 13px;
+            right: 15px;
+
+            width: 52px;
+            height: 63px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+            font-family: "Courier New", monospace;
+            font-size: 10px;
+            font-style: normal;
+            text-align: center;
+
+            background: #4f8067;
+
+            border: 4px dotted #e8e1c7;
+            outline: 1px solid #69755d;
+        }
+
+        .letter-reader p {
+            max-width: 78%;
+            margin-top: 0;
+        }
+
+        .write-letter {
+            margin-left: auto;
+        }
+
+        /* Taskbar */
+
+        .taskbar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 500;
+
+            min-height: 50px;
+            padding: 5px 7px;
+
+            display: flex;
+            align-items: stretch;
+            gap: 5px;
+
+            background: var(--taskbar);
+
+            border-top: 3px solid #fff;
+            box-shadow: 0 -2px 0 #5d5a4e;
+        }
+
+        .begin-button,
+        .task-button,
+        .clock {
+            min-height: 39px;
+
+            display: flex;
+            align-items: center;
+
+            background: #d8d2bd;
+
+            border-top: 2px solid #fff;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #555348;
+            border-bottom: 2px solid #555348;
+        }
+
+        .begin-button {
+            min-width: 105px;
+            padding: 0 13px;
+
+            gap: 7px;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .task-buttons {
+            min-width: 0;
+            flex: 1;
+
+            display: flex;
+            gap: 5px;
+            overflow: hidden;
+        }
+
+        .task-button {
+            min-width: 150px;
+            max-width: 245px;
+            padding: 0 10px;
+
+            gap: 7px;
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .task-button.active {
+            border-top-color: #555348;
+            border-left-color: #555348;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+            background: #c4bea9;
+        }
+
+        .system-tray {
+            display: flex;
+            gap: 4px;
+        }
+
+        .clock {
+            min-width: 112px;
+            padding: 0 13px;
+
+            justify-content: center;
+
+            font-size: 12px;
+
+            border-top-color: #777467;
+            border-left-color: #777467;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        /* Begin menu */
+
+        .begin-menu {
+            position: fixed;
+            left: 7px;
+            bottom: 50px;
+            z-index: 600;
+
+            width: 245px;
+            padding: 5px;
+
+            display: none;
+
+            background: #d8d2bd;
+
+            border-top: 3px solid #fff;
+            border-left: 3px solid #fff;
+            border-right: 3px solid #45443b;
+            border-bottom: 3px solid #45443b;
+
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+        }
+
+        .begin-menu.open {
+            display: block;
+        }
+
+        .begin-brand {
+            padding: 10px;
+
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+
+            background: var(--navy);
+        }
+
+        .begin-item {
+            width: 100%;
+            padding: 10px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            border: 0;
+            background: transparent;
+
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .begin-item:hover {
+            color: #fff;
+            background: var(--navy);
+        }
+
+        /* Mobile */
+
+        @media (max-width: 820px) {
+            body {
+                overflow-y: auto;
+            }
+
+            .desktop {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                padding: 12px 10px 72px;
+                overflow: visible;
+            }
+
+            .desktop-icons {
+                position: relative;
+                inset: auto;
+
+                width: 100%;
+                margin-bottom: 14px;
+
+                display: grid;
+                grid-template-columns:
+                    repeat(4, minmax(68px, 1fr));
+                gap: 9px;
+            }
+
+            .desktop-icon {
+                width: auto;
+            }
+
+            .desktop-icon-graphic {
+                width: 42px;
+                height: 42px;
+                font-size: 25px;
+            }
+
+            .desktop-icon-label {
+                font-size: 10px;
+            }
+
+            .window,
+            #welcome-window,
+            #journal-window,
+            #bulletin-window,
+            #player-window,
+            #dial-window,
+            #letters-window {
+                position: relative;
+                inset: auto;
+
+                width: 100%;
+                max-width: none;
+                margin: 0 0 15px;
+            }
+
+            .window-titlebar {
+                cursor: default;
+            }
+
+            .welcome-body {
+                min-height: 0;
+                padding: 29px 18px;
+            }
+
+            .welcome-year {
+                font-size: 67px;
+            }
+
+            .welcome-word {
+                font-size: 14px;
+                letter-spacing: 7px;
+            }
+
+            .journal-body {
+                height: auto;
+                min-height: 340px;
+            }
+
+            .quote-note {
+                position: relative;
+                inset: auto;
+
+                width: 100%;
+                min-height: 0;
+                margin: 0 0 15px;
+
+                transform: none;
+            }
+
+            .bulletin-body {
+                height: 360px;
+            }
+
+            .letters-body {
+                height: auto;
+                grid-template-columns: 1fr;
+            }
+
+            .mail-list {
+                border-right: 0;
+                border-bottom: 2px solid #787568;
+            }
+
+            .letter-reader {
+                min-height: 310px;
+            }
+
+            .task-buttons {
+                display: none;
+            }
+
+            .begin-button {
+                min-width: 110px;
+            }
+
+            .system-tray {
+                margin-left: auto;
+            }
+
+            .clock {
+                min-width: 90px;
+                padding: 0 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .desktop-icons {
+                grid-template-columns:
+                    repeat(3, minmax(75px, 1fr));
+            }
+
+            .window-menu {
+                gap: 12px;
+                font-size: 12px;
+            }
+
+            .welcome-year {
+                font-size: 54px;
+                letter-spacing: 4px;
+            }
+
+            .welcome-copy {
+                font-size: 13px;
+            }
+
+            .pin-note {
+                width: 128px;
+            }
+
+            .letter-reader p {
+                max-width: 72%;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<div class="desktop">
-
-
-
-<div class="logo">
-
-1999world OS
-
-<div class="subtitle">
-The community is still online.
-</div>
-
-</div>
-
-
-
-
-<div class="icons">
-
-
-
-<div class="icon">
-
-<div class="icon-box">
-🌎
-</div>
-
-<div class="icon-name">
-My World
-</div>
-
-</div>
-
-
-
-
-<div class="icon">
-
-<div class="icon-box">
-✉️
-</div>
-
-<div class="icon-name">
-Letters
-</div>
-
-</div>
-
-
-
-
-
-<div class="icon">
-
-<div class="icon-box">
-🌱
-</div>
-
-<div class="icon-name">
-Go Outside
-</div>
-
-</div>
-
-
-
-
-
-<div class="icon">
-
-<div class="icon-box">
-⚙️
-</div>
-
-<div class="icon-name">
-Life Settings
-</div>
-
-</div>
-
-
-
-
-
-<div class="icon">
-
-<div class="icon-box">
-🗑
-</div>
-
-<div class="icon-name">
-Things We Don't Need
-</div>
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="window">
-
-
-<div class="window-title">
-
-Welcome to 1999world
-
-</div>
-
-
-<div class="window-content">
-
-Bringing back the curiosity,
-creativity and connection
-of the 90s.
-
-<br><br>
-
-Double-click to explore.
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="taskbar">
-
-
-<div class="begin">
-
-Begin
-
-</div>
-
-
-<div class="status">
-
-Connected: 56K |
-Sunday Mode
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
+    <main class="desktop" id="desktop">
+
+        <!-- Desktop icons -->
+
+        <section
+            class="desktop-icons"
+            aria-label="1999world desktop icons"
+        >
+            <button
+                class="desktop-icon"
+                data-open="welcome-window"
+            >
+                <span class="desktop-icon-graphic">🖥️</span>
+                <span class="desktop-icon-label">My World</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-open="letters-window"
+            >
+                <span class="notification-badge">3</span>
+                <span class="desktop-icon-graphic">✉️</span>
+                <span class="desktop-icon-label">Letters</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-open="journal-window"
+            >
+                <span class="desktop-icon-graphic">📓</span>
+                <span class="desktop-icon-label">Journal.exe</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-message="Calendar is coming soon."
+            >
+                <span class="desktop-icon-graphic">📅</span>
+                <span class="desktop-icon-label">Calendar</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-open="bulletin-window"
+            >
+                <span class="desktop-icon-graphic">👥</span>
+                <span class="desktop-icon-label">Community</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-message="Photo Album is coming soon."
+            >
+                <span class="desktop-icon-graphic">📷</span>
+                <span class="desktop-icon-label">Photo Album</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-open="player-window"
+            >
+                <span class="desktop-icon-graphic">💿</span>
+                <span class="desktop-icon-label">Record Player</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-message="Downloads are coming soon."
+            >
+                <span class="desktop-icon-graphic">📥</span>
+                <span class="desktop-icon-label">Downloads</span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                data-message="Things We Don't Need is empty."
+            >
+                <span class="desktop-icon-graphic">♻️</span>
+                <span class="desktop-icon-label">
+                    Things We<br>Don't Need
+                </span>
+            </button>
+
+            <button
+                class="desktop-icon"
+                id="see-you-sunday-icon"
+            >
+                <span class="desktop-icon-graphic">🚪</span>
+                <span class="desktop-icon-label">
+                    See You Sunday
+                </span>
+            </button>
+        </section>
+
+        <!-- Welcome -->
+
+        <section
+            class="window active"
+            id="welcome-window"
+            data-title="Welcome to 1999.world"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">▣</span>
+                <span class="window-title">
+                    Welcome to 1999.world
+                </span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control maximise-window"
+                        aria-label="Restore"
+                    >□</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <nav class="window-menu">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Help</span>
+            </nav>
+
+            <div class="window-body welcome-body">
+                <h1 class="welcome-year">1999</h1>
+
+                <div class="welcome-word">WELCOME</div>
+
+                <div class="welcome-rule"></div>
+
+                <div class="welcome-copy">
+                    The internet got faster.<br>
+                    Life got noisier.<br>
+                    We're trying something different.
+                </div>
+
+                <div class="welcome-action">
+                    <button
+                        class="retro-button"
+                        id="double-click-button"
+                    >
+                        Double-click anywhere.
+                    </button>
+                </div>
+            </div>
+
+            <footer class="window-status">
+                <span>💾 Est. 2026</span>
+                <span>Online Now: 27 👥</span>
+            </footer>
+        </section>
+
+        <!-- Journal -->
+
+        <section
+            class="window"
+            id="journal-window"
+            data-title="1999.txt - Journal.exe"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">▤</span>
+                <span class="window-title">
+                    1999.txt - Journal.exe
+                </span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control maximise-window"
+                        aria-label="Restore"
+                    >□</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <nav class="window-menu">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Help</span>
+            </nav>
+
+            <div class="window-body journal-body">
+                <p>
+                    The world became connected.<br>
+                    We became disconnected.
+                </p>
+
+                <p>
+                    The world became faster.<br>
+                    We forgot how to wait.
+                </p>
+
+                <p>
+                    The world became louder.<br>
+                    We stopped listening.
+                </p>
+
+                <p>
+                    1999 isn't about going backwards.
+                </p>
+
+                <p>
+                    It's about bringing forward<br>
+                    the parts of life worth keeping.
+                </p>
+
+                <p>
+                    Close your laptop.<br>
+                    We'll see you Sunday.
+                </p>
+
+                <div class="fake-scrollbar" aria-hidden="true">
+                    <div class="scroll-arrow">▲</div>
+                    <div class="scroll-thumb"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote note -->
+
+        <aside class="quote-note">
+            <h3>Quote of the day</h3>
+
+            <p>
+                The best memories aren't saved to cloud drive.
+            </p>
+
+            <div class="quote-smile">☺</div>
+        </aside>
+
+        <!-- Bulletin Board -->
+
+        <section
+            class="window"
+            id="bulletin-window"
+            data-title="Bulletin Board"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">▥</span>
+                <span class="window-title">Bulletin Board</span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control maximise-window"
+                        aria-label="Restore"
+                    >□</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <nav class="window-menu">
+                <span>Board</span>
+                <span>Pin</span>
+                <span>View</span>
+                <span>Help</span>
+            </nav>
+
+            <div class="window-body bulletin-body">
+                <article class="pin-note note-one">
+                    <strong>Reading Club</strong><br>
+                    Sun, 2 June<br>
+                    4:00pm<br>
+                    The Corner Store
+                </article>
+
+                <article class="pin-note blue note-two">
+                    <strong>Vinyl Night</strong><br>
+                    Fri, 7 June<br>
+                    7:00pm<br>
+                    Bring a record.
+                </article>
+
+                <article class="pin-note green note-three">
+                    <strong>Sunday Walk</strong><br>
+                    Sun, 9 June<br>
+                    8:00am<br>
+                    Meet at the park.
+                </article>
+            </div>
+
+            <footer class="window-status">
+                <span>3 notices pinned</span>
+                <span>◢</span>
+            </footer>
+        </section>
+
+        <!-- Record Player -->
+
+        <section
+            class="window"
+            id="player-window"
+            data-title="Now Playing - Sunday Morning"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">♫</span>
+                <span class="window-title">
+                    Now Playing - Sunday Morning
+                </span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <nav class="window-menu">
+                <span>File</span>
+                <span>Options</span>
+                <span>Help</span>
+            </nav>
+
+            <div class="window-body player-body">
+                <div class="track-display">
+                    <strong>Nick Drake</strong><br>
+                    — Sunday Morning
+
+                    <span class="track-time" id="track-time">
+                        02:17
+                    </span>
+                </div>
+
+                <div class="player-controls">
+                    <button class="player-button">|◀</button>
+                    <button
+                        class="player-button"
+                        id="play-button"
+                    >▶</button>
+                    <button
+                        class="player-button"
+                        id="pause-button"
+                    >Ⅱ</button>
+                    <button class="player-button">■</button>
+                    <button class="player-button">▶|</button>
+
+                    <span class="volume">🔊</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dial-Up -->
+
+        <section
+            class="window"
+            id="dial-window"
+            data-title="Dial-Up Connection"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">🌐</span>
+                <span class="window-title">
+                    Dial-Up Connection
+                </span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <div class="window-body dial-body">
+                <div class="dial-graphic">
+                    🌍
+                    <span class="dial-dots">••••••</span>
+                    🖥️
+                </div>
+
+                <p id="connection-status">Connecting...</p>
+
+                <button
+                    class="retro-button"
+                    id="cancel-connection"
+                >
+                    Cancel
+                </button>
+            </div>
+        </section>
+
+        <!-- Letters -->
+
+        <section
+            class="window"
+            id="letters-window"
+            data-title="Inbox - Letters (3)"
+        >
+            <header class="window-titlebar">
+                <span class="window-title-icon">✉</span>
+                <span class="window-title">
+                    Inbox - Letters (3)
+                </span>
+
+                <div class="window-controls">
+                    <button
+                        class="window-control minimise-window"
+                        aria-label="Minimise"
+                    >−</button>
+
+                    <button
+                        class="window-control maximise-window"
+                        aria-label="Restore"
+                    >□</button>
+
+                    <button
+                        class="window-control close-window"
+                        aria-label="Close"
+                    >×</button>
+                </div>
+            </header>
+
+            <nav class="window-menu">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Help</span>
+            </nav>
+
+            <div class="window-body letters-body">
+                <div class="mail-list">
+                    <article
+                        class="mail-item active"
+                        data-letter="welcome"
+                    >
+                        <span class="mail-envelope">✉</span>
+
+                        <span class="mail-subject">
+                            <strong>Welcome to 1999</strong><br>
+                            From: The Club
+                        </span>
+
+                        <span class="mail-dot"></span>
+                    </article>
+
+                    <article
+                        class="mail-item"
+                        data-letter="plans"
+                    >
+                        <span class="mail-envelope">✉</span>
+
+                        <span class="mail-subject">
+                            <strong>Sunday Plans</strong><br>
+                            From: Anna
+                        </span>
+
+                        <span class="mail-dot"></span>
+                    </article>
+
+                    <article
+                        class="mail-item"
+                        data-letter="meet"
+                    >
+                        <span class="mail-envelope">✉</span>
+
+                        <span class="mail-subject">
+                            <strong>See you there?</strong><br>
+                            From: Marcus
+                        </span>
+
+                        <span class="mail-dot"></span>
+                    </article>
+                </div>
+
+                <article class="letter-reader">
+                    <div class="stamp">
+                        🌲<br>
+                        1999
+                    </div>
+
+                    <div id="letter-content">
+                        <p>Hey friend,</p>
+
+                        <p>Welcome to 1999.</p>
+
+                        <p>
+                            Once a week, you'll get a letter.
+                        </p>
+
+                        <p>
+                            No ads. No noise.<br>
+                            Just thoughts, invites,<br>
+                            and things worth keeping.
+                        </p>
+
+                        <p>See you Sunday.</p>
+
+                        <p>— The Club</p>
+                    </div>
+                </article>
+            </div>
+
+            <footer class="window-status">
+                <span>3 unread</span>
+
+                <button class="retro-button write-letter">
+                    Write Letter
+                </button>
+            </footer>
+        </section>
+
+        <!-- Begin menu -->
+
+        <nav class="begin-menu" id="begin-menu">
+            <div class="begin-brand">1999world</div>
+
+            <button
+                class="begin-item"
+                data-open="welcome-window"
+            >
+                🖥️ My World
+            </button>
+
+            <button
+                class="begin-item"
+                data-open="letters-window"
+            >
+                ✉️ Letters
+            </button>
+
+            <button
+                class="begin-item"
+                data-open="journal-window"
+            >
+                📓 Journal.exe
+            </button>
+
+            <button
+                class="begin-item"
+                data-open="bulletin-window"
+            >
+                📌 Bulletin Board
+            </button>
+
+            <button
+                class="begin-item"
+                id="begin-see-you-sunday"
+            >
+                🚪 See You Sunday
+            </button>
+        </nav>
+
+        <!-- Taskbar -->
+
+        <footer class="taskbar">
+            <button
+                class="begin-button"
+                id="begin-button"
+            >
+                🌲 Begin
+            </button>
+
+            <div
+                class="task-buttons"
+                id="task-buttons"
+            ></div>
+
+            <div class="system-tray">
+                <div class="clock" id="clock">10:24 AM</div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const windows = Array.from(
+            document.querySelectorAll(".window")
+        );
+
+        const desktop = document.getElementById("desktop");
+        const taskButtons = document.getElementById("task-buttons");
+
+        let highestZ = 50;
+        let dragState = null;
+
+        function isMobileLayout() {
+            return window.matchMedia("(max-width: 820px)").matches;
+        }
+
+        function activateWindow(windowElement) {
+            highestZ += 1;
+
+            windows.forEach((item) => {
+                item.classList.remove("active");
+            });
+
+            windowElement.classList.add("active");
+            windowElement.style.zIndex = highestZ;
+
+            updateTaskButtons();
+        }
+
+        function openWindow(id) {
+            const windowElement = document.getElementById(id);
+
+            if (!windowElement) {
+                return;
+            }
+
+            windowElement.classList.remove(
+                "hidden",
+                "minimised"
+            );
+
+            activateWindow(windowElement);
+
+            if (isMobileLayout()) {
+                windowElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        }
+
+        function closeWindow(windowElement) {
+            windowElement.classList.add("hidden");
+            windowElement.classList.remove("active");
+
+            updateTaskButtons();
+        }
+
+        function toggleMinimise(windowElement) {
+            windowElement.classList.toggle("minimised");
+
+            if (!windowElement.classList.contains("minimised")) {
+                activateWindow(windowElement);
+            }
+
+            updateTaskButtons();
+        }
+
+        function updateTaskButtons() {
+            taskButtons.innerHTML = "";
+
+            windows.forEach((windowElement) => {
+                if (windowElement.classList.contains("hidden")) {
+                    return;
+                }
+
+                const button = document.createElement("button");
+
+                button.className = "task-button";
+
+                if (windowElement.classList.contains("active")) {
+                    button.classList.add("active");
+                }
+
+                button.textContent =
+                    windowElement.dataset.title || "1999world";
+
+                button.addEventListener("click", () => {
+                    if (
+                        windowElement.classList.contains("minimised")
+                    ) {
+                        windowElement.classList.remove("minimised");
+                        activateWindow(windowElement);
+                    } else if (
+                        windowElement.classList.contains("active")
+                    ) {
+                        toggleMinimise(windowElement);
+                    } else {
+                        activateWindow(windowElement);
+                    }
+                });
+
+                taskButtons.appendChild(button);
+            });
+        }
+
+        windows.forEach((windowElement) => {
+            windowElement.addEventListener("mousedown", () => {
+                activateWindow(windowElement);
+            });
+
+            const titlebar =
+                windowElement.querySelector(".window-titlebar");
+
+            titlebar.addEventListener("pointerdown", (event) => {
+                if (
+                    isMobileLayout() ||
+                    event.target.closest(".window-control")
+                ) {
+                    return;
+                }
+
+                activateWindow(windowElement);
+
+                const rect =
+                    windowElement.getBoundingClientRect();
+
+                dragState = {
+                    windowElement,
+                    pointerId: event.pointerId,
+                    offsetX: event.clientX - rect.left,
+                    offsetY: event.clientY - rect.top
+                };
+
+                titlebar.setPointerCapture(event.pointerId);
+            });
+
+            titlebar.addEventListener("pointermove", (event) => {
+                if (
+                    !dragState ||
+                    dragState.pointerId !== event.pointerId ||
+                    dragState.windowElement !== windowElement
+                ) {
+                    return;
+                }
+
+                const maxLeft =
+                    window.innerWidth - windowElement.offsetWidth;
+
+                const maxTop =
+                    window.innerHeight -
+                    windowElement.offsetHeight -
+                    52;
+
+                const left = Math.max(
+                    0,
+                    Math.min(
+                        event.clientX - dragState.offsetX,
+                        maxLeft
+                    )
+                );
+
+                const top = Math.max(
+                    0,
+                    Math.min(
+                        event.clientY - dragState.offsetY,
+                        maxTop
+                    )
+                );
+
+                windowElement.style.left = `${left}px`;
+                windowElement.style.top = `${top}px`;
+                windowElement.style.right = "auto";
+                windowElement.style.bottom = "auto";
+            });
+
+            titlebar.addEventListener("pointerup", () => {
+                dragState = null;
+            });
+
+            const closeButton =
+                windowElement.querySelector(".close-window");
+
+            const minimiseButton =
+                windowElement.querySelector(".minimise-window");
+
+            if (closeButton) {
+                closeButton.addEventListener("click", () => {
+                    closeWindow(windowElement);
+                });
+            }
+
+            if (minimiseButton) {
+                minimiseButton.addEventListener("click", () => {
+                    toggleMinimise(windowElement);
+                });
+            }
+        });
+
+        document.querySelectorAll("[data-open]").forEach((item) => {
+            item.addEventListener("click", () => {
+                openWindow(item.dataset.open);
+
+                document
+                    .getElementById("begin-menu")
+                    .classList.remove("open");
+            });
+        });
+
+        document
+            .querySelectorAll("[data-message]")
+            .forEach((item) => {
+                item.addEventListener("click", () => {
+                    alert(item.dataset.message);
+                });
+            });
+
+        const beginButton =
+            document.getElementById("begin-button");
+
+        const beginMenu =
+            document.getElementById("begin-menu");
+
+        beginButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            beginMenu.classList.toggle("open");
+        });
+
+        document.addEventListener("click", (event) => {
+            if (
+                !beginMenu.contains(event.target) &&
+                event.target !== beginButton
+            ) {
+                beginMenu.classList.remove("open");
+            }
+        });
+
+        function seeYouSunday() {
+            document.body.innerHTML = `
+                <main style="
+                    min-height:100vh;
+                    display:grid;
+                    place-items:center;
+                    padding:30px;
+                    color:#00ff99;
+                    background:#000;
+                    font-family:'Courier New', monospace;
+                    text-align:center;
+                ">
+                    <div>
+                        <h1 style="
+                            margin:0 0 20px;
+                            font-size:clamp(34px,8vw,80px);
+                        ">
+                            SEE YOU SUNDAY
+                        </h1>
+
+                        <p>
+                            Close your laptop.<br>
+                            Go make a memory.
+                        </p>
+
+                        <button
+                            onclick="window.location.reload()"
+                            style="
+                                margin-top:25px;
+                                padding:10px 18px;
+                                color:#00ff99;
+                                background:#000;
+                                border:2px solid #00ff99;
+                                font-family:inherit;
+                                cursor:pointer;
+                            "
+                        >
+                            Return to 1999world
+                        </button>
+                    </div>
+                </main>
+            `;
+        }
+
+        document
+            .getElementById("see-you-sunday-icon")
+            .addEventListener("click", seeYouSunday);
+
+        document
+            .getElementById("begin-see-you-sunday")
+            .addEventListener("click", seeYouSunday);
+
+        const letters = {
+            welcome: `
+                <p>Hey friend,</p>
+
+                <p>Welcome to 1999.</p>
+
+                <p>Once a week, you'll get a letter.</p>
+
+                <p>
+                    No ads. No noise.<br>
+                    Just thoughts, invites,<br>
+                    and things worth keeping.
+                </p>
+
+                <p>See you Sunday.</p>
+
+                <p>— The Club</p>
+            `,
+
+            plans: `
+                <p>Hey,</p>
+
+                <p>
+                    We're meeting at the park this Sunday.
+                </p>
+
+                <p>
+                    Bring a book, a blanket and something
+                    homemade to share.
+                </p>
+
+                <p>
+                    Phones stay in bags.
+                </p>
+
+                <p>— Anna</p>
+            `,
+
+            meet: `
+                <p>Hello,</p>
+
+                <p>
+                    Vinyl night starts at seven.
+                </p>
+
+                <p>
+                    Bring one record and one story about
+                    why it matters to you.
+                </p>
+
+                <p>See you there?</p>
+
+                <p>— Marcus</p>
+            `
+        };
+
+        document
+            .querySelectorAll(".mail-item")
+            .forEach((item) => {
+                item.addEventListener("click", () => {
+                    document
+                        .querySelectorAll(".mail-item")
+                        .forEach((mail) => {
+                            mail.classList.remove("active");
+                        });
+
+                    item.classList.add("active");
+
+                    document.getElementById(
+                        "letter-content"
+                    ).innerHTML =
+                        letters[item.dataset.letter] ||
+                        letters.welcome;
+                });
+            });
+
+        const connectionStatus =
+            document.getElementById("connection-status");
+
+        const cancelConnection =
+            document.getElementById("cancel-connection");
+
+        let connectionTimer = window.setTimeout(() => {
+            connectionStatus.textContent =
+                "Connected at 56K.";
+
+            cancelConnection.textContent =
+                "Disconnect";
+        }, 2500);
+
+        cancelConnection.addEventListener("click", () => {
+            window.clearTimeout(connectionTimer);
+
+            if (
+                connectionStatus.textContent.includes("Connected")
+            ) {
+                connectionStatus.textContent =
+                    "Connection closed.";
+
+                cancelConnection.textContent =
+                    "Reconnect";
+            } else {
+                connectionStatus.textContent =
+                    "Connecting...";
+
+                cancelConnection.textContent =
+                    "Cancel";
+
+                connectionTimer = window.setTimeout(() => {
+                    connectionStatus.textContent =
+                        "Connected at 56K.";
+
+                    cancelConnection.textContent =
+                        "Disconnect";
+                }, 1800);
+            }
+        });
+
+        document
+            .getElementById("double-click-button")
+            .addEventListener("dblclick", () => {
+                openWindow("bulletin-window");
+            });
+
+        document
+            .getElementById("double-click-button")
+            .addEventListener("click", () => {
+                openWindow("journal-window");
+            });
+
+        document
+            .getElementById("play-button")
+            .addEventListener("click", () => {
+                document.getElementById("track-time").textContent =
+                    "▶ 02:17";
+            });
+
+        document
+            .getElementById("pause-button")
+            .addEventListener("click", () => {
+                document.getElementById("track-time").textContent =
+                    "Ⅱ 02:17";
+            });
+
+        function updateClock() {
+            const now = new Date();
+
+            document.getElementById("clock").textContent =
+                now.toLocaleTimeString("en-AU", {
+                    hour: "numeric",
+                    minute: "2-digit"
+                });
+        }
+
+        updateClock();
+        window.setInterval(updateClock, 30000);
+
+        updateTaskButtons();
+    </script>
 
 </body>
-
 </html>
