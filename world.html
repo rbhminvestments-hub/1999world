@@ -11,66 +11,119 @@
 
 body {
     margin:0;
-    background:#008080;
+    background:#003333;
     font-family:"Courier New", monospace;
-    color:#000;
+    color:#001a1a;
+    font-size:14px;
 }
 
-.container {
-    width:85%;
-    max-width:900px;
-    margin:40px auto;
-    background:#c0c0c0;
-    border:3px solid #003333;
-    box-shadow:8px 8px #004444;
+.wrapper {
+    width:90%;
+    max-width:760px;
+    margin:25px auto;
+    background:#c8d8d8;
+    border:3px solid #006666;
 }
 
 .header {
-    background:#000080;
-    color:white;
-    padding:15px;
+    background:#003366;
+    color:#00ff99;
+    padding:12px;
+    text-align:center;
+    border-bottom:3px solid #00aa88;
+}
+
+.header h1 {
+    margin:0;
     font-size:26px;
+}
+
+.header p {
+    margin:5px 0;
+    font-size:13px;
+}
+
+
+.section {
+    margin:12px;
+    background:#e0eeee;
+    border:2px solid #006666;
+    padding:10px;
+}
+
+
+.title {
+    background:#006666;
+    color:white;
+    padding:5px;
     font-weight:bold;
 }
 
-.content {
-    padding:25px;
+
+.welcome {
     text-align:center;
+    padding:15px;
 }
 
-.tagline {
-    font-size:18px;
-    margin-bottom:25px;
-}
 
-.grid {
+.links {
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:8px;
+
 }
 
-.card {
 
-    background:#008080;
+.link {
+
+    background:#009999;
     color:white;
-    padding:20px;
-    border:3px outset white;
+    padding:12px 5px;
+    text-align:center;
+    border:2px outset #99ffff;
     cursor:pointer;
 
 }
 
-.card:hover {
 
-    background:#00aaaa;
+.link:hover {
+
+    background:#00bbbb;
 
 }
 
-.footer {
 
-    background:#000080;
-    color:white;
+.icon {
+
+    font-size:22px;
+
+}
+
+
+.board {
+
+    background:#ffffcc;
+    border:2px dashed #666;
     padding:10px;
-    font-size:14px;
+
+}
+
+
+.board p {
+
+    margin:6px 0;
+
+}
+
+
+.status {
+
+    background:#003366;
+    color:#00ff99;
+    padding:8px;
+    text-align:center;
+    font-size:12px;
 
 }
 
@@ -83,137 +136,151 @@ body {
 <body>
 
 
-<div class="container">
+<div class="wrapper">
 
 
 <div class="header">
 
-1999WORLD OS
+<h1>1999WORLD.NET</h1>
+
+<p>ONLINE COMMUNITY NETWORK</p>
+
+<p>Bringing back the curiosity, creativity and connection of the 90s.</p>
 
 </div>
 
 
-<div class="content">
 
+<div class="section welcome">
 
-<h1>Welcome to 1999WORLD</h1>
+Welcome to 1999WORLD.<br><br>
 
-
-<div class="tagline">
-
-Bringing back the curiosity, creativity and connection of the 90s.
+A place to discover, create and reconnect.
 
 </div>
 
 
-<div class="grid">
 
+<div class="section">
 
-<div class="card">
-
-📼<br>
-DISCOVER
-
-<br><br>
-
-Music<br>
-Movies<br>
-Culture
-
-</div>
-
-
-<div class="card">
-
-🎮<br>
-PLAY
-
-<br><br>
-
-Games<br>
-Arcades<br>
-Challenges
-
-</div>
-
-
-<div class="card">
-
-✏️<br>
-CREATE
-
-<br><br>
-
-Art<br>
-Stories<br>
-Projects
-
-</div>
-
-
-<div class="card">
-
-💬<br>
-CONNECT
-
-<br><br>
-
-Community<br>
-Friends<br>
-Conversations
-
-</div>
-
-
-<div class="card">
-
-📚<br>
-EXPLORE
-
-<br><br>
-
-Magazines<br>
-Technology<br>
-Memories
-
-</div>
-
-
-<div class="card">
-
-🌎<br>
-GO OUTSIDE
-
-<br><br>
-
-Analogue<br>
-Experiences<br>
-Real World
-
-</div>
-
-
+<div class="title">
+EXPLORE THE WORLD
 </div>
 
 
 <br>
 
 
+<div class="links">
+
+
+<div class="link">
+<div class="icon">📼</div>
+Culture Board
+<br>
+Music • Movies • TV
+</div>
+
+
+<div class="link">
+<div class="icon">🎮</div>
+Arcade Board
+<br>
+Games • Tech
+</div>
+
+
+<div class="link">
+<div class="icon">✏️</div>
+Creator Board
+<br>
+Art • Stories
+</div>
+
+
+<div class="link">
+<div class="icon">💬</div>
+Community Board
+<br>
+Members • Groups
+</div>
+
+
+<div class="link">
+<div class="icon">📚</div>
+Magazine Rack
+<br>
+Ideas • Discovery
+</div>
+
+
+<div class="link">
+<div class="icon">🌎</div>
+Outside World
+<br>
+Real Experiences
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="section">
+
+
+<div class="title">
+COMMUNITY BULLETIN BOARD
+</div>
+
+
+<div class="board">
+
+<p>★ Welcome to the 1999WORLD community</p>
+
+<p>★ New discoveries being uploaded</p>
+
+<p>★ Share your memories and creations</p>
+
+<p>★ Analogue experiences coming soon</p>
+
+</div>
+
+
+</div>
+
+
+
+<div class="section">
+
+
+<div class="title">
+LATEST CONNECTIONS
+</div>
+
+
 <p>
+&gt; Visitors online: 000001
+</p>
 
-C:\1999WORLD>
+<p>
+&gt; New messages: 000000
+</p>
 
-CONNECTED
-
+<p>
+&gt; Current connection: 56K
 </p>
 
 
 </div>
 
 
-<div class="footer">
 
-Connection: 56K | Users Online: 000001 | 1999WORLD.NET
+<div class="status">
+
+1999WORLD.NET © 1999 - The community is still online
 
 </div>
 
