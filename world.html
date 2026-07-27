@@ -664,6 +664,218 @@
     }
 
 
+
+    /* ---------- Owner-curated Photo Album ---------- */
+    #photos-window { width: min(900px, calc(100vw - 430px)); }
+
+    .photo-archive {
+      min-height: 470px;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      background: #f4efe0;
+      font-size: 11px;
+    }
+
+    .photo-sidebar {
+      padding: 13px 11px;
+      background: #e6dfca;
+      border-right: 1px solid #8d8778;
+    }
+
+    .photo-sidebar h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .photo-tree {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 1.9;
+      font-family: "Courier New", monospace;
+    }
+
+    .photo-tree-active {
+      padding: 2px 4px;
+      color: white;
+      background: #1b2a83;
+    }
+
+    .photo-readonly {
+      margin-top: 20px;
+      padding: 9px;
+      line-height: 1.45;
+      background: #fff9df;
+      border: 1px solid #9d9581;
+    }
+
+    .photo-main { padding: 14px; overflow: auto; }
+
+    .photo-transfer {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      color: #57ff7d;
+      background: #080808;
+      border-top: 2px solid #555;
+      border-left: 2px solid #555;
+      border-right: 2px solid #eee;
+      border-bottom: 2px solid #eee;
+      font-family: "Courier New", monospace;
+      line-height: 1.5;
+    }
+
+    .photo-album-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: end;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #aaa28f;
+    }
+
+    .photo-album-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .photo-album-heading p { margin: 4px 0 0; color: #5e594e; }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .photo-thumb {
+      padding: 8px 8px 13px;
+      text-align: left;
+      background: white;
+      border: 1px solid #999386;
+      box-shadow: 3px 4px 0 rgba(0,0,0,.15);
+      cursor: pointer;
+      transform: rotate(-.45deg);
+    }
+
+    .photo-thumb:nth-child(even) { transform: rotate(.65deg); }
+
+    .photo-thumb:hover,
+    .photo-thumb:focus {
+      outline: 2px dotted var(--navy);
+      outline-offset: 3px;
+    }
+
+    .photo-thumb img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: block;
+      object-fit: cover;
+      background: #bbb;
+      filter: saturate(.85) contrast(.96);
+    }
+
+    .photo-thumb-file {
+      display: block;
+      margin-top: 7px;
+      color: #696459;
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+    }
+
+    .photo-thumb-title {
+      display: block;
+      margin-top: 3px;
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .photo-viewer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      place-items: center;
+      padding: 25px;
+      background: rgba(0,0,0,.62);
+    }
+
+    .photo-viewer-overlay.open { display: grid; }
+
+    .photo-viewer {
+      width: min(800px, 100%);
+      background: var(--window);
+      border-top: 2px solid white;
+      border-left: 2px solid white;
+      border-right: 2px solid #3e3a32;
+      border-bottom: 2px solid #3e3a32;
+      box-shadow: 9px 11px 0 rgba(0,0,0,.35);
+    }
+
+    .photo-viewer-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 225px;
+      gap: 12px;
+      padding: 12px;
+      background: #e8e1cf;
+    }
+
+    .photo-viewer-frame {
+      padding: 8px;
+      background: #111;
+      border: 4px inset #777;
+    }
+
+    .photo-viewer-frame img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    .photo-viewer-meta {
+      padding: 11px;
+      line-height: 1.45;
+      background: #fffaf0;
+      border: 2px inset var(--window);
+    }
+
+    .photo-viewer-meta h2 {
+      margin: 5px 0 8px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .photo-viewer-filename {
+      color: #666056;
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+    }
+
+    .photo-viewer-actions {
+      padding: 9px 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .photo-viewer-actions div { display: flex; gap: 7px; }
+
+    @media (max-width: 700px) {
+      #photos-window { width: calc(100vw - 18px); }
+      .photo-archive { grid-template-columns: 1fr; }
+      .photo-sidebar { display: none; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-viewer-body { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 450px) {
+      .photo-grid { grid-template-columns: 1fr; }
+    }
+
     /* ---------- Taskbar ---------- */
 
     .taskbar {
@@ -948,7 +1160,7 @@
     }
 
     .desktop {
-      opacity: 1;
+      opacity: 0;
       transition: opacity 700ms ease;
       background:
         linear-gradient(to bottom, transparent 0 58%, rgba(33, 112, 86, .95) 58% 72%, rgba(24, 88, 66, .98) 72% 100%),
@@ -987,6 +1199,59 @@
     @keyframes cloud-drift {
       from { translate: 0 0; }
       to { translate: calc(100vw + 340px) 0; }
+    }
+
+    .boot-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      padding: clamp(24px, 6vw, 80px);
+      color: #00ff66;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0,
+          rgba(0, 0, 0, 0) 3px,
+          rgba(0, 255, 102, 0.045) 4px
+        ),
+        #000;
+      font-family: "Courier New", monospace;
+      font-size: clamp(14px, 2vw, 21px);
+      line-height: 1.7;
+      text-shadow:
+        0 0 4px rgba(0, 255, 102, 0.72),
+        0 0 10px rgba(0, 255, 102, 0.24);
+      cursor: wait;
+      animation: boot-flicker 3.2s steps(1, end) infinite;
+    }
+
+    .boot-screen.hidden {
+      animation: boot-away 650ms ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes boot-away {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    .boot-cursor {
+      display: inline-block;
+      width: .7em;
+      height: 1.1em;
+      margin-left: 5px;
+      vertical-align: -2px;
+      background: #00ff66;
+      box-shadow: 0 0 6px rgba(0, 255, 102, 0.72);
+      animation: blink 650ms steps(1) infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @keyframes boot-flicker {
+      0%, 94%, 100% { opacity: 1; }
+      95% { opacity: .97; }
+      96% { opacity: 1; }
+      97% { opacity: .985; }
     }
 
     .window:not(.hidden) {
@@ -1571,10 +1836,12 @@ Physical-card fulfilment and the MailerLite welcome-email redesign remain outsid
 No music or mixtape feature is included.
 -->
 
-<span class="boot-cursor" aria-hidden="true"></span>
+<div class="boot-screen" id="boot-screen" aria-live="polite">
+  <div id="boot-text">Starting 1999world...</div>
+  <span class="boot-cursor" aria-hidden="true"></span>
 </div>
 
-<main class="desktop ready" id="desktop">
+<main class="desktop" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -1968,20 +2235,92 @@ No music or mixtape feature is included.
   <section class="window content-window hidden" id="photos-window" data-title="Photo Album">
     <header class="window-titlebar">
       <span class="window-title-icon">▧</span>
-      <span class="window-title">Photo Album</span>
+      <span class="window-title">Photo Album — 1999world Archive</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
 
-    <div class="window-body standard-body">
-      <h2>Photo Album</h2>
-      <p>A place for photographs worth keeping, printing and sharing.</p>
-      <p>No filters. No scores. No endless feed.</p>
-      <p>Albums are coming soon.</p>
+    <nav class="window-menu">
+      <span>File</span><span>Edit</span><span>View</span><span>Album</span><span>Help</span>
+    </nav>
+
+    <div class="window-body photo-archive">
+      <aside class="photo-sidebar">
+        <h3>Archive folders</h3>
+        <ul class="photo-tree">
+          <li>▾ 1999WORLD</li>
+          <li>&nbsp;&nbsp;▾ ARCHIVE</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;▸ FIELD_NOTES</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;▾ EVENTS</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="photo-tree-active" id="photo-folder-label">FIRST_SUNDAY</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;▸ PLACES</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;▸ PEOPLE</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;▸ THE_JOURNEY</li>
+        </ul>
+        <div class="photo-readonly">
+          <strong>Read-only archive</strong><br>
+          Photographs are selected and published by the 1999world team. Visitor uploads are disabled.
+        </div>
+      </aside>
+
+      <main class="photo-main">
+        <div class="photo-transfer" id="photo-transfer-message">
+          Checking camera connection...<br>
+          Reading archive directory...
+        </div>
+
+        <div class="photo-album-heading">
+          <div>
+            <h2 id="photo-album-title">Photo Archive</h2>
+            <p id="photo-album-details">Loading album information...</p>
+          </div>
+          <span id="photo-album-count">0 pictures</span>
+        </div>
+
+        <div class="photo-grid" id="photo-album-grid"></div>
+      </main>
     </div>
+
+    <footer class="window-status">
+      <span id="photo-status-count">0 object(s)</span>
+      <span>Owner-curated archive</span>
+    </footer>
   </section>
+
+  <div class="photo-viewer-overlay" id="photo-viewer-overlay" role="dialog" aria-modal="true" aria-label="Picture Viewer">
+    <section class="photo-viewer">
+      <header class="window-titlebar">
+        <span class="window-title-icon">▧</span>
+        <span class="window-title" id="photo-viewer-title">Picture Viewer</span>
+        <div class="window-controls">
+          <button class="window-control" id="photo-viewer-close" aria-label="Close">×</button>
+        </div>
+      </header>
+
+      <div class="photo-viewer-body">
+        <div class="photo-viewer-frame">
+          <img id="photo-viewer-image" alt="">
+        </div>
+        <aside class="photo-viewer-meta">
+          <div class="photo-viewer-filename" id="photo-viewer-file"></div>
+          <h2 id="photo-viewer-heading"></h2>
+          <p id="photo-viewer-date"></p>
+          <p id="photo-viewer-caption"></p>
+          <p><strong>Credit:</strong><br><span id="photo-viewer-credit"></span></p>
+        </aside>
+      </div>
+
+      <div class="photo-viewer-actions">
+        <div>
+          <button class="retro-button" id="photo-viewer-previous">◀ Previous</button>
+          <button class="retro-button" id="photo-viewer-next">Next ▶</button>
+        </div>
+        <button class="retro-button" id="photo-viewer-close-bottom">Close</button>
+      </div>
+    </section>
+  </div>
 
   <!-- Player -->
 <!-- Downloads -->
@@ -2415,8 +2754,43 @@ No music or mixtape feature is included.
 
 </main>
 
+<script src="assets/photo-album-data.js"></script>
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
+
+  // Version 1.1 loading sequence
+  const bootScreen = document.getElementById("boot-screen");
+  const bootText = document.getElementById("boot-text");
+  const desktop = document.getElementById("desktop");
+  const bootLines = [
+    "Starting 1999world...",
+    "",
+    "Loading analogue life...",
+    "Loading human interaction...",
+    "Loading memories...",
+    "",
+    "Connection established.",
+    "Welcome."
+  ];
+
+  let bootIndex = 1;
+
+  function advanceBoot() {
+    if (bootIndex >= bootLines.length) {
+      window.setTimeout(() => {
+        bootScreen.classList.add("hidden");
+        desktop.classList.add("ready");
+      }, 500);
+      return;
+    }
+
+    bootText.textContent += `\n${bootLines[bootIndex]}`;
+    bootText.style.whiteSpace = "pre-line";
+    bootIndex += 1;
+    window.setTimeout(advanceBoot, bootLines[bootIndex - 1] ? 430 : 220);
+  }
+
+  window.setTimeout(advanceBoot, 350);
 
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
@@ -2861,6 +3235,12 @@ function seeYouSunday() {
 
   window.setInterval(updateClock, 30000);
   window.setInterval(updateSessionTime, 30000);
+  window.setTimeout(() => {
+    if (!desktop.classList.contains("ready")) {
+      bootScreen.classList.add("hidden");
+      desktop.classList.add("ready");
+    }
+  }, 7000);
 
   // ===== Approved major update interactions =====
   const approvedArchiveText = {
@@ -3010,6 +3390,105 @@ function seeYouSunday() {
       if (rect.bottom > innerHeight - 48) win.style.top = `${Math.max(0, innerHeight - rect.height - 52)}px`;
     });
   });
+
+
+  // Owner-curated photo archive. Visitors have no upload controls.
+  const photoAlbum = window.PHOTO_ALBUM || { photos: [] };
+  const albumPhotos = Array.isArray(photoAlbum.photos) ? photoAlbum.photos : [];
+  const photoGrid = document.getElementById("photo-album-grid");
+  const photoOverlay = document.getElementById("photo-viewer-overlay");
+  let currentPhotoIndex = 0;
+
+  document.getElementById("photo-album-title").textContent =
+    photoAlbum.title || "Photo Archive";
+  document.getElementById("photo-album-details").textContent =
+    [photoAlbum.date, photoAlbum.description].filter(Boolean).join(" · ");
+  document.getElementById("photo-folder-label").textContent =
+    (photoAlbum.folder || "ARCHIVE").toUpperCase();
+  document.getElementById("photo-album-count").textContent =
+    `${albumPhotos.length} picture${albumPhotos.length === 1 ? "" : "s"}`;
+  document.getElementById("photo-status-count").textContent =
+    `${albumPhotos.length} object(s)`;
+
+  albumPhotos.forEach((photo, index) => {
+    const button = document.createElement("button");
+    button.className = "photo-thumb";
+    button.type = "button";
+    button.setAttribute("aria-label", `Open ${photo.title || photo.file}`);
+
+    const image = document.createElement("img");
+    image.src = photo.src;
+    image.alt = photo.alt || photo.title || "";
+
+    const filename = document.createElement("span");
+    filename.className = "photo-thumb-file";
+    filename.textContent = photo.file || `PIC_${String(index + 1).padStart(4, "0")}.JPG`;
+
+    const title = document.createElement("span");
+    title.className = "photo-thumb-title";
+    title.textContent = photo.title || "Untitled photograph";
+
+    button.append(image, filename, title);
+    button.addEventListener("click", () => openArchivePhoto(index));
+    photoGrid.appendChild(button);
+  });
+
+  if (!albumPhotos.length) {
+    photoGrid.innerHTML = "<p>No photographs have been published yet.</p>";
+  }
+
+  window.setTimeout(() => {
+    const transfer = document.getElementById("photo-transfer-message");
+    transfer.innerHTML =
+      `${albumPhotos.length} photograph${albumPhotos.length === 1 ? "" : "s"} found.<br>` +
+      "Archive opened in read-only mode.";
+  }, 1200);
+
+  function openArchivePhoto(index) {
+    if (!albumPhotos.length) return;
+    currentPhotoIndex = (index + albumPhotos.length) % albumPhotos.length;
+    const photo = albumPhotos[currentPhotoIndex];
+
+    document.getElementById("photo-viewer-image").src = photo.src;
+    document.getElementById("photo-viewer-image").alt = photo.alt || photo.title || "";
+    document.getElementById("photo-viewer-title").textContent =
+      `${photo.file || "Picture"} — Picture Viewer`;
+    document.getElementById("photo-viewer-file").textContent = photo.file || "";
+    document.getElementById("photo-viewer-heading").textContent = photo.title || "";
+    document.getElementById("photo-viewer-date").textContent = photo.date || "";
+    document.getElementById("photo-viewer-caption").textContent = photo.caption || "";
+    document.getElementById("photo-viewer-credit").textContent =
+      photo.credit || "1999world archive";
+
+    photoOverlay.classList.add("open");
+  }
+
+  function closeArchivePhoto() {
+    photoOverlay.classList.remove("open");
+  }
+
+  document.getElementById("photo-viewer-previous").addEventListener("click", () => {
+    openArchivePhoto(currentPhotoIndex - 1);
+  });
+
+  document.getElementById("photo-viewer-next").addEventListener("click", () => {
+    openArchivePhoto(currentPhotoIndex + 1);
+  });
+
+  document.getElementById("photo-viewer-close").addEventListener("click", closeArchivePhoto);
+  document.getElementById("photo-viewer-close-bottom").addEventListener("click", closeArchivePhoto);
+
+  photoOverlay.addEventListener("click", (event) => {
+    if (event.target === photoOverlay) closeArchivePhoto();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!photoOverlay.classList.contains("open")) return;
+    if (event.key === "Escape") closeArchivePhoto();
+    if (event.key === "ArrowLeft") openArchivePhoto(currentPhotoIndex - 1);
+    if (event.key === "ArrowRight") openArchivePhoto(currentPhotoIndex + 1);
+  });
+
 
 </script>
 </body>
