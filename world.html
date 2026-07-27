@@ -1562,17 +1562,92 @@
       .pixel-cloud, .pixel-bird, .steam-pixel, .card-glint { animation: none !important; }
     }
 
+
+    /* ---------- Single 1999world loading screen ---------- */
+    .boot-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: clamp(28px, 7vw, 84px);
+      color: #00ff66;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0,
+          rgba(0, 0, 0, 0) 3px,
+          rgba(0, 255, 102, 0.045) 4px
+        ),
+        #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(14px, 2vw, 20px);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      opacity: 1;
+      text-shadow:
+        0 0 4px rgba(0, 255, 102, 0.75),
+        0 0 10px rgba(0, 255, 102, 0.28);
+      transition: opacity 450ms ease;
+      animation: boot-flicker 3.2s steps(1, end) infinite;
+    }
+
+    .boot-screen.finished {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .boot-cursor {
+      display: inline-block;
+      width: 0.65em;
+      height: 1em;
+      margin-left: 0.25em;
+      vertical-align: -0.15em;
+      background: #00ff66;
+      box-shadow: 0 0 6px rgba(0, 255, 102, 0.75);
+      animation: boot-cursor-blink 700ms steps(1, end) infinite;
+    }
+
+    @keyframes boot-cursor-blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes boot-flicker {
+      0%, 94%, 100% { opacity: 1; }
+      95% { opacity: 0.96; }
+      96% { opacity: 1; }
+      97% { opacity: 0.985; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .boot-screen {
+        transition: none;
+        animation: none;
+      }
+
+      .boot-cursor {
+        animation: none;
+      }
+    }
+
 </style>
 </head>
 
 <body>
+
+<div class="boot-screen" id="boot-screen" role="status" aria-live="polite" aria-label="1999world loading">
+  <div><span id="boot-text"></span><span class="boot-cursor" aria-hidden="true"></span></div>
+</div>
+
+
 <!--
 1999world Version 1.1 — single loading screen correction.
 Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
 No music or mixtape feature is included.
 -->
 
-<main class="desktop ready" id="desktop">
+<main class="desktop" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -2417,6 +2492,36 @@ No music or mixtape feature is included.
   const windows = Array.from(document.querySelectorAll(".window"));
 
   const desktop = document.getElementById("desktop");
+
+  // Single loading screen. Every line appears on this same black screen.
+  const bootScreen = document.getElementById("boot-screen");
+  const bootText = document.getElementById("boot-text");
+
+  const bootSteps = [
+    { text: "Starting 1999world...", delay: 850 },
+    { text: "\n\nLoading analogue life...", delay: 650 },
+    { text: "\nLoading human interaction...", delay: 650 },
+    { text: "\nLoading memories...", delay: 850 },
+    { text: "\n\nConnection established.", delay: 900 },
+    { text: "\n\nWelcome.", delay: 1000 }
+  ];
+
+  async function runBootSequence() {
+    for (const step of bootSteps) {
+      bootText.textContent += step.text;
+      await new Promise((resolve) => window.setTimeout(resolve, step.delay));
+    }
+
+    bootScreen.classList.add("finished");
+    desktop.classList.add("ready");
+
+    window.setTimeout(() => {
+      bootScreen.remove();
+    }, 500);
+  }
+
+  runBootSequence();
+
 
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
