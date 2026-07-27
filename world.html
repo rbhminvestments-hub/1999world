@@ -989,39 +989,6 @@
       to { translate: calc(100vw + 340px) 0; }
     }
 
-    .boot-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 20000;
-      padding: clamp(24px, 6vw, 80px);
-      color: #69ff9e;
-      background: #020402;
-      font-family: "Courier New", monospace;
-      font-size: clamp(14px, 2vw, 21px);
-      line-height: 1.7;
-      cursor: wait;
-    }
-
-    .boot-screen.hidden {
-      animation: boot-away 650ms ease forwards;
-      pointer-events: none;
-    }
-
-    @keyframes boot-away {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    .boot-cursor {
-      display: inline-block;
-      width: .7em;
-      height: 1.1em;
-      margin-left: 5px;
-      vertical-align: -2px;
-      background: #69ff9e;
-      animation: blink 650ms steps(1) infinite;
-    }
-
-    @keyframes blink { 50% { opacity: 0; } }
 
     .window:not(.hidden) {
       animation: window-open 150ms steps(3, end);
@@ -1600,17 +1567,12 @@
 
 <body>
 <!--
-1999world Version 1.1.
+1999world Version 1.1 — single loading screen correction.
 Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
 No music or mixtape feature is included.
 -->
 
-<div class="boot-screen" id="boot-screen" aria-live="polite">
-  <div id="boot-text">Starting 1999world...</div>
-  <span class="boot-cursor" aria-hidden="true"></span>
-</div>
-
-<main class="desktop" id="desktop">
+<main class="desktop ready" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -2454,39 +2416,7 @@ No music or mixtape feature is included.
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
 
-  // Version 1.1 loading sequence
-  const bootScreen = document.getElementById("boot-screen");
-  const bootText = document.getElementById("boot-text");
   const desktop = document.getElementById("desktop");
-  const bootLines = [
-    "Starting 1999world...",
-    "",
-    "Loading analogue life...",
-    "Loading human interaction...",
-    "Loading memories...",
-    "",
-    "Connection established.",
-    "Welcome."
-  ];
-
-  let bootIndex = 1;
-
-  function advanceBoot() {
-    if (bootIndex >= bootLines.length) {
-      window.setTimeout(() => {
-        bootScreen.classList.add("hidden");
-        desktop.classList.add("ready");
-      }, 500);
-      return;
-    }
-
-    bootText.textContent += `\n${bootLines[bootIndex]}`;
-    bootText.style.whiteSpace = "pre-line";
-    bootIndex += 1;
-    window.setTimeout(advanceBoot, bootLines[bootIndex - 1] ? 430 : 220);
-  }
-
-  window.setTimeout(advanceBoot, 350);
 
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
@@ -2931,13 +2861,6 @@ function seeYouSunday() {
 
   window.setInterval(updateClock, 30000);
   window.setInterval(updateSessionTime, 30000);
-  window.setTimeout(() => {
-    if (!desktop.classList.contains("ready")) {
-      bootScreen.classList.add("hidden");
-      desktop.classList.add("ready");
-    }
-  }, 7000);
-
   // ===== Approved major update interactions =====
   const approvedArchiveText = {
     readme: `<strong>readme.txt</strong><p>If you’re reading this, I’m glad you found us.</p>`,
