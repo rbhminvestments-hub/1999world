@@ -1323,13 +1323,287 @@
       }
     }
 
-  </style>
+  
+    /* ---------- 1999world period interface refinements ---------- */
+
+    html, body, button, input, select, textarea {
+      cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAvklEQVR4nO3XwQ6EMAgEUNj4/7/cPW2cIIWiQD3s3Ew0PKbGRKIXZewY+tmNkIB2xAUwxmhFaA20IlRAJ2IK6EKYgA6EC6hGLAEEIhWyDADED9IPqECEAdmIW4BMxG1AFuJYvZGZXQ8RuTfJmA3gUNjWQ4QybcDYOLylFbUBHK60UPshgoFMydsuAWD4eVHYggaQW5e2IAHzN6+oBQSUn7cHsMJEZwvQxuMWIlvPhj1qLvowIrYc2Zbft39K8wVCBEkYlAS/0gAAAABJRU5ErkJggg==") 2 1, default;
+    }
+
+    .desktop-icon {
+      cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAvklEQVR4nO3XwQ6EMAgEUNj4/7/cPW2cIIWiQD3s3Ew0PKbGRKIXZewY+tmNkIB2xAUwxmhFaA20IlRAJ2IK6EKYgA6EC6hGLAEEIhWyDADED9IPqECEAdmIW4BMxG1AFuJYvZGZXQ8RuTfJmA3gUNjWQ4QybcDYOLylFbUBHK60UPshgoFMydsuAWD4eVHYggaQW5e2IAHzN6+oBQSUn7cHsMJEZwvQxuMWIlvPhj1qLvowIrYc2Zbft39K8wVCBEkYlAS/0gAAAABJRU5ErkJggg==") 2 1, default;
+    }
+
+    .desktop-icon.selected {
+      border: 1px dotted #fff;
+      background: rgba(9, 22, 92, .32);
+    }
+
+    .desktop-icon.selected .desktop-icon-label {
+      color: #fff;
+      background: #000080;
+    }
+
+    /* Keep the founding-member window high and make its contents reachable. */
+    #club-window {
+      top: 18px;
+      max-height: calc(100vh - var(--taskbar-height) - 28px);
+    }
+
+    #club-window .window-body {
+      max-height: calc(100vh - var(--taskbar-height) - 112px);
+      overflow-y: auto;
+      scrollbar-color: #777468 #d6d0bd;
+    }
+
+    .cassette-display {
+      margin: 8px auto 18px;
+      width: min(360px, 100%);
+      padding: 16px;
+      color: #171713;
+      background: #d1c7aa;
+      border-top: 3px solid #f7f1dc;
+      border-left: 3px solid #f7f1dc;
+      border-right: 3px solid #514f47;
+      border-bottom: 3px solid #514f47;
+      text-align: center;
+    }
+
+    .cassette-label {
+      padding: 12px 10px;
+      background: #efe5c7;
+      border: 2px solid #36342d;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .cassette-reels {
+      margin: 12px auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 52px;
+    }
+
+    .cassette-reel {
+      width: 34px;
+      height: 34px;
+      border: 6px dotted #37352f;
+      border-radius: 50%;
+      background: #c5b993;
+    }
+
+    .mixtape-note {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      #club-window {
+        top: 4px;
+        max-height: calc(100vh - var(--taskbar-height) - 8px);
+      }
+
+      #club-window .window-body {
+        max-height: calc(100vh - var(--taskbar-height) - 98px);
+      }
+    }
+
+  
+    /* ===== 1999world major approved update ===== */
+    :root {
+      --paper: #efe4c5;
+      --plastic: #c8c0a8;
+      --navy: #000080;
+      --burgundy: #7f2435;
+      --brass: #b4944b;
+      --ink: #211f1a;
+    }
+
+    body, button, input, select, textarea {
+      font-family: "MS Sans Serif", Geneva, Arial, sans-serif;
+    }
+
+    .window-body p, .club-letter, .archive-preview, .hidden-note-paper {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .desktop-icon:active .pixel-icon { transform: translate(1px, 1px); }
+
+    .desktop-icon:focus-visible,
+    .window-control:focus-visible,
+    .retro-button:focus-visible,
+    .archive-file:focus-visible {
+      outline: 1px dotted #fff;
+      outline-offset: 2px;
+    }
+
+    .desktop.sunday-variation::after {
+      content: "SUNDAY";
+      position: fixed;
+      right: 18px;
+      bottom: 62px;
+      color: rgba(255,255,255,.7);
+      font: bold 11px "Courier New", monospace;
+      letter-spacing: 3px;
+      text-shadow: 1px 1px #25355c;
+      pointer-events: none;
+    }
+
+    .archive-body { min-height: 330px; }
+    .archive-file {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      margin: 4px 0;
+      padding: 6px 8px;
+      color: var(--ink);
+      background: #d7d0bb;
+      border-top: 2px solid #fff9e9;
+      border-left: 2px solid #fff9e9;
+      border-right: 2px solid #555148;
+      border-bottom: 2px solid #555148;
+      text-align: left;
+    }
+    .archive-file span {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 24px;
+      color: #fff;
+      background: var(--burgundy);
+      border: 1px solid #332b25;
+      font: bold 9px "Courier New", monospace;
+    }
+    .locked-file { opacity: .55; }
+    .archive-preview {
+      margin-top: 12px;
+      padding: 14px;
+      min-height: 100px;
+      color: #211f1a;
+      background: #f4eccf;
+      border: 1px solid #81745d;
+    }
+
+    .membership-card-preview {
+      position: relative;
+      margin: 18px auto 8px;
+      padding: 20px;
+      max-width: 430px;
+      min-height: 210px;
+      color: #2a2118;
+      background:
+        repeating-linear-gradient(0deg, rgba(90,70,35,.035) 0 1px, transparent 1px 4px),
+        #efe2bd;
+      border: 4px double #76283a;
+      box-shadow: 3px 3px 0 #766c59;
+      font-family: "Courier New", monospace;
+      text-align: left;
+    }
+    .membership-card-preview::before {
+      content: "★";
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      color: var(--brass);
+      font-size: 24px;
+    }
+    .membership-card-preview h3 {
+      margin: 0 40px 18px 0;
+      color: #76283a;
+      font-size: 17px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .membership-card-preview dl { margin: 0; }
+    .membership-card-preview dt {
+      margin-top: 10px;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+    .membership-card-preview dd {
+      margin: 2px 0 0;
+      border-bottom: 1px solid #756b57;
+      font-weight: bold;
+    }
+    .card-glint { animation: cardGlint .25s steps(2, end); }
+    @keyframes cardGlint {
+      0% { filter: none; }
+      50% { filter: brightness(1.14); }
+      100% { filter: none; }
+    }
+
+    .hidden-note-paper {
+      position: fixed;
+      left: 48%;
+      top: 58%;
+      z-index: 9000;
+      width: 250px;
+      padding: 18px;
+      color: #242018;
+      background: #f2e6b9;
+      border: 1px solid #756a55;
+      box-shadow: 5px 5px 0 rgba(0,0,0,.35);
+      transform: rotate(-1deg);
+    }
+    .hidden-note-paper button { float: right; }
+
+    .pixel-bird {
+      position: fixed;
+      z-index: 8000;
+      top: 22%;
+      left: -40px;
+      width: 24px;
+      height: 12px;
+      pointer-events: none;
+      animation: birdCross 7s steps(70, end) forwards;
+    }
+    .pixel-bird::before {
+      content: "";
+      position: absolute;
+      left: 8px; top: 5px;
+      width: 8px; height: 4px;
+      background: #292722;
+      box-shadow: -5px -3px #292722, 5px -3px #292722, 11px 1px #292722;
+    }
+    @keyframes birdCross { to { left: calc(100vw + 50px); } }
+
+    .steam-pixel {
+      position: fixed;
+      z-index: 7000;
+      width: 3px;
+      height: 3px;
+      background: rgba(255,255,255,.75);
+      animation: steamRise 2.6s steps(8, end) forwards;
+      pointer-events: none;
+    }
+    @keyframes steamRise {
+      to { transform: translate(5px,-28px); opacity: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .window {
+        max-width: calc(100vw - 8px) !important;
+        max-height: calc(100vh - var(--taskbar-height) - 8px) !important;
+      }
+      .window-body { overflow-y: auto; }
+      .membership-card-preview { min-height: 190px; padding: 14px; }
+      .hidden-note-paper { left: 10%; top: 40%; width: 70%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pixel-cloud, .pixel-bird, .steam-pixel, .card-glint { animation: none !important; }
+    }
+
+</style>
 </head>
 
 <body>
-
-  <span class="boot-cursor" aria-hidden="true"></span>
-</div>
+<!--
+1999world major approved update.
+Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
+No music or mixtape feature is included.
+-->
 
 <main class="desktop ready" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
@@ -1347,7 +1621,7 @@
         <rect x="5" y="13" width="6" height="1" fill="#2b2a24"/>
         <rect x="2" y="11" width="12" height="1" fill="#4b493f"/>
       </svg>
-      <span class="desktop-icon-label">My World</span>
+      <span class="desktop-icon-label">About</span>
     </button>
 
     <button class="desktop-icon" data-open="letters-window">
@@ -1364,7 +1638,7 @@
         <rect x="9" y="6" width="2" height="1" fill="#607b72"/>
         <rect x="11" y="5" width="2" height="1" fill="#607b72"/>
       </svg>
-      <span class="desktop-icon-label">Letters</span>
+      <span class="desktop-icon-label">Sunday Letters</span>
     </button>
 
     <button class="desktop-icon" data-open="journal-window">
@@ -1376,7 +1650,7 @@
         <rect x="6" y="7" width="5" height="1" fill="#716d59"/>
         <rect x="6" y="9" width="4" height="1" fill="#716d59"/>
       </svg>
-      <span class="desktop-icon-label">Journal.exe</span>
+      <span class="desktop-icon-label">Journal</span>
     </button>
 
     <button class="desktop-icon" data-open="calendar-window">
@@ -1413,17 +1687,18 @@
         <rect x="6" y="7" width="4" height="3" fill="#68a8a3"/>
         <rect x="3" y="6" width="1" height="2" fill="#9f2b2b"/>
       </svg>
-      <span class="desktop-icon-label">Photo Album</span>
+      <span class="desktop-icon-label">Gallery</span>
     </button>
-<button class="desktop-icon" data-open="downloads-window">
+<button class="desktop-icon" data-open="archive-window" aria-label="Archive">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
-        <rect x="3" y="9" width="10" height="5" fill="#b69c68"/>
-        <rect x="4" y="8" width="8" height="2" fill="#e5ce92"/>
-        <rect x="7" y="2" width="2" height="7" fill="#2a3a98"/>
-        <rect x="5" y="6" width="6" height="2" fill="#2a3a98"/>
-        <rect x="6" y="8" width="4" height="1" fill="#2a3a98"/>
+        <rect x="2" y="4" width="12" height="10" fill="#9a7048"/>
+        <rect x="1" y="3" width="14" height="3" fill="#c79b63"/>
+        <rect x="5" y="7" width="6" height="4" fill="#efe3c2"/>
+        <rect x="6" y="8" width="4" height="1" fill="#4a4033"/>
+        <rect x="6" y="10" width="3" height="1" fill="#4a4033"/>
+        <rect x="2" y="13" width="12" height="1" fill="#4a3524"/>
       </svg>
-      <span class="desktop-icon-label">Downloads</span>
+      <span class="desktop-icon-label">Archive</span>
     </button>
 
     <button class="desktop-icon" data-open="things-window">
@@ -1496,6 +1771,13 @@
       <div class="screen-time-actions"><button class="retro-button" id="screen-time-exit">See You Sunday</button></div>
     </div>
   </aside>
+<div class="hidden-note-paper" id="hidden-note" hidden>
+    <button class="retro-button" id="close-hidden-note" aria-label="Close note">×</button>
+    <strong>NOTE.TXT</strong>
+    <p>You found the quiet part of the desktop.</p>
+    <p>Stay as long as you like.</p>
+  </div>
+
 <!-- Welcome: only open window on load -->
   <section class="window active" id="welcome-window" data-title="Welcome to 1999world">
     <header class="window-titlebar">
@@ -1736,23 +2018,29 @@
 
   <!-- Player -->
 <!-- Downloads -->
-  <section class="window content-window hidden" id="downloads-window" data-title="Downloads">
+  <section class="window content-window hidden" id="archive-window" data-title="Archive">
     <header class="window-titlebar">
-      <span class="window-title-icon">↓</span>
-      <span class="window-title">Downloads</span>
+      <span class="window-title-icon">▤</span>
+      <span class="window-title">Archive — Things Worth Keeping</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
-
-    <div class="window-body standard-body">
-      <h2>Downloads</h2>
-      <p>Printable invitations</p>
-      <p>Sunday activity cards</p>
-      <p>Journal pages</p>
-      <p>Community posters</p>
+    <nav class="window-menu"><span>File</span><span>View</span><span>Remember</span><span>Help</span></nav>
+    <div class="window-body standard-body archive-body">
+      <h2>Archive</h2>
+      <p>A small box for things that deserve another look.</p>
+      <button class="archive-file" data-archive-file="readme"><span>TXT</span> readme.txt</button>
+      <button class="archive-file" data-archive-file="web"><span>URL</span> a_forgotten_web.txt</button>
+      <button class="archive-file" data-archive-file="history"><span>DOC</span> project_history.txt</button>
+      <button class="archive-file locked-file" disabled><span>???</span> not_yet.txt</button>
+      <article class="archive-preview" id="archive-preview">
+        <strong>Select a file.</strong>
+        <p>The archive will grow slowly, and only with material we have the right to keep here.</p>
+      </article>
     </div>
+    <footer class="window-status"><span>4 objects</span><span>Local archive</span></footer>
   </section>
 
   <!-- Things We Don't Need -->
@@ -2116,42 +2404,24 @@
         </section>
 
         <div class="signup-message" id="signup-message" role="status" aria-live="polite">
-          <strong>Letter Received.</strong><br><br>
-          Welcome, <span id="member-first-name">Friend</span>.<br>
-          <span class="member-location" id="member-location"></span><br>
-          We’ll write soon.<br>
-          See you Sunday.
-        </div>
-      </article>
-    </div>
+            <h3>Letter Received.</h3>
+            <p>Welcome, <strong id="member-first-name">Friend</strong>.</p>
+            <p class="member-location" id="member-location"></p>
+            <p>Your place in the 1999 Club has been recorded.</p>
 
-    <footer class="window-status">
-      <span>Membership is free.</span>
-      <span>No advertising. No algorithms.</span>
-    </footer>
-  </section>
+            <section class="membership-card-preview" id="digital-membership-card" aria-label="Digital 1999 Club membership card">
+              <h3>1999 Club — Founding Membership</h3>
+              <dl>
+                <dt>Member</dt><dd id="card-member-name">Friend</dd>
+                <dt>Place</dt><dd id="card-member-location">Somewhere in the world</dd>
+                <dt>Issued</dt><dd id="card-issue-date">—</dd>
+                <dt>Member number</dt><dd>To be issued when verified numbering is ready</dd>
+              </dl>
+            </section>
 
-  <!-- Hidden discovery -->
-  <section class="window content-window hidden" id="secret-window" data-title="FOUND.TXT">
-    <header class="window-titlebar">
-      <span class="window-title-icon">?</span>
-      <span class="window-title">FOUND.TXT</span>
-      <div class="window-controls">
-        <button class="window-control minimise-window" aria-label="Minimise">−</button>
-        <button class="window-control close-window" aria-label="Close">×</button>
-      </div>
-    </header>
-    <div class="window-body standard-body easter-egg-copy">
-      <h2>You found something.</h2>
-      <pre>   .----.
-  / .--. \
- | |    | |
-  \ '--' /
-   '----'</pre>
-      <p>The best parts of the old internet were never on the front page.</p>
-      <p>Keep looking.</p>
-    </div>
-  </section>
+            <p><strong>See you Sunday.</strong></p>
+          </div>
+        </section>
 
   <!-- Begin menu -->
   <nav class="begin-menu" id="begin-menu">
@@ -2311,6 +2581,11 @@
     if (!windowElement) return;
 
     windowElement.classList.remove("hidden", "minimised");
+
+    if (id === "club-window") {
+      windowElement.style.top = isMobile() ? "4px" : "18px";
+    }
+
     activateWindow(windowElement);
     beginMenu.classList.remove("open");
 
@@ -2369,7 +2644,36 @@
   }
 
   document.querySelectorAll("[data-open]").forEach((item) => {
-    item.addEventListener("click", () => openWindow(item.dataset.open));
+    const isDesktopObject = item.classList.contains("desktop-icon");
+
+    if (!isDesktopObject) {
+      item.addEventListener("click", () => openWindow(item.dataset.open));
+      return;
+    }
+
+    item.addEventListener("click", () => {
+      document.querySelectorAll(".desktop-icon.selected").forEach((icon) => {
+        if (icon !== item) icon.classList.remove("selected");
+      });
+
+      item.classList.add("selected");
+
+      if (window.matchMedia("(pointer: coarse)").matches || isMobile()) {
+        openWindow(item.dataset.open);
+      }
+    });
+
+    item.addEventListener("dblclick", () => {
+      item.classList.remove("selected");
+      openWindow(item.dataset.open);
+    });
+  });
+
+  document.getElementById("desktop").addEventListener("click", (event) => {
+    if (!event.target.closest(".desktop-icon")) {
+      document.querySelectorAll(".desktop-icon.selected")
+        .forEach((icon) => icon.classList.remove("selected"));
+    }
   });
 
   windows.forEach((windowElement) => {
@@ -2596,6 +2900,156 @@ function seeYouSunday() {
       desktop.classList.add("ready");
     }
   }, 6500);
+
+  // ===== Approved major update interactions =====
+  const approvedArchiveText = {
+    readme: `<strong>readme.txt</strong><p>If you’re reading this, I’m glad you found us.</p>`,
+    web: `<strong>a_forgotten_web.txt</strong><p>A place for one carefully chosen corner of the old web. The first recommendation will be added only after its availability and rights are checked.</p>`,
+    history: `<strong>project_history.txt</strong><p>1999world began as an attempt to make the internet feel quieter, slower and more human again.</p>`
+  };
+
+  document.querySelectorAll("[data-archive-file]").forEach((file) => {
+    file.addEventListener("click", () => {
+      document.getElementById("archive-preview").innerHTML =
+        approvedArchiveText[file.dataset.archiveFile] || "<p>File unavailable.</p>";
+      playInterfaceSound("open");
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    const selected = document.querySelector(".desktop-icon.selected");
+    if (event.key === "Enter" && selected?.dataset.open) openWindow(selected.dataset.open);
+    if (event.key === "Escape") beginMenu.classList.remove("open");
+  });
+
+  let desktopCode = "";
+  document.addEventListener("keydown", (event) => {
+    if (/^[0-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
+      desktopCode = (desktopCode + event.key).slice(-4);
+      if (desktopCode === "1999") {
+        openWindow("archive-window");
+        desktopCode = "";
+      }
+    }
+  });
+
+  let journalIdleTimer = null;
+  const openWindowBeforeApprovedUpdate = openWindow;
+  openWindow = function(id) {
+    openWindowBeforeApprovedUpdate(id);
+    if (id === "journal-window") {
+      clearTimeout(journalIdleTimer);
+      journalIdleTimer = setTimeout(() => {
+        const activePage = document.querySelector("#journal-window .journal-page.active");
+        if (activePage && !activePage.querySelector(".journal-idle-line")) {
+          const line = document.createElement("p");
+          line.className = "journal-idle-line";
+          line.innerHTML = "<em>Sometimes it’s enough just to sit here.</em>";
+          activePage.appendChild(line);
+        }
+      }, 30000);
+    }
+    playInterfaceSound("open");
+  };
+
+  document.getElementById("desktop").addEventListener("dblclick", (event) => {
+    if (event.target.closest(".desktop-icon, .window, .taskbar, .desktop-widgets")) return;
+    const x = event.clientX / window.innerWidth;
+    const y = event.clientY / window.innerHeight;
+    if (x > .40 && x < .65 && y > .55 && y < .82) {
+      document.getElementById("hidden-note").hidden = false;
+    }
+  });
+
+  document.getElementById("close-hidden-note").addEventListener("click", () => {
+    document.getElementById("hidden-note").hidden = true;
+  });
+
+  document.querySelectorAll(".pixel-cloud").forEach((cloud) => {
+    let cloudClicks = 0;
+    cloud.style.pointerEvents = "auto";
+    cloud.addEventListener("click", () => {
+      cloudClicks += 1;
+      if (cloudClicks === 5) {
+        const bird = document.createElement("span");
+        bird.className = "pixel-bird";
+        document.body.appendChild(bird);
+        setTimeout(() => bird.remove(), 7500);
+        cloudClicks = 0;
+      }
+    });
+  });
+
+  function releaseSteam() {
+    if (document.hidden) return;
+    const steam = document.createElement("span");
+    steam.className = "steam-pixel";
+    steam.style.left = `${Math.max(20, window.innerWidth - 150)}px`;
+    steam.style.top = `${Math.max(80, window.innerHeight - 205)}px`;
+    document.body.appendChild(steam);
+    setTimeout(() => steam.remove(), 3000);
+  }
+  setInterval(releaseSteam, 45000);
+
+  setInterval(() => {
+    const card = document.getElementById("digital-membership-card");
+    if (card && signupMessage.classList.contains("show")) {
+      card.classList.add("card-glint");
+      setTimeout(() => card.classList.remove("card-glint"), 350);
+    }
+  }, 90000);
+
+  if (new Date().getDay() === 0) {
+    document.getElementById("desktop").classList.add("sunday-variation");
+  }
+
+  let audioContext = null;
+  function playInterfaceSound(kind) {
+    try {
+      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+      if (audioContext.state !== "running") return;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = "square";
+      osc.frequency.value = kind === "close" ? 150 : 210;
+      gain.gain.setValueAtTime(.018, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + .045);
+      osc.connect(gain).connect(audioContext.destination);
+      osc.start();
+      osc.stop(audioContext.currentTime + .05);
+    } catch (_) {}
+  }
+
+  document.addEventListener("pointerdown", () => {
+    try {
+      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+      audioContext.resume();
+    } catch (_) {}
+  }, { once: true });
+
+  document.querySelectorAll(".close-window").forEach((button) => {
+    button.addEventListener("click", () => playInterfaceSound("close"));
+  });
+
+  const membershipCardObserver = new MutationObserver(() => {
+    if (!signupMessage.classList.contains("show")) return;
+    const firstName = document.getElementById("member-first-name").textContent;
+    const location = document.getElementById("member-location").textContent;
+    document.getElementById("card-member-name").textContent = firstName;
+    document.getElementById("card-member-location").textContent = location;
+    document.getElementById("card-issue-date").textContent =
+      new Date().toLocaleDateString("en-AU", { day: "2-digit", month: "long", year: "numeric" });
+  });
+  membershipCardObserver.observe(signupMessage, { attributes: true, attributeFilter: ["class"] });
+
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".window:not(.hidden)").forEach((win) => {
+      const rect = win.getBoundingClientRect();
+      if (rect.right > innerWidth) win.style.left = `${Math.max(0, innerWidth - rect.width - 4)}px`;
+      if (rect.bottom > innerHeight - 48) win.style.top = `${Math.max(0, innerHeight - rect.height - 52)}px`;
+    });
+  });
+
 </script>
 </body>
 </html>
