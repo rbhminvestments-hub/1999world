@@ -44,3 +44,12 @@ window.PHOTO_ALBUM = {
     }
   ]
 };
+{
+  src: "assets/photos/first-sunday/P1010005.JPG",
+  file: "P1010005.JPG",
+  title: "Gorge after rain",
+  date: "27 JUL 2026",
+  caption: "Water running strongly through the gorge after recent rain. One of the places that reminds us to slow down.",
+  credit: "Photo: 1999world",
+  alt: "A rocky gorge with flowing water and a waterfall in the distance."
+};
