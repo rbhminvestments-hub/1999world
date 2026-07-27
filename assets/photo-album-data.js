@@ -41,10 +41,8 @@ window.PHOTO_ALBUM = {
       caption: "The note that stayed on the wall after everything else was packed away.",
       credit: "1999world archive",
       alt: "A handwritten note saying see you Sunday."
-    }
-  ]
-};
-{
+    },
+    {      
   src: "assets/photos/first-sunday/P1010005.JPG",
   file: "P1010005.JPG",
   title: "Gorge after rain",
