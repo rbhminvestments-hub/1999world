@@ -384,10 +384,10 @@
     .welcome-year {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      font-size: clamp(58px, 8vw, 94px);
+      font-size: clamp(46px, 7vw, 78px);
       line-height: .9;
       font-weight: 900;
-      letter-spacing: 7px;
+      letter-spacing: 1px;
     }
 
     .welcome-word {
@@ -1600,12 +1600,17 @@
 
 <body>
 <!--
-1999world major approved update.
+1999world Version 1.1.
 Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
 No music or mixtape feature is included.
 -->
 
-<main class="desktop ready" id="desktop">
+<div class="boot-screen" id="boot-screen" aria-live="polite">
+  <div id="boot-text">Starting 1999world...</div>
+  <span class="boot-cursor" aria-hidden="true"></span>
+</div>
+
+<main class="desktop" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -1797,8 +1802,7 @@ No music or mixtape feature is included.
     </nav>
 
     <div class="window-body welcome-body">
-      <h1 class="welcome-year">1999</h1>
-      <div class="welcome-word">WELCOME</div>
+      <h1 class="welcome-year">1999world</h1>
       <div class="welcome-rule"></div>
 
       <div class="welcome-copy">
@@ -1808,13 +1812,12 @@ No music or mixtape feature is included.
       </div>
 
       <div class="welcome-action">
-        <button class="retro-button" id="explore-button">Begin exploring</button>
+        <button class="retro-button" id="explore-button">Journal.exe</button>
       </div>
     </div>
 
     <footer class="window-status">
-      <span>Est. 2026</span>
-      <span>Digital is the doorway. Real life is the destination.</span>
+      <span>A slower corner of the internet.</span>
     </footer>
   </section>
 
@@ -1941,7 +1944,7 @@ No music or mixtape feature is included.
 
       <article class="journal-page" id="journal-page-future">
         <h2>The future we’re building</h2>
-        <p>Digital is the doorway. Real life is the destination.</p>
+        <p>A slower corner of the internet.</p>
         <p>We’re bringing forward the parts of life worth keeping: curiosity, creativity, conversation and Sundays with nowhere else to be.</p>
       </article>
     </div>
@@ -2451,6 +2454,40 @@ No music or mixtape feature is included.
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
 
+  // Version 1.1 loading sequence
+  const bootScreen = document.getElementById("boot-screen");
+  const bootText = document.getElementById("boot-text");
+  const desktop = document.getElementById("desktop");
+  const bootLines = [
+    "Starting 1999world...",
+    "",
+    "Loading analogue life...",
+    "Loading human interaction...",
+    "Loading memories...",
+    "",
+    "Connection established.",
+    "Welcome."
+  ];
+
+  let bootIndex = 1;
+
+  function advanceBoot() {
+    if (bootIndex >= bootLines.length) {
+      window.setTimeout(() => {
+        bootScreen.classList.add("hidden");
+        desktop.classList.add("ready");
+      }, 500);
+      return;
+    }
+
+    bootText.textContent += `\n${bootLines[bootIndex]}`;
+    bootText.style.whiteSpace = "pre-line";
+    bootIndex += 1;
+    window.setTimeout(advanceBoot, bootLines[bootIndex - 1] ? 430 : 220);
+  }
+
+  window.setTimeout(advanceBoot, 350);
+
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -2753,7 +2790,7 @@ No music or mixtape feature is included.
   });
 
   document.getElementById("explore-button").addEventListener("click", () => {
-    openWindow("letters-window");
+    openWindow("journal-window");
   });
 
   const letters = {
@@ -2899,7 +2936,7 @@ function seeYouSunday() {
       bootScreen.classList.add("hidden");
       desktop.classList.add("ready");
     }
-  }, 6500);
+  }, 7000);
 
   // ===== Approved major update interactions =====
   const approvedArchiveText = {
