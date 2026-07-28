@@ -2127,6 +2127,83 @@
       }
     }
 
+
+
+    /* ---------- Version 1.0.5 cloud layering fix ---------- */
+
+    /*
+      Keep the animated sky strictly below every desktop object.
+      The window backing layer is fully opaque, including behind borders,
+      menus, status bars and empty content areas.
+    */
+    .desktop {
+      isolation: isolate;
+    }
+
+    .pixel-cloud {
+      z-index: 0 !important;
+      pointer-events: none;
+    }
+
+    .desktop-icons {
+      z-index: 2;
+    }
+
+    .window {
+      z-index: 20;
+      overflow: hidden;
+      background: #d6d0bb !important;
+      background-image: none !important;
+      opacity: 1 !important;
+    }
+
+    .window.active {
+      z-index: 100;
+    }
+
+    .window::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: #d6d0bb;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .window-titlebar {
+      background-color: #11176f;
+      opacity: 1 !important;
+    }
+
+    .window-menu,
+    .window-status {
+      background-color: #d6d0bb !important;
+      background-image: none !important;
+      opacity: 1 !important;
+    }
+
+    .window-body,
+    .welcome-body,
+    .standard-body,
+    .readme-document,
+    .journal-page,
+    .photo-archive,
+    .photo-main {
+      opacity: 1 !important;
+      background-blend-mode: normal !important;
+    }
+
+    .window-body,
+    .standard-body {
+      background: #f8f1dc !important;
+    }
+
+    .welcome-body,
+    .readme-document {
+      background: #fffdf5 !important;
+    }
+
 </style>
 
 </head>
