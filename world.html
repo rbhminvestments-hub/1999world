@@ -1826,6 +1826,19 @@
       .pixel-cloud, .pixel-bird, .steam-pixel, .card-glint { animation: none !important; }
     }
 
+
+    /* Phase 1 launch: future desktop features remain in the file but are not visible. */
+    .phase-two { display: none !important; }
+    .readme-form { width: min(420px, 100%); margin: 24px auto 0; text-align: left; }
+    .readme-form label { display:block; margin-bottom:6px; font-size:12px; font-weight:bold; }
+    .readme-form-row { display:flex; gap:8px; align-items:stretch; }
+    .readme-form input[type="email"] { min-width:0; flex:1; padding:8px; background:#fffdf5; border-top:2px solid #555348; border-left:2px solid #555348; border-right:2px solid #fff; border-bottom:2px solid #fff; }
+    .readme-smallprint { margin-top:10px; color:#5e594e; font-size:10px; line-height:1.5; }
+    .readme-message { display:none; margin:24px auto 0; width:min(420px,100%); padding:18px; text-align:left; background:#edf3d3; border:2px solid #6b7650; line-height:1.65; }
+    .readme-message.show { display:block; }
+    .readme-error { display:none; margin-top:10px; padding:8px; color:#6f1717; background:#f5d9d3; border:1px solid #9c4c43; font-size:11px; }
+    .readme-error.show { display:block; }
+
 </style>
   <style>
     /* The CRT loading sequence belongs only in index.html. */
@@ -1836,7 +1849,7 @@
 
 <body>
 <!--
-1999world Version 1.1.
+1999world Phase 1 Launch Edition.
 Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
 No music or mixtape feature is included.
 -->
@@ -1862,10 +1875,10 @@ No music or mixtape feature is included.
         <rect x="5" y="13" width="6" height="1" fill="#2b2a24"/>
         <rect x="2" y="11" width="12" height="1" fill="#4b493f"/>
       </svg>
-      <span class="desktop-icon-label">About</span>
+      <span class="desktop-icon-label">Read Me First.txt</span>
     </button>
 
-    <button class="desktop-icon" data-open="letters-window">
+    <button class="desktop-icon phase-two" data-open="letters-window">
       <span class="notification-badge">3</span>
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="2" y="4" width="12" height="9" fill="#efe7cf"/>
@@ -1894,7 +1907,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">Journal</span>
     </button>
 
-    <button class="desktop-icon" data-open="calendar-window">
+    <button class="desktop-icon phase-two" data-open="calendar-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="2" y="3" width="12" height="11" fill="#eee6cf"/>
         <rect x="2" y="3" width="12" height="3" fill="#9f2b2b"/>
@@ -1908,7 +1921,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">Calendar</span>
     </button>
 
-    <button class="desktop-icon" data-open="community-window">
+    <button class="desktop-icon phase-two" data-open="community-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="3" y="3" width="4" height="4" fill="#f0c39b"/>
         <rect x="9" y="2" width="4" height="4" fill="#d6a57e"/>
@@ -1928,7 +1941,7 @@ No music or mixtape feature is included.
         <rect x="6" y="7" width="4" height="3" fill="#68a8a3"/>
         <rect x="3" y="6" width="1" height="2" fill="#9f2b2b"/>
       </svg>
-      <span class="desktop-icon-label">Gallery</span>
+      <span class="desktop-icon-label">Photo Album</span>
     </button>
 <button class="desktop-icon" data-open="archive-window" aria-label="Archive">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
@@ -1942,7 +1955,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">Archive</span>
     </button>
 
-    <button class="desktop-icon" data-open="things-window">
+    <button class="desktop-icon phase-two" data-open="things-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="4" y="4" width="8" height="10" fill="#9aa196"/>
         <rect x="3" y="3" width="10" height="2" fill="#cdd2c8"/>
@@ -1954,7 +1967,7 @@ No music or mixtape feature is included.
     </button>
 
 
-    <button class="desktop-icon" data-open="club-window">
+    <button class="desktop-icon phase-two" data-open="club-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="2" y="4" width="12" height="9" fill="#efe4c5"/>
         <rect x="2" y="4" width="12" height="1" fill="#3a332a"/>
@@ -1968,7 +1981,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">The 1999<br>Club</span>
     </button>
 
-    <button class="desktop-icon" id="see-you-sunday-icon">
+    <button class="desktop-icon phase-two" id="see-you-sunday-icon">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="4" y="2" width="8" height="12" fill="#71513d"/>
         <rect x="5" y="3" width="6" height="10" fill="#9a714f"/>
@@ -1978,6 +1991,19 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">See You<br>Sunday</span>
     </button>
 
+
+
+    <button class="desktop-icon" data-open="recycle-window">
+      <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="4" y="4" width="8" height="10" fill="#aeb5ad"/>
+        <rect x="3" y="3" width="10" height="2" fill="#d7ddd4"/>
+        <rect x="6" y="2" width="4" height="1" fill="#d7ddd4"/>
+        <rect x="6" y="6" width="1" height="6" fill="#59605a"/>
+        <rect x="9" y="6" width="1" height="6" fill="#59605a"/>
+        <rect x="5" y="14" width="6" height="1" fill="#3d433e"/>
+      </svg>
+      <span class="desktop-icon-label">Recycle Bin</span>
+    </button>
 
     <button class="desktop-icon secret-icon" id="secret-icon" data-open="secret-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
@@ -2019,42 +2045,34 @@ No music or mixtape feature is included.
     <p>Stay as long as you like.</p>
   </div>
 
-<!-- Welcome: only open window on load -->
-  <section class="window active" id="welcome-window" data-title="Welcome to 1999world">
+<!-- Read Me First: only open window on load -->
+  <section class="window active" id="welcome-window" data-title="Read Me First.txt">
     <header class="window-titlebar">
-      <span class="window-title-icon">▣</span>
-      <span class="window-title">Welcome to 1999world</span>
+      <span class="window-title-icon">TXT</span>
+      <span class="window-title">Read Me First.txt — Notepad</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
-
-    <nav class="window-menu">
-      <span>File</span>
-      <span>Edit</span>
-      <span>View</span>
-      <span>Help</span>
-    </nav>
-
+    <nav class="window-menu"><span>File</span><span>Edit</span><span>Search</span><span>Help</span></nav>
     <div class="window-body welcome-body">
-      <h1 class="welcome-year">1999world</h1>
-      <div class="welcome-rule"></div>
-
-      <div class="welcome-copy">
-        The internet got faster.<br>
-        Life got noisier.<br>
-        We’re trying something different.
+      <div class="welcome-copy" style="text-align:left; max-width:440px; margin:0 auto;">
+        Hello.<br><br>Thanks for stopping by.<br><br>This computer has been online for a long time.<br><br>There isn't much here yet.<br><br>Feel free to look around.<br><br>The Journal changes occasionally.<br>The Photo Album grows whenever there are new memories worth keeping.<br><br>If you'd like an occasional letter whenever something interesting happens, leave your email below.
       </div>
-
-      <div class="welcome-action">
-        <button class="retro-button" id="explore-button">Journal.exe</button>
-      </div>
+      <form class="readme-form" id="readme-signup-form" novalidate>
+        <label for="readme-email">Email address</label>
+        <div class="readme-form-row">
+          <input id="readme-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          <button class="retro-button" type="submit">Stay in Touch</button>
+        </div>
+        <div class="honeypot-field" aria-hidden="true"><label for="readme-website">Website</label><input id="readme-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <p class="readme-error" id="readme-error" role="alert"></p>
+        <p class="readme-smallprint">No spam. No newsletters.<br>Just the occasional letter when something new appears.</p>
+      </form>
+      <div class="readme-message" id="readme-message" role="status" aria-live="polite">Thank you.<br><br>I'll write when there's something worth writing about.<br><br>Until then...<br><br>Enjoy looking around.</div>
     </div>
-
-    <footer class="window-status">
-      <span>A slower corner of the internet.</span>
-    </footer>
+    <footer class="window-status"><span>A slower corner of the internet.</span></footer>
   </section>
 
   <!-- Letters -->
@@ -2734,16 +2752,22 @@ No music or mixtape feature is included.
           </div>
         </section>
 
+
+  <!-- Recycle Bin -->
+  <section class="window content-window hidden" id="recycle-window" data-title="Recycle Bin">
+    <header class="window-titlebar"><span class="window-title-icon">♻</span><span class="window-title">Recycle Bin</span><div class="window-controls"><button class="window-control minimise-window" aria-label="Minimise">−</button><button class="window-control close-window" aria-label="Close">×</button></div></header>
+    <nav class="window-menu"><span>File</span><span>Edit</span><span>View</span><span>Help</span></nav>
+    <div class="window-body standard-body"><h2>Recycle Bin</h2><p>Nothing here yet.</p></div>
+    <footer class="window-status"><span>0 object(s)</span><span>Recycle Bin</span></footer>
+  </section>
+
   <!-- Begin menu -->
   <nav class="begin-menu" id="begin-menu">
     <div class="begin-brand">1999world</div>
-    <button class="begin-item" data-open="welcome-window"><span class="menu-glyph">▣</span>My World</button>
-    <button class="begin-item" data-open="letters-window"><span class="menu-glyph">✉</span>Letters</button>
+    <button class="begin-item" data-open="welcome-window"><span class="menu-glyph">TXT</span>Read Me First.txt</button>
     <button class="begin-item" data-open="journal-window"><span class="menu-glyph">▤</span>Journal.exe</button>
-    <button class="begin-item" data-open="community-window"><span class="menu-glyph">▥</span>Community</button>
-    <button class="begin-item" data-open="things-window"><span class="menu-glyph">×</span>Things We Don’t Need</button>
-    <button class="begin-item" data-open="club-window"><span class="menu-glyph">99</span>The 1999 Club</button>
-    <button class="begin-item" id="begin-see-you-sunday"><span class="menu-glyph">→</span>See You Sunday</button>
+    <button class="begin-item" data-open="photos-window"><span class="menu-glyph">▧</span>Photo Album</button>
+    <button class="begin-item" data-open="recycle-window"><span class="menu-glyph">♻</span>Recycle Bin</button>
   </nav>
 
   <!-- Taskbar -->
@@ -2882,6 +2906,35 @@ No music or mixtape feature is included.
       );
       submitButton.disabled = false;
       submitButton.textContent = "Become a Founding Member";
+    }
+  });
+
+  // Read Me First mailing-list signup.
+  const readmeSignupForm = document.getElementById("readme-signup-form");
+  const readmeMessage = document.getElementById("readme-message");
+  const readmeError = document.getElementById("readme-error");
+
+  readmeSignupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    readmeError.classList.remove("show");
+    readmeError.textContent = "";
+    if (!readmeSignupForm.checkValidity()) { readmeSignupForm.reportValidity(); return; }
+    const submitButton = readmeSignupForm.querySelector("button[type='submit']");
+    const email = document.getElementById("readme-email").value.trim();
+    const website = document.getElementById("readme-website").value;
+    submitButton.disabled = true;
+    submitButton.textContent = "Saving...";
+    try {
+      const response = await fetch(SIGNUP_ENDPOINT, { method:"POST", headers:{"Accept":"application/json","Content-Type":"application/json"}, body:JSON.stringify({ firstName:"", email, city:"", country:"", interests:[], consent:true, website, source:"1999world.net — Read Me First.txt" }) });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error(result?.message || "Your address could not be saved just now.");
+      readmeSignupForm.style.display = "none";
+      readmeMessage.classList.add("show");
+    } catch (error) {
+      readmeError.textContent = error instanceof Error ? error.message : "Your address could not be saved just now. Please try again.";
+      readmeError.classList.add("show");
+      submitButton.disabled = false;
+      submitButton.textContent = "Stay in Touch";
     }
   });
 
@@ -3205,14 +3258,12 @@ function seeYouSunday() {
     `;
   }
 
-  document.getElementById("see-you-sunday-icon")
-    .addEventListener("click", seeYouSunday);
+  document.getElementById("see-you-sunday-icon")?.addEventListener("click", seeYouSunday);
 
   document.getElementById("screen-time-exit")
     .addEventListener("click", seeYouSunday);
 
-  document.getElementById("begin-see-you-sunday")
-    .addEventListener("click", seeYouSunday);
+  document.getElementById("begin-see-you-sunday")?.addEventListener("click", seeYouSunday);
 
   function updateClock() {
     document.getElementById("clock").textContent =
