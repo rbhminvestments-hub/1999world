@@ -2264,7 +2264,7 @@ No music or mixtape feature is included.
     </header>
     <div class="window-body welcome-body">
       <div class="readme-document">
-        <div class="welcome-copy">
+        <div class="welcome-copy" id="readme-intro">
           <p>Hello.</p>
           <p>Thanks for stopping by.</p>
           <p>This computer first went online in 1999.</p>
@@ -3216,6 +3216,8 @@ No music or mixtape feature is included.
       }) });
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) throw new Error(result?.message || "Your email address could not be saved just now.");
+      const readmeIntro = document.getElementById("readme-intro");
+      if (readmeIntro) readmeIntro.style.display = "none";
       readmeSignupForm.style.display = "none";
       readmeMessage.classList.add("show");
     } catch (error) {
