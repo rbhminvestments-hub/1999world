@@ -2050,6 +2050,83 @@
       }
     }
 
+
+
+    /* ---------- Version 1.0.4 polish ---------- */
+
+    /* Open windows are solid desktop objects: moving clouds remain behind them. */
+    .window {
+      opacity: 1;
+      isolation: isolate;
+      background: var(--panel);
+    }
+
+    .window-titlebar,
+    .window-menu,
+    .window-body,
+    .window-status {
+      opacity: 1;
+    }
+
+    .window-body {
+      background-color: var(--cream);
+      background-image: none;
+    }
+
+    /* Match the visitor counter to the clock box exactly. */
+    .taskbar-visitors,
+    .clock {
+      width: 118px;
+      min-width: 118px;
+      height: 38px;
+      min-height: 38px;
+      padding: 0 10px;
+      box-sizing: border-box;
+      justify-content: center;
+      background: var(--panel);
+      border-top: 2px solid #777468;
+      border-left: 2px solid #777468;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      font-size: 10px;
+    }
+
+    .taskbar-visitors {
+      gap: 0;
+    }
+
+    .taskbar-visitors-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .taskbar-visitors-digits {
+      min-width: 0;
+      padding: 0;
+      color: var(--navy);
+      text-align: center;
+      background: transparent;
+      border: 0;
+      font: 10px "Courier New", monospace;
+      letter-spacing: 0;
+    }
+
+    @media (max-width: 760px) {
+      .taskbar-visitors,
+      .clock {
+        width: 84px;
+        min-width: 84px;
+        padding: 0 6px;
+      }
+    }
+
 </style>
 
 </head>
@@ -3053,7 +3130,7 @@ No music or mixtape feature is included.
       <span class="status-dot"></span>
       Recently restarted
     </div>
-    <div class="taskbar-visitors" title="Total visitors">
+    <div class="taskbar-visitors" title="Visitors">
       <span class="taskbar-visitors-label">Visitors</span>
       <span class="taskbar-visitors-digits" id="visitor-count">0000000</span>
     </div>
