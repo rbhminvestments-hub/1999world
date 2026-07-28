@@ -2280,10 +2280,7 @@ No music or mixtape feature is included.
           <input id="readme-email" name="email" type="email" autocomplete="email" maxlength="254" required>
           <button class="retro-button readme-submit" type="submit">Stay in Touch</button>
 
-          <div class="honeypot-field" aria-hidden="true">
-            <label for="readme-website">Website</label>
-            <input id="readme-website" name="website" type="text" tabindex="-1" autocomplete="off">
-          </div>
+          <input id="readme-website" name="website" type="hidden" value="">
 
           <p class="readme-error" id="readme-error" role="alert"></p>
 
@@ -3206,9 +3203,18 @@ No music or mixtape feature is included.
     submitButton.disabled = true;
     submitButton.textContent = "Saving...";
     try {
-      const response = await fetch(SIGNUP_ENDPOINT, { method:"POST", headers:{"Accept":"application/json","Content-Type":"application/json"}, body:JSON.stringify({ firstName:"", email, city:"", country:"", interests:[], consent:true, website, source:"1999world.net — Read Me First.txt" }) });
+      const response = await fetch(SIGNUP_ENDPOINT, { method:"POST", headers:{"Accept":"application/json","Content-Type":"application/json"}, body:JSON.stringify({
+        firstName:"Visitor",
+        email,
+        city:"Not provided",
+        country:"Not provided",
+        interests:["occasional letters"],
+        consent:true,
+        website,
+        source:"1999world.net — Read Me First.txt"
+      }) });
       const result = await response.json().catch(() => null);
-      if (!response.ok || !result?.success) throw new Error(result?.message || "Your address could not be saved just now.");
+      if (!response.ok || !result?.success) throw new Error(result?.message || "Your email address could not be saved just now.");
       readmeSignupForm.style.display = "none";
       readmeMessage.classList.add("show");
     } catch (error) {
