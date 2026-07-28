@@ -1843,7 +1843,94 @@
   <style>
     /* The CRT loading sequence belongs only in index.html. */
     #boot-screen { display: none !important; }
-  </style>
+  
+    /* ---------- Version 1 comprehensive launch refinements ---------- */
+    .desktop-widgets {
+      display: none;
+    }
+
+    .welcome-copy p {
+      margin: 0 0 17px;
+    }
+
+    .welcome-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .journal-page {
+      max-height: 390px;
+      overflow-y: auto;
+    }
+
+    .system-status {
+      min-width: 142px;
+      padding: 0 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 10px;
+      white-space: nowrap;
+      background: var(--panel);
+      border-top: 2px solid #777468;
+      border-left: 2px solid #777468;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    .system-status .status-dot {
+      margin-right: 0;
+    }
+
+    .visitor-counter {
+      position: fixed;
+      right: 12px;
+      bottom: calc(var(--taskbar-height) + 10px);
+      z-index: 900;
+      padding: 7px 8px 8px;
+      color: #f7f2dd;
+      text-align: center;
+      background: rgba(8, 60, 61, .84);
+      border-top: 1px solid rgba(255,255,255,.5);
+      border-left: 1px solid rgba(255,255,255,.5);
+      border-right: 2px solid rgba(0,0,0,.5);
+      border-bottom: 2px solid rgba(0,0,0,.5);
+      box-shadow: 3px 3px 0 rgba(0,0,0,.16);
+    }
+
+    .visitor-counter-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff7bc;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .visitor-counter-digits {
+      display: block;
+      padding: 3px 5px;
+      color: #72ff95;
+      background: #080808;
+      border: 2px inset #777;
+      font: bold 13px "Courier New", monospace;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .system-status {
+        display: none;
+      }
+
+      .visitor-counter {
+        position: fixed;
+        right: 8px;
+        bottom: calc(var(--taskbar-height) + 8px);
+      }
+    }
+
+</style>
 
 </head>
 
@@ -1859,7 +1946,7 @@ No music or mixtape feature is included.
   <span class="boot-cursor" aria-hidden="true"></span>
 </div>
 
-<main class="desktop" id="desktop">
+<main class="desktop ready" id="desktop">
   <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
   <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
@@ -1904,7 +1991,7 @@ No music or mixtape feature is included.
         <rect x="6" y="7" width="5" height="1" fill="#716d59"/>
         <rect x="6" y="9" width="4" height="1" fill="#716d59"/>
       </svg>
-      <span class="desktop-icon-label">Journal</span>
+      <span class="desktop-icon-label">Journal.exe</span>
     </button>
 
     <button class="desktop-icon phase-two" data-open="calendar-window">
@@ -1943,7 +2030,7 @@ No music or mixtape feature is included.
       </svg>
       <span class="desktop-icon-label">Photo Album</span>
     </button>
-<button class="desktop-icon" data-open="archive-window" aria-label="Archive">
+<button class="desktop-icon phase-two" data-open="archive-window" aria-label="Archive">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="2" y="4" width="12" height="10" fill="#9a7048"/>
         <rect x="1" y="3" width="14" height="3" fill="#c79b63"/>
@@ -2049,16 +2136,23 @@ No music or mixtape feature is included.
   <section class="window active" id="welcome-window" data-title="Read Me First.txt">
     <header class="window-titlebar">
       <span class="window-title-icon">TXT</span>
-      <span class="window-title">Read Me First.txt — Notepad</span>
+      <span class="window-title">Read Me First.txt</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
-    <nav class="window-menu"><span>File</span><span>Edit</span><span>Search</span><span>Help</span></nav>
     <div class="window-body welcome-body">
       <div class="welcome-copy" style="text-align:left; max-width:440px; margin:0 auto;">
-        Hello.<br><br>Thanks for stopping by.<br><br>This computer has been online for a long time.<br><br>There isn't much here yet.<br><br>Feel free to look around.<br><br>The Journal changes occasionally.<br>The Photo Album grows whenever there are new memories worth keeping.<br><br>If you'd like an occasional letter whenever something interesting happens, leave your email below.
+        <p>Hello.</p>
+        <p>Thanks for stopping by.</p>
+        <p>This computer first went online in 1999.<br>
+        It was left alone for a long time and has recently been switched on again.</p>
+        <p>There isn't much here yet, so feel free to look around.</p>
+        <p>The Journal changes occasionally.<br>
+        The Photo Album grows whenever there are new memories worth keeping.</p>
+        <p>If you'd like an occasional letter when something interesting happens,<br>
+        leave your email below.</p>
       </div>
       <form class="readme-form" id="readme-signup-form" novalidate>
         <label for="readme-email">Email address</label>
@@ -2155,51 +2249,67 @@ No music or mixtape feature is included.
   <section class="window content-window hidden" id="journal-window" data-title="Journal.exe">
     <header class="window-titlebar">
       <span class="window-title-icon">▤</span>
-      <span class="window-title">1999.txt — Journal.exe</span>
+      <span class="window-title">Journal.exe</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
 
-    <nav class="window-menu">
-      <span>File</span>
-      <span>Edit</span>
-      <span>View</span>
-      <span>Help</span>
-    </nav>
-
     <div class="window-body standard-body journal-copy">
       <div class="journal-tabs" role="tablist" aria-label="Journal pages">
-        <button class="retro-button journal-tab active" data-page="why">Why 1999?</button>
-        <button class="retro-button journal-tab" data-page="here">Why we’re here</button>
-        <button class="retro-button journal-tab" data-page="miss">The internet we miss</button>
-        <button class="retro-button journal-tab" data-page="future">The future</button>
+        <button class="retro-button journal-tab active" data-page="computer">The computer</button>
+        <button class="retro-button journal-tab" data-page="back">Why it is back</button>
+        <button class="retro-button journal-tab" data-page="remains">What remains</button>
+        <button class="retro-button journal-tab" data-page="beginning">A new beginning</button>
       </div>
 
-      <article class="journal-page active" id="journal-page-why">
-        <h2>Why 1999?</h2>
-        <p>1999 isn’t about going backwards.</p>
-        <p>It’s about remembering when the internet felt like somewhere you explored, rather than somewhere that followed you everywhere.</p>
+      <article class="journal-page active" id="journal-page-computer">
+        <h2>The computer</h2>
+        <p>This computer first went online in 1999.</p>
+        <p>For a while, it was used often.</p>
+        <p>Pages were visited. Emails were written. Photographs were saved. Small things accumulated.</p>
+        <p>Then life moved on.</p>
+        <p>The computer was shut down and left alone for a very long time.</p>
+        <p>Recently, it was switched on again.</p>
+        <p>Most of what was here has disappeared.</p>
+        <p>A few files remain.</p>
       </article>
 
-      <article class="journal-page" id="journal-page-here">
-        <h2>Why we’re here</h2>
-        <p>The world became connected.<br>We became disconnected.</p>
-        <p>The world became faster.<br>We forgot how to wait.</p>
-        <p>The world became louder.<br>We stopped listening.</p>
+      <article class="journal-page" id="journal-page-back">
+        <h2>Why it is back</h2>
+        <p>The world outside became faster.</p>
+        <p>The internet became louder, busier and harder to leave.</p>
+        <p>This old computer remembers something different.</p>
+        <p>A time when going online felt like going somewhere.</p>
+        <p>You connected.</p>
+        <p>You looked around.</p>
+        <p>You found something small and strange.</p>
+        <p>Then, eventually, you logged off.</p>
       </article>
 
-      <article class="journal-page" id="journal-page-miss">
-        <h2>The internet we miss</h2>
-        <p>Small websites. Strange corners. Personal pages. Long emails.</p>
-        <p>Places made by people, not shaped by algorithms.</p>
+      <article class="journal-page" id="journal-page-remains">
+        <h2>What remains</h2>
+        <p>There is not much here yet.</p>
+        <p>A journal.</p>
+        <p>A photo album.</p>
+        <p>A note for anyone who happens to stop by.</p>
+        <p>Other things may return slowly.</p>
+        <p>Old files may be found.</p>
+        <p>New ones may be added.</p>
+        <p>Nothing here needs to arrive quickly.</p>
       </article>
 
-      <article class="journal-page" id="journal-page-future">
-        <h2>The future we’re building</h2>
-        <p>A slower corner of the internet.</p>
-        <p>We’re bringing forward the parts of life worth keeping: curiosity, creativity, conversation and Sundays with nowhere else to be.</p>
+      <article class="journal-page" id="journal-page-beginning">
+        <h2>A new beginning</h2>
+        <p>This is not an attempt to pretend it is still 1999.</p>
+        <p>It is today.</p>
+        <p>The clock is current.</p>
+        <p>The visitors are real.</p>
+        <p>The computer is simply being used again.</p>
+        <p>We are keeping the parts of the old internet that still feel worth keeping:</p>
+        <p>curiosity, patience, personal pages, photographs, long thoughts and quiet corners.</p>
+        <p>Welcome back.</p>
       </article>
     </div>
   </section>
@@ -2258,16 +2368,12 @@ No music or mixtape feature is included.
   <section class="window content-window hidden" id="photos-window" data-title="Photo Album">
     <header class="window-titlebar">
       <span class="window-title-icon">▧</span>
-      <span class="window-title">Photo Album — 1999world Archive</span>
+      <span class="window-title">Photo Album</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
       </div>
     </header>
-
-    <nav class="window-menu">
-      <span>File</span><span>Edit</span><span>View</span><span>Album</span><span>Help</span>
-    </nav>
 
     <div class="window-body photo-archive">
       <aside class="photo-sidebar">
@@ -2756,7 +2862,6 @@ No music or mixtape feature is included.
   <!-- Recycle Bin -->
   <section class="window content-window hidden" id="recycle-window" data-title="Recycle Bin">
     <header class="window-titlebar"><span class="window-title-icon">♻</span><span class="window-title">Recycle Bin</span><div class="window-controls"><button class="window-control minimise-window" aria-label="Minimise">−</button><button class="window-control close-window" aria-label="Close">×</button></div></header>
-    <nav class="window-menu"><span>File</span><span>Edit</span><span>View</span><span>Help</span></nav>
     <div class="window-body standard-body"><h2>Recycle Bin</h2><p>Nothing here yet.</p></div>
     <footer class="window-status"><span>0 object(s)</span><span>Recycle Bin</span></footer>
   </section>
@@ -2778,8 +2883,17 @@ No music or mixtape feature is included.
     </button>
 
     <div class="task-buttons" id="task-buttons"></div>
-    <div class="clock" id="clock">10:24 AM</div>
+    <div class="system-status" title="This computer first connected in 1999 and was recently restarted.">
+      <span class="status-dot"></span>
+      Recently restarted
+    </div>
+    <div class="clock" id="clock" title="">--:--</div>
   </footer>
+
+  <aside class="visitor-counter" aria-label="Visitor counter">
+    <span class="visitor-counter-label">Visitors</span>
+    <span class="visitor-counter-digits" id="visitor-count">0000000</span>
+  </aside>
 
 </main>
 
@@ -2802,7 +2916,7 @@ No music or mixtape feature is included.
     "Welcome."
   ];
 
-  let bootIndex = 1;
+  let bootIndex = bootLines.length;
 
   function advanceBoot() {
     if (bootIndex >= bootLines.length) {
@@ -2819,7 +2933,7 @@ No music or mixtape feature is included.
     window.setTimeout(advanceBoot, bootLines[bootIndex - 1] ? 430 : 220);
   }
 
-  window.setTimeout(advanceBoot, 350);
+  desktop.classList.add("ready");
 
   // Journal pages
   document.querySelectorAll(".journal-tab").forEach((tab) => {
@@ -3151,9 +3265,6 @@ No music or mixtape feature is included.
     }
   });
 
-  document.getElementById("explore-button").addEventListener("click", () => {
-    openWindow("journal-window");
-  });
 
   const letters = {
     welcome: `
@@ -3266,11 +3377,59 @@ function seeYouSunday() {
   document.getElementById("begin-see-you-sunday")?.addEventListener("click", seeYouSunday);
 
   function updateClock() {
-    document.getElementById("clock").textContent =
-      new Date().toLocaleTimeString("en-AU", {
-        hour: "numeric",
-        minute: "2-digit"
-      });
+    const now = new Date();
+    const clock = document.getElementById("clock");
+
+    clock.textContent = now.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+
+    clock.title = now.toLocaleDateString([], {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+
+  // Visitor counter.
+  // Add a counter endpoint here when the Cloudflare Worker route is ready.
+  // Expected response: { "count": 1234 }
+  const VISITOR_COUNTER_ENDPOINT = "";
+
+  async function updateVisitorCounter() {
+    const counter = document.getElementById("visitor-count");
+    let count = 1;
+
+    if (VISITOR_COUNTER_ENDPOINT) {
+      try {
+        const response = await fetch(VISITOR_COUNTER_ENDPOINT, {
+          method: "POST",
+          headers: { "Accept": "application/json" }
+        });
+        const result = await response.json();
+
+        if (!response.ok || !Number.isFinite(Number(result?.count))) {
+          throw new Error("Counter response was invalid.");
+        }
+
+        count = Number(result.count);
+      } catch (_) {
+        count = Number(localStorage.getItem("1999worldVisitorCount") || 0);
+      }
+    } else {
+      count = Number(localStorage.getItem("1999worldVisitorCount") || 0);
+
+      if (!sessionStorage.getItem("1999worldVisitCounted")) {
+        count += 1;
+        localStorage.setItem("1999worldVisitorCount", String(count));
+        sessionStorage.setItem("1999worldVisitCounted", "true");
+      }
+    }
+
+    counter.textContent = String(Math.max(0, count)).padStart(7, "0");
   }
 
   function updateSessionTime() {
@@ -3285,6 +3444,7 @@ function seeYouSunday() {
   }
 
   updateClock();
+  updateVisitorCounter();
   updateSessionTime();
   updateUnreadStatus();
   updateTaskbar();
@@ -3302,7 +3462,7 @@ function seeYouSunday() {
   const approvedArchiveText = {
     readme: `<strong>readme.txt</strong><p>If you’re reading this, I’m glad you found us.</p>`,
     web: `<strong>a_forgotten_web.txt</strong><p>A place for one carefully chosen corner of the old web. The first recommendation will be added only after its availability and rights are checked.</p>`,
-    history: `<strong>project_history.txt</strong><p>1999world began as an attempt to make the internet feel quieter, slower and more human again.</p>`
+    history: `<strong>project_history.txt</strong><p>This computer first went online in 1999, was left alone for many years, and has recently been switched on again.</p>`
   };
 
   document.querySelectorAll("[data-archive-file]").forEach((file) => {
