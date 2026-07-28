@@ -1839,22 +1839,129 @@
     .readme-error { display:none; margin-top:10px; padding:8px; color:#6f1717; background:#f5d9d3; border:1px solid #9c4c43; font-size:11px; }
     .readme-error.show { display:block; }
 
-</style>
-  <style>
-    /* The CRT loading sequence belongs only in index.html. */
+
     #boot-screen { display: none !important; }
-  
-    /* ---------- Version 1 comprehensive launch refinements ---------- */
+
+    /* ---------- Version 1.0 Launch Edition ---------- */
+
+    /* Future features remain in the source but are hidden at launch. */
+    .phase-two,
     .desktop-widgets {
-      display: none;
+      display: none !important;
     }
 
-    .welcome-copy p {
-      margin: 0 0 17px;
+    /* Read Me First.txt is deliberately laid out like a simple text document. */
+    #welcome-window {
+      width: min(570px, calc(100vw - 32px));
     }
 
-    .welcome-copy p:last-child {
+    .welcome-body {
+      padding: 0;
+      background: #fffdf5;
+    }
+
+    .readme-document {
+      min-height: 455px;
+      padding: 24px 28px 28px;
+      color: #171712;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      line-height: 1.42;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    .welcome-copy {
+      max-width: none;
+      margin: 0;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .welcome-copy p,
+    .readme-smallprint p,
+    .readme-message p {
+      margin: 0 0 16px;
+    }
+
+    .welcome-copy p:last-child,
+    .readme-smallprint p:last-child,
+    .readme-message p:last-child {
       margin-bottom: 0;
+    }
+
+    .readme-form {
+      width: 100%;
+      margin: 24px 0 0;
+      text-align: left;
+    }
+
+    .readme-form label {
+      display: block;
+      margin: 0 0 8px;
+      font: inherit;
+      font-weight: normal;
+    }
+
+    .readme-form input[type="email"] {
+      display: block;
+      width: min(360px, 100%);
+      height: 28px;
+      padding: 3px 6px;
+      color: #111;
+      background: #fff;
+      border-top: 2px solid #555348;
+      border-left: 2px solid #555348;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      box-sizing: border-box;
+      font: inherit;
+    }
+
+    .readme-submit {
+      display: block;
+      min-width: 126px;
+      margin: 14px 0 0 116px;
+    }
+
+    .readme-smallprint {
+      margin-top: 24px;
+      color: #171712;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .readme-error {
+      display: none;
+      width: min(360px, 100%);
+      margin: 12px 0 0;
+      padding: 7px;
+      color: #6f1717;
+      background: #f5d9d3;
+      border: 1px solid #9c4c43;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      box-sizing: border-box;
+    }
+
+    .readme-error.show {
+      display: block;
+    }
+
+    .readme-message {
+      display: none;
+      width: auto;
+      margin: 0;
+      padding: 0;
+      color: #171712;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      line-height: inherit;
+    }
+
+    .readme-message.show {
+      display: block;
     }
 
     .journal-page {
@@ -1882,51 +1989,64 @@
       margin-right: 0;
     }
 
-    .visitor-counter {
-      position: fixed;
-      right: 12px;
-      bottom: calc(var(--taskbar-height) + 10px);
-      z-index: 900;
-      padding: 7px 8px 8px;
-      color: #f7f2dd;
-      text-align: center;
-      background: rgba(8, 60, 61, .84);
-      border-top: 1px solid rgba(255,255,255,.5);
-      border-left: 1px solid rgba(255,255,255,.5);
-      border-right: 2px solid rgba(0,0,0,.5);
-      border-bottom: 2px solid rgba(0,0,0,.5);
-      box-shadow: 3px 3px 0 rgba(0,0,0,.16);
+    .taskbar-visitors {
+      height: 24px;
+      min-width: 112px;
+      padding: 0 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      background: var(--panel);
+      border-top: 2px solid #777468;
+      border-left: 2px solid #777468;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      box-sizing: border-box;
+      font-size: 10px;
     }
 
-    .visitor-counter-label {
-      display: block;
-      margin-bottom: 4px;
-      color: #fff7bc;
-      font-size: 9px;
+    .taskbar-visitors-label {
       font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
-    .visitor-counter-digits {
-      display: block;
-      padding: 3px 5px;
-      color: #72ff95;
+    .taskbar-visitors-digits {
+      min-width: 56px;
+      padding: 1px 3px;
+      color: #6cff87;
+      text-align: center;
       background: #080808;
-      border: 2px inset #777;
-      font: bold 13px "Courier New", monospace;
-      letter-spacing: 2px;
+      border: 1px inset #777;
+      font: bold 10px "Courier New", monospace;
+      letter-spacing: 1px;
+      box-sizing: border-box;
     }
 
     @media (max-width: 900px) {
       .system-status {
         display: none;
       }
+    }
 
-      .visitor-counter {
-        position: fixed;
-        right: 8px;
-        bottom: calc(var(--taskbar-height) + 8px);
+    @media (max-width: 760px) {
+      .readme-document {
+        min-height: 0;
+        padding: 18px;
+        font-size: 12px;
+      }
+
+      .readme-submit {
+        margin-left: 74px;
+      }
+
+      .taskbar-visitors-label {
+        display: none;
+      }
+
+      .taskbar-visitors {
+        min-width: 68px;
+        padding: 0 4px;
       }
     }
 
@@ -1936,7 +2056,7 @@
 
 <body>
 <!--
-1999world Phase 1 Launch Edition.
+1999world Version 1.0 Launch Edition.
 Physical-card fulfilment and the MailerLite welcome-email redesign remain outside this HTML file.
 No music or mixtape feature is included.
 -->
@@ -2143,28 +2263,44 @@ No music or mixtape feature is included.
       </div>
     </header>
     <div class="window-body welcome-body">
-      <div class="welcome-copy" style="text-align:left; max-width:440px; margin:0 auto;">
-        <p>Hello.</p>
-        <p>Thanks for stopping by.</p>
-        <p>This computer first went online in 1999.<br>
-        It was left alone for a long time and has recently been switched on again.</p>
-        <p>There isn't much here yet, so feel free to look around.</p>
-        <p>The Journal changes occasionally.<br>
-        The Photo Album grows whenever there are new memories worth keeping.</p>
-        <p>If you'd like an occasional letter when something interesting happens,<br>
-        leave your email below.</p>
-      </div>
-      <form class="readme-form" id="readme-signup-form" novalidate>
-        <label for="readme-email">Email address</label>
-        <div class="readme-form-row">
-          <input id="readme-email" name="email" type="email" autocomplete="email" maxlength="254" required>
-          <button class="retro-button" type="submit">Stay in Touch</button>
+      <div class="readme-document">
+        <div class="welcome-copy">
+          <p>Hello.</p>
+          <p>Thanks for stopping by.</p>
+          <p>This computer first went online in 1999.</p>
+          <p>It was left alone for a long time and has recently been switched on again.</p>
+          <p>There isn't much here yet, so feel free to look around.</p>
+          <p>The Journal changes occasionally.</p>
+          <p>The Photo Album grows whenever there are new memories worth keeping.</p>
+          <p>If you'd like an occasional letter when something interesting happens,<br>leave your email below.</p>
         </div>
-        <div class="honeypot-field" aria-hidden="true"><label for="readme-website">Website</label><input id="readme-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <p class="readme-error" id="readme-error" role="alert"></p>
-        <p class="readme-smallprint">No spam. No newsletters.<br>Just the occasional letter when something new appears.</p>
-      </form>
-      <div class="readme-message" id="readme-message" role="status" aria-live="polite">Thank you.<br><br>I'll write when there's something worth writing about.<br><br>Until then...<br><br>Enjoy looking around.</div>
+
+        <form class="readme-form" id="readme-signup-form" novalidate>
+          <label for="readme-email">Email address</label>
+          <input id="readme-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          <button class="retro-button readme-submit" type="submit">Stay in Touch</button>
+
+          <div class="honeypot-field" aria-hidden="true">
+            <label for="readme-website">Website</label>
+            <input id="readme-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="readme-error" id="readme-error" role="alert"></p>
+
+          <div class="readme-smallprint">
+            <p>No spam.</p>
+            <p>No newsletters.</p>
+            <p>Just the occasional letter when there's something worth writing about.</p>
+          </div>
+        </form>
+
+        <div class="readme-message" id="readme-message" role="status" aria-live="polite">
+          <p>Thank you.</p>
+          <p>I'll write when there's something worth writing about.</p>
+          <p>Until then...</p>
+          <p>Enjoy looking around.</p>
+        </div>
+      </div>
     </div>
     <footer class="window-status"><span>A slower corner of the internet.</span></footer>
   </section>
@@ -2919,13 +3055,12 @@ No music or mixtape feature is included.
       <span class="status-dot"></span>
       Recently restarted
     </div>
+    <div class="taskbar-visitors" title="Total visitors">
+      <span class="taskbar-visitors-label">Visitors</span>
+      <span class="taskbar-visitors-digits" id="visitor-count">0000000</span>
+    </div>
     <div class="clock" id="clock" title="">--:--</div>
   </footer>
-
-  <aside class="visitor-counter" aria-label="Visitor counter">
-    <span class="visitor-counter-label">Visitors</span>
-    <span class="visitor-counter-digits" id="visitor-count">0000000</span>
-  </aside>
 
 </main>
 
@@ -2933,7 +3068,7 @@ No music or mixtape feature is included.
 <script>
   const windows = Array.from(document.querySelectorAll(".window"));
 
-  // Version 1.1 loading sequence
+  // Legacy loading-sequence references retained for compatibility
   const bootScreen = document.getElementById("boot-screen");
   const bootText = document.getElementById("boot-text");
   const desktop = document.getElementById("desktop");
