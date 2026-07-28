@@ -2204,6 +2204,87 @@
       background: #fffdf5 !important;
     }
 
+
+
+    /* ---------- Version 1.0.6 structural sky separation ---------- */
+
+    /*
+      The animated clouds now live in their own sibling layer.
+      All icons, windows, overlays and the taskbar live in .desktop-ui above it.
+      This prevents Safari's compositor from painting transformed clouds over
+      window text or controls.
+    */
+    .desktop {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .sky-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .sky-layer .pixel-cloud {
+      z-index: auto !important;
+      pointer-events: auto;
+    }
+
+    .desktop-ui {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+    }
+
+    .desktop-ui .desktop-icons,
+    .desktop-ui .desktop-widgets,
+    .desktop-ui .window,
+    .desktop-ui .begin-menu,
+    .desktop-ui .taskbar,
+    .desktop-ui .hidden-note-paper,
+    .desktop-ui .photo-viewer-overlay {
+      position: absolute;
+    }
+
+    .desktop-ui .taskbar,
+    .desktop-ui .begin-menu,
+    .desktop-ui .photo-viewer-overlay,
+    .desktop-ui .hidden-note-paper {
+      position: fixed;
+    }
+
+    .desktop-ui .window {
+      background: #d6d0bb !important;
+      opacity: 1 !important;
+    }
+
+    .desktop-ui .window-body,
+    .desktop-ui .welcome-body,
+    .desktop-ui .readme-document,
+    .desktop-ui .standard-body,
+    .desktop-ui .journal-page,
+    .desktop-ui .photo-archive,
+    .desktop-ui .photo-main {
+      opacity: 1 !important;
+    }
+
+    @media (max-width: 900px) {
+      .desktop-ui {
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .desktop-ui .desktop-icons,
+      .desktop-ui .desktop-widgets,
+      .desktop-ui .window {
+        position: relative;
+      }
+    }
+
 </style>
 
 </head>
@@ -2221,9 +2302,12 @@ No music or mixtape feature is included.
 </div>
 
 <main class="desktop ready" id="desktop">
-  <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
-  <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
+  <div class="sky-layer" aria-hidden="true">
+    <div class="pixel-cloud cloud-one"></div>
+    <div class="pixel-cloud cloud-two"></div>
+  </div>
 
+  <div class="desktop-ui">
   <!-- Desktop icons -->
   <section class="desktop-icons" aria-label="1999world desktop icons">
 
@@ -3213,6 +3297,7 @@ No music or mixtape feature is included.
     </div>
     <div class="clock" id="clock" title="">--:--</div>
   </footer>
+  </div><!-- /.desktop-ui -->
 
 </main>
 
