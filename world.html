@@ -2219,6 +2219,51 @@
       color: inherit;
     }
 
+
+
+    /* Two requested landing-page fixes only */
+    .desktop-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Clouds remain animated but are always behind desktop windows. */
+    .pixel-cloud,
+    .sky-layer {
+      z-index: 0 !important;
+    }
+
+    .desktop-icons {
+      position: relative;
+      z-index: 2 !important;
+    }
+
+    .window {
+      position: absolute;
+      z-index: 20 !important;
+      background: #d6d0bb !important;
+      opacity: 1 !important;
+      isolation: isolate;
+    }
+
+    .window.active {
+      z-index: 100 !important;
+    }
+
+    .window-body,
+    .welcome-body,
+    .readme-document {
+      background: #fffdf5 !important;
+      opacity: 1 !important;
+    }
+
+    .window-titlebar,
+    .window-menu,
+    .window-status {
+      opacity: 1 !important;
+    }
+
 </style>
 
 </head>
