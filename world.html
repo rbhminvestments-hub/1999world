@@ -1850,7 +1850,7 @@
       display: none !important;
     }
 
-    /* Read Me First.txt is deliberately laid out like a simple text document. */
+    /* Read Me is deliberately laid out like a simple text document. */
     #welcome-window {
       width: min(570px, calc(100vw - 32px));
     }
@@ -2205,84 +2205,18 @@
     }
 
 
-
-    /* ---------- Version 1.0.6 structural sky separation ---------- */
-
-    /*
-      The animated clouds now live in their own sibling layer.
-      All icons, windows, overlays and the taskbar live in .desktop-ui above it.
-      This prevents Safari's compositor from painting transformed clouds over
-      window text or controls.
-    */
-    .desktop {
-      position: relative;
-      isolation: isolate;
+    /* Landing page-only adjustments */
+    a.desktop-icon,
+    a.begin-item {
+      text-decoration: none;
     }
 
-    .sky-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
+    a.desktop-icon {
+      display: block;
     }
 
-    .sky-layer .pixel-cloud {
-      z-index: auto !important;
-      pointer-events: auto;
-    }
-
-    .desktop-ui {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      height: 100%;
-      min-height: inherit;
-    }
-
-    .desktop-ui .desktop-icons,
-    .desktop-ui .desktop-widgets,
-    .desktop-ui .window,
-    .desktop-ui .begin-menu,
-    .desktop-ui .taskbar,
-    .desktop-ui .hidden-note-paper,
-    .desktop-ui .photo-viewer-overlay {
-      position: absolute;
-    }
-
-    .desktop-ui .taskbar,
-    .desktop-ui .begin-menu,
-    .desktop-ui .photo-viewer-overlay,
-    .desktop-ui .hidden-note-paper {
-      position: fixed;
-    }
-
-    .desktop-ui .window {
-      background: #d6d0bb !important;
-      opacity: 1 !important;
-    }
-
-    .desktop-ui .window-body,
-    .desktop-ui .welcome-body,
-    .desktop-ui .readme-document,
-    .desktop-ui .standard-body,
-    .desktop-ui .journal-page,
-    .desktop-ui .photo-archive,
-    .desktop-ui .photo-main {
-      opacity: 1 !important;
-    }
-
-    @media (max-width: 900px) {
-      .desktop-ui {
-        height: auto;
-        min-height: 100vh;
-      }
-
-      .desktop-ui .desktop-icons,
-      .desktop-ui .desktop-widgets,
-      .desktop-ui .window {
-        position: relative;
-      }
+    a.begin-item {
+      color: inherit;
     }
 
 </style>
@@ -2302,12 +2236,9 @@ No music or mixtape feature is included.
 </div>
 
 <main class="desktop ready" id="desktop">
-  <div class="sky-layer" aria-hidden="true">
-    <div class="pixel-cloud cloud-one"></div>
-    <div class="pixel-cloud cloud-two"></div>
-  </div>
+  <div class="pixel-cloud cloud-one" aria-hidden="true"></div>
+  <div class="pixel-cloud cloud-two" aria-hidden="true"></div>
 
-  <div class="desktop-ui">
   <!-- Desktop icons -->
   <section class="desktop-icons" aria-label="1999world desktop icons">
 
@@ -2320,8 +2251,24 @@ No music or mixtape feature is included.
         <rect x="5" y="13" width="6" height="1" fill="#2b2a24"/>
         <rect x="2" y="11" width="12" height="1" fill="#4b493f"/>
       </svg>
-      <span class="desktop-icon-label">Read Me First.txt</span>
+      <span class="desktop-icon-label">Read Me</span>
     </button>
+
+    <a class="desktop-icon" href="mailto:hello@1999world.net" aria-label="Contact Us">
+      <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
+        <rect x="2" y="4" width="12" height="9" fill="#efe7cf"/>
+        <rect x="2" y="4" width="12" height="1" fill="#332f28"/>
+        <rect x="2" y="12" width="12" height="1" fill="#332f28"/>
+        <rect x="2" y="5" width="1" height="7" fill="#332f28"/>
+        <rect x="13" y="5" width="1" height="7" fill="#332f28"/>
+        <rect x="3" y="5" width="2" height="1" fill="#607b72"/>
+        <rect x="5" y="6" width="2" height="1" fill="#607b72"/>
+        <rect x="7" y="7" width="2" height="1" fill="#607b72"/>
+        <rect x="9" y="6" width="2" height="1" fill="#607b72"/>
+        <rect x="11" y="5" width="2" height="1" fill="#607b72"/>
+      </svg>
+      <span class="desktop-icon-label">Contact Us</span>
+    </a>
 
     <button class="desktop-icon phase-two" data-open="letters-window">
       <span class="notification-badge">3</span>
@@ -2340,7 +2287,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">Sunday Letters</span>
     </button>
 
-    <button class="desktop-icon" data-open="journal-window">
+    <button class="desktop-icon phase-two" data-open="journal-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="3" y="2" width="10" height="12" fill="#d8c777"/>
         <rect x="4" y="3" width="8" height="10" fill="#f5e8a8"/>
@@ -2378,7 +2325,7 @@ No music or mixtape feature is included.
       <span class="desktop-icon-label">Community</span>
     </button>
 
-    <button class="desktop-icon" data-open="photos-window">
+    <button class="desktop-icon phase-two" data-open="photos-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="2" y="4" width="12" height="9" fill="#d8d0b9"/>
         <rect x="5" y="2" width="5" height="3" fill="#d8d0b9"/>
@@ -2438,7 +2385,7 @@ No music or mixtape feature is included.
 
 
 
-    <button class="desktop-icon" data-open="recycle-window">
+    <button class="desktop-icon phase-two" data-open="recycle-window">
       <svg class="pixel-icon" viewBox="0 0 16 16" aria-hidden="true">
         <rect x="4" y="4" width="8" height="10" fill="#aeb5ad"/>
         <rect x="3" y="3" width="10" height="2" fill="#d7ddd4"/>
@@ -2491,10 +2438,10 @@ No music or mixtape feature is included.
   </div>
 
 <!-- Read Me First: only open window on load -->
-  <section class="window active" id="welcome-window" data-title="Read Me First.txt">
+  <section class="window active" id="welcome-window" data-title="Read Me">
     <header class="window-titlebar">
       <span class="window-title-icon">TXT</span>
-      <span class="window-title">Read Me First.txt</span>
+      <span class="window-title">Read Me</span>
       <div class="window-controls">
         <button class="window-control minimise-window" aria-label="Minimise">−</button>
         <button class="window-control close-window" aria-label="Close">×</button>
@@ -2505,36 +2452,13 @@ No music or mixtape feature is included.
         <div class="welcome-copy" id="readme-intro">
           <p>Hello.</p>
           <p>Thanks for stopping by.</p>
-          <p>This computer first went online in 1999.</p>
-          <p>It was left alone for a long time and has recently been switched on again.</p>
-          <p>There isn't much here yet, so feel free to look around.</p>
-          <p>The Journal changes occasionally.</p>
-          <p>The Photo Album grows whenever there are new memories worth keeping.</p>
-          <p>If you'd like the occasional letter,<br>leave your email below.</p>
-        </div>
-
-        <form class="readme-form" id="readme-signup-form" novalidate>
-          <label for="readme-email">Email address</label>
-          <input id="readme-email" name="email" type="email" autocomplete="email" maxlength="254" required>
-          <button class="retro-button readme-submit" type="submit">Stay in Touch</button>
-
-          <input id="readme-website" name="website" type="hidden" value="">
-
-          <p class="readme-error" id="readme-error" role="alert"></p>
-
-          <div class="readme-smallprint">
-            <p>No spam.</p>
-            <p>No newsletters.</p>
-            <p>Just the occasional letter when there's something worth writing about.</p>
-          </div>
-        </form>
-
-        <div class="readme-message" id="readme-message" role="status" aria-live="polite">
-          <p>Thank you.</p>
-          <p>I'll write when there's something worth sharing.</p>
-          <p>In the meantime...</p>
-          <p>I'm still sorting through what's left on this old computer.</p>
-          <p>You never know what might turn up next.</p>
+          <p>There isn't much here yet.</p>
+          <p>We're working on something about spending a little less time online — and a little more time doing things in the real world.</p>
+          <p>Music. Games. Places to go. Things to make. People to meet. Stories worth sharing.</p>
+          <p>Some of it will happen here.</p>
+          <p>Most of it won't.</p>
+          <p>We're building slowly.</p>
+          <p>Come back soon.</p>
         </div>
       </div>
     </div>
@@ -3273,10 +3197,8 @@ No music or mixtape feature is included.
   <!-- Begin menu -->
   <nav class="begin-menu" id="begin-menu">
     <div class="begin-brand">1999world</div>
-    <button class="begin-item" data-open="welcome-window"><span class="menu-glyph">TXT</span>Read Me First.txt</button>
-    <button class="begin-item" data-open="journal-window"><span class="menu-glyph">▤</span>Journal.exe</button>
-    <button class="begin-item" data-open="photos-window"><span class="menu-glyph">▧</span>Photo Album</button>
-    <button class="begin-item" data-open="recycle-window"><span class="menu-glyph">♻</span>Recycle Bin</button>
+    <button class="begin-item" data-open="welcome-window"><span class="menu-glyph">TXT</span>Read Me</button>
+    <a class="begin-item" href="mailto:hello@1999world.net"><span class="menu-glyph">✉</span>Contact Us</a>
   </nav>
 
   <!-- Taskbar -->
@@ -3297,7 +3219,6 @@ No music or mixtape feature is included.
     </div>
     <div class="clock" id="clock" title="">--:--</div>
   </footer>
-  </div><!-- /.desktop-ui -->
 
 </main>
 
@@ -3432,7 +3353,7 @@ No music or mixtape feature is included.
   const readmeMessage = document.getElementById("readme-message");
   const readmeError = document.getElementById("readme-error");
 
-  readmeSignupForm.addEventListener("submit", async (event) => {
+  readmeSignupForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     readmeError.classList.remove("show");
     readmeError.textContent = "";
@@ -3451,7 +3372,7 @@ No music or mixtape feature is included.
         interests:["occasional letters"],
         consent:true,
         website,
-        source:"1999world.net — Read Me First.txt"
+        source:"1999world.net — Read Me"
       }) });
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) throw new Error(result?.message || "Your email address could not be saved just now.");
